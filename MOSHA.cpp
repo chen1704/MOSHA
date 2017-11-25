@@ -3,10 +3,13 @@
 #include <wx/filename.h>
 
 BEGIN_EVENT_TABLE(MOSHA, wxWindow)
-EVT_PAINT(MOSHA::OnPaint)
+	EVT_PAINT(MOSHA::OnPaint)
+	EVT_CHAR(MOSHA::OnChar)
 END_EVENT_TABLE()
 
 int ganti = 0;
+int r;
+
 MOSHA::MOSHA(wxFrame *parent) : wxWindow(parent, wxID_ANY){
 	this->SetBackgroundColour(wxColour(*wxWHITE));
 	wxImageHandler *pngLoader = new wxPNGHandler();
@@ -16,6 +19,15 @@ MOSHA::MOSHA(wxFrame *parent) : wxWindow(parent, wxID_ANY){
 	if (ganti == 0) {
 		this->LoadStartButton();
 		this->LoadMenuBitmap();
+		if (r == 13) {
+			ganti = 1;
+			delete menu;
+			delete start;
+			Refresh();
+		}
+	}
+	if (ganti == 1) {
+		
 	}
 }
 
@@ -66,4 +78,9 @@ void MOSHA::OnPaint(wxPaintEvent &event) {
 		}
 	}
 	
+}
+
+void MOSHA::OnChar(wxKeyEvent &event) {
+	r = event.GetKeyCode();
+	wxMessageOutputDebug().Printf("Keyboard diteken, Keycode = %d", r);
 }
