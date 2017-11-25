@@ -7,6 +7,7 @@ public:
 	MOSHA(wxFrame *parent);
 	~MOSHA();
 	void OnPaint(wxPaintEvent &event);
+	void OnChar(wxKeyEvent &event);
 private:
 	wxBitmap *menu = nullptr;
 	wxBitmap *buttonWindow = nullptr;
