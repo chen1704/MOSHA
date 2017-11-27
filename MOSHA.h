@@ -10,6 +10,7 @@ public:
 	void OnChar(wxKeyEvent &event);
 private:
 	wxPanel *panel;
+	int state;
 	wxBitmap *menu = nullptr;
 	wxBitmap *buttonWindow = nullptr;
 	wxBitmap *start = nullptr;
