@@ -20,23 +20,15 @@ MOSHA::MOSHA(wxFrame *parent) : wxWindow(parent, wxID_ANY){
 	wxImage::AddHandler(pngLoader);
 
 	this->LoadbuttonWindowBitmap();
-	if (ganti == 0) {
+	
 //		this->LoadStartButton();
 		wxImage image(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\start button.png"), wxBITMAP_TYPE_PNG);
 		start = new wxBitmap(image);
 		wxBitmapButton* startbutton = new wxBitmapButton(panel, 1001,image,wxDefaultPosition,
 			wxDefaultSize, wxBU_AUTODRAW);
 		this->LoadMenuBitmap();
-		if (r == 13) {
-			ganti = 1;
-			delete menu;
-			delete start;
-			Refresh();
-		}
-	}
-	if (ganti == 1) {
 		
-	}
+	
 }
 
 
@@ -87,13 +79,12 @@ void MOSHA::LoadbuttonWindowBitmap() {
 //D:\ITS SMT 3\PBO (C)\FP\moshasampah
 void MOSHA::OnPaint(wxPaintEvent &event) {
 	wxPaintDC pdc(this);
-	if (buttonWindow != nullptr) {
 		pdc.DrawBitmap(*buttonWindow, wxPoint(0,455),true);
-		if (ganti == 0) {
+		
 			pdc.DrawBitmap(*menu, wxPoint(0,0), true);
 //			pdc.DrawBitmap(*start, wxPoint(108,526), true);
-		}
-	}
+		
+	
 	
 }
 
