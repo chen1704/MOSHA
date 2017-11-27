@@ -9,6 +9,7 @@ public:
 	void OnPaint(wxPaintEvent &event);
 	void OnChar(wxKeyEvent &event);
 private:
+	wxPanel *panel;
 	wxBitmap *menu = nullptr;
 	wxBitmap *buttonWindow = nullptr;
 	wxBitmap *start = nullptr;
@@ -16,5 +17,6 @@ private:
 	void LoadMenuBitmap();
 	void LoadbuttonWindowBitmap();
 	void LoadStartButton();
+	void ClickStart(wxCommandEvent &event);
 };
 
