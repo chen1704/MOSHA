@@ -4,31 +4,26 @@
 #include "wx/bmpbuttn.h"
 
 BEGIN_EVENT_TABLE(MOSHA, wxWindow)
-	EVT_PAINT(MOSHA::OnPaint)
-	EVT_CHAR(MOSHA::OnChar)
-	EVT_BUTTON(1001, MOSHA::ClickStart)
-	
+EVT_PAINT(MOSHA::OnPaint)
+EVT_CHAR(MOSHA::OnChar)
+EVT_BUTTON(1001, MOSHA::ClickStart)
 END_EVENT_TABLE()
 
-int ganti = 0;
-int r;
-
-MOSHA::MOSHA(wxFrame *parent) : wxWindow(parent, wxID_ANY){
+MOSHA::MOSHA(wxFrame *parent) : wxWindow(parent, wxID_ANY) {
+	this->state = 0;
 	this->SetBackgroundColour(wxColour(*wxWHITE));
-	panel = new wxPanel(this, wxID_ANY,wxPoint(10,455),wxSize(700,500));
+	panel = new wxPanel(this, 1001, wxPoint(100, 520), wxSize(300, 110));
 	wxImageHandler *pngLoader = new wxPNGHandler();
 	wxImage::AddHandler(pngLoader);
 
+	this->LoadMenuBitmap();
 	this->LoadbuttonWindowBitmap();
-	
-//		this->LoadStartButton();
-		wxImage image(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\start button.png"), wxBITMAP_TYPE_PNG);
-		start = new wxBitmap(image);
-		wxBitmapButton* startbutton = new wxBitmapButton(panel, 1001,image,wxDefaultPosition,
-			wxDefaultSize, wxBU_AUTODRAW);
-		this->LoadMenuBitmap();
-		
-	
+
+	wxImage image(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\start button.png"), wxBITMAP_TYPE_PNG);
+	start = new wxBitmap(image);
+	wxBitmapButton* startbutton = new wxBitmapButton(panel, 1001, image, wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW);
+
+
 }
 
 
@@ -40,55 +35,55 @@ MOSHA::~MOSHA()
 }
 
 void MOSHA::LoadMenuBitmap() {
-	wxStandardPaths &stdPaths = wxStandardPaths::Get();
-	wxString fileLocation = stdPaths.GetExecutablePath();
-	fileLocation = wxFileName(fileLocation).GetPath() + wxT("\\menu awal.png");
-	wxMessageOutputDebug().Printf("Gambarnya di %s", fileLocation);
-
 	wxImage image(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\menu awal.png"), wxBITMAP_TYPE_PNG);
 	menu = new wxBitmap(image);
 }
 
-void MOSHA::LoadStartButton() {
-	wxStandardPaths &stdPaths = wxStandardPaths::Get();
-	wxString fileLocation = stdPaths.GetExecutablePath();
-	fileLocation = wxFileName(fileLocation).GetPath() + wxT("\\start button.png");
-	wxMessageOutputDebug().Printf("Gambarnya di %s", fileLocation);
+void MOSHA::LoadMapButton() {
+	wxImage image(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\MAP - FIX.png"), wxBITMAP_TYPE_PNG);
+	map = new wxBitmap(image);
+}
 
-//	wxImage image(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\start button.png"), wxBITMAP_TYPE_PNG);
-//	start = new wxBitmap(image);
-//	wxBitmap bitmap(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\start button.png"), wxBITMAP_TYPE_PNG);
-//	wxBitmapButton* startbutton = new wxBitmapButton(panel, wxID_OK, bitmap, wxPoint(108, 526),
-//		wxSize(286,101), wxBU_AUTODRAW);
+void MOSHA::LoadStartButton() {
+		//	wxImage image(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\start button.png"), wxBITMAP_TYPE_PNG);
+	//	start = new wxBitmap(image);
+	//	wxBitmap bitmap(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\start button.png"), wxBITMAP_TYPE_PNG);
+	//	wxBitmapButton* startbutton = new wxBitmapButton(panel, wxID_OK, bitmap, wxPoint(108, 526),
+	//		wxSize(286,101), wxBU_AUTODRAW);
 }
 
 void MOSHA::ClickStart(wxCommandEvent & event)
 {
 	wxMessageOutputDebug().Printf("di klik di start");
+	this->state = 1;
+	Refresh();
+	this->LoadMapButton();
+
 }
 
 void MOSHA::LoadbuttonWindowBitmap() {
-	wxStandardPaths &stdPaths = wxStandardPaths::Get();
-	wxString fileLocation = stdPaths.GetExecutablePath();
-	fileLocation = wxFileName(fileLocation).GetPath() + wxT("\\button window.png");
-	wxMessageOutputDebug().Printf("Gambarnya di %s", fileLocation);
-
 	wxImage image(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\button window.png"), wxBITMAP_TYPE_PNG);
 	buttonWindow = new wxBitmap(image);
 }
+
+
 //D:\ITS SMT 3\PBO (C)\FP\moshasampah
 void MOSHA::OnPaint(wxPaintEvent &event) {
 	wxPaintDC pdc(this);
-		pdc.DrawBitmap(*buttonWindow, wxPoint(0,455),true);
-		
-			pdc.DrawBitmap(*menu, wxPoint(0,0), true);
-//			pdc.DrawBitmap(*start, wxPoint(108,526), true);
-		
-	
-	
+
+	if (this->state == 0) {
+		pdc.DrawBitmap(*menu, wxPoint(0, 0), true);
+		pdc.DrawBitmap(*buttonWindow, wxPoint(0, 455), true);
+	}
+	else if (this->state == 1) { 
+		pdc.DrawBitmap(*map, wxPoint(0, 0), true);
+	}
+//	wxMessageOutputDebug().Printf("Halo");
+
+
 }
 
+
 void MOSHA::OnChar(wxKeyEvent &event) {
-	r = event.GetKeyCode();
-	wxMessageOutputDebug().Printf("Keyboard diteken, Keycode = %d", r);
+	wxMessageOutputDebug().Printf("Keyboard diteken, Keycode = %d", event.GetKeyCode());
 }
