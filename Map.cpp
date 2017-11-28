@@ -10,13 +10,17 @@ EVT_BUTTON(1003, Map::ClickMap3)
 EVT_BUTTON(1004, Map::ClickMap4)
 EVT_BUTTON(1005, Map::ClickMap5)
 EVT_BUTTON(1006, Map::ClickMap6)
+EVT_BUTTON(1007, Map::ClickButtonStatus)
+EVT_BUTTON(1008, Map::ClickButtonBonds)
+EVT_BUTTON(1009, Map::ClickButtonShop)
+EVT_BUTTON(1010, Map::ClickButtonBlackSmith)
 END_EVENT_TABLE()
 
 
 
-Map::Map(wxFrame * parent) : wxWindow(parent, wxID_ANY)
+Map::Map(ImageFrame * parent) : wxWindow(parent, wxID_ANY), parentFrame(parent)
 {
-	Refresh();
+//	Refresh();
 	this->SetBackgroundColour(wxColour(*wxWHITE));
 	wxImageHandler *pngLoader = new wxPNGHandler();
 	wxImage::AddHandler(pngLoader);
@@ -33,11 +37,14 @@ Map::Map(wxFrame * parent) : wxWindow(parent, wxID_ANY)
 	
 //	wxAnimationCtrl *an = new wxAnimationCtrl(this, wxID_ANY, wxAnimation(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\miraiwalking.gif"), wxANIMATION_TYPE_ANY), wxPoint(28, 300));
 //	an->Play();
+	// https://github.com/LuaDist/wxwidgets/blob/master/samples/animate/anitest.cpp
+
+	wxBitmapButton *buttonstatus = new wxBitmapButton(this, 1007, *bitmapstatus, wxPoint(40, 630), wxDefaultSize, wxBORDER_MASK);
+	wxBitmapButton *buttonbonds = new wxBitmapButton(this, 1008, *bitmapbonds, wxPoint(165, 627), wxDefaultSize, wxBORDER_MASK);
+	wxBitmapButton *buttonshop = new wxBitmapButton(this, 1009, *bitmapshop, wxPoint(270, 628), wxDefaultSize, wxBORDER_MASK);
+	wxBitmapButton *buttonblacksmith = new wxBitmapButton(this, 1010, *bitmapblacksmith, wxPoint(380, 625), wxDefaultSize, wxBORDER_MASK);
 }
 
-Map::Map()
-{
-}
 
 Map::~Map()
 {
@@ -50,10 +57,12 @@ Map::~Map()
 void Map::OnPaint(wxPaintEvent & event)
 {
 	wxPaintDC pdc(this);
+
 	pdc.DrawBitmap(*map, wxPoint(0, 0), true);
 	pdc.DrawBitmap(*buttonWindow, wxPoint(0, 455), true);
-	pdc.DrawBitmap(*chibi, wxPoint(28,488),true);
-//	pdc.DrawBitmap(*mirai, 0,0);
+	pdc.DrawBitmap(*chibi, wxPoint(28, 488), true);
+	//	pdc.DrawBitmap(*mirai, 0,0);
+	
 }
 
 void Map::ClickMap1(wxCommandEvent & event)
@@ -86,11 +95,29 @@ void Map::ClickMap6(wxCommandEvent & event)
 	wxMessageOutputDebug().Printf("click on map6");
 }
 
+void Map::ClickButtonStatus(wxCommandEvent & event)
+{
+	Refresh();
+}
+
+void Map::ClickButtonBonds(wxCommandEvent & event)
+{
+}
+
+void Map::ClickButtonShop(wxCommandEvent & event)
+{
+}
+
+void Map::ClickButtonBlackSmith(wxCommandEvent & event)
+{
+}
+
 void Map::LoadAllBitmap()
 {
 	this->LoadMapBitmap();
 	this->LoadbuttonWindowBitmap();
 	this->LoadMapNumberBitmap();
+	this->LoadUpgradeBitmap();
 }
 
 void Map::LoadMapBitmap()
@@ -131,4 +158,13 @@ void Map::LoadbuttonWindowBitmap()
 
 void Map::LoadUpgradeBitmap()
 {
+	wxImage image1(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\status button.png"), wxBITMAP_TYPE_PNG);
+	bitmapstatus = new wxBitmap(image1);
+	wxImage image2(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\bonds button.png"), wxBITMAP_TYPE_PNG);
+	bitmapbonds = new wxBitmap(image2);
+	wxImage image3(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\shop button.png"), wxBITMAP_TYPE_PNG);
+	bitmapshop = new wxBitmap(image3);
+	wxImage image4(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\blacksmith button.png"), wxBITMAP_TYPE_PNG);
+	bitmapblacksmith = new wxBitmap(image4);
+
 }
