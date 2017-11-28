@@ -63,10 +63,9 @@ void MOSHA::LoadStartButton() {
 void MOSHA::ClickStart(wxCommandEvent & event)
 {
 	wxMessageOutputDebug().Printf("di klik di start");
-//	this->state = 1;
-//	Refresh();
-//	this->LoadMapButton();
-	parentFrame->ShowMap();
+
+//	parentFrame->ShowMap();
+	parentFrame->ShowBattle1();
 
 }
 
