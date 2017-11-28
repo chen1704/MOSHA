@@ -30,6 +30,7 @@ MOSHA::~MOSHA()
 	delete menu;
 	delete start;
 	delete buttonWindow;
+	
 }
 
 void MOSHA::LoadAllBitmap()
@@ -40,21 +41,23 @@ void MOSHA::LoadAllBitmap()
 }
 
 void MOSHA::LoadMenuBitmap() {
-	wxImage image(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\menu awal.png"), wxBITMAP_TYPE_PNG);
+	wxStandardPaths &stdPaths = wxStandardPaths::Get();
+	fileLocation = stdPaths.GetExecutablePath();
+	wxString loclogo = wxFileName(fileLocation).GetPath() + wxT("\\menu awal.png");
+	wxImage image(loclogo, wxBITMAP_TYPE_PNG);
 	menu = new wxBitmap(image);
 }
 
 void MOSHA::LoadMapButton() {
-	wxImage image(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\MAP - FIX.png"), wxBITMAP_TYPE_PNG);
+	wxString locmenu = wxFileName(fileLocation).GetPath() + wxT("\\MAP - FIX.png");
+	wxImage image(locmenu, wxBITMAP_TYPE_PNG);
 	map = new wxBitmap(image);
 }
 
 void MOSHA::LoadStartButton() {
-	wxImage image(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\start button.png"), wxBITMAP_TYPE_PNG);
+	wxString locstart = wxFileName(fileLocation).GetPath() + wxT("\\start button.png");
+	wxImage image(locstart, wxBITMAP_TYPE_PNG);
 	start = new wxBitmap(image);
-	//	wxBitmap bitmap(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\start button.png"), wxBITMAP_TYPE_PNG);
-	//	wxBitmapButton* startbutton = new wxBitmapButton(panel, wxID_OK, bitmap, wxPoint(108, 526),
-	//		wxSize(286,101), wxBU_AUTODRAW);
 }
 
 void MOSHA::ClickStart(wxCommandEvent & event)
@@ -68,7 +71,8 @@ void MOSHA::ClickStart(wxCommandEvent & event)
 }
 
 void MOSHA::LoadbuttonWindowBitmap() {
-	wxImage image(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\button window.png"), wxBITMAP_TYPE_PNG);
+	wxString locwindow = wxFileName(fileLocation).GetPath() + wxT("\\button window.png");
+	wxImage image(locwindow, wxBITMAP_TYPE_PNG);
 	buttonWindow = new wxBitmap(image);
 }
 
@@ -95,7 +99,3 @@ void MOSHA::OnChar(wxKeyEvent &event) {
 	wxMessageOutputDebug().Printf("Keyboard diteken, Keycode = %d", event.GetKeyCode());
 }
 
-int MOSHA::ChangeState()
-{
-	return 1;
-}

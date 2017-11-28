@@ -1,6 +1,7 @@
 #include "Map.h"
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
+#include <wx/animate.h>
 
 BEGIN_EVENT_TABLE(Map, wxWindow)
 EVT_PAINT(Map::OnPaint)
@@ -23,7 +24,9 @@ Map::Map(ImageFrame * parent) : wxWindow(parent, wxID_ANY), parentFrame(parent)
 //	Refresh();
 	this->SetBackgroundColour(wxColour(*wxWHITE));
 	wxImageHandler *pngLoader = new wxPNGHandler();
+	wxImageHandler *gifLoader = new wxGIFHandler();
 	wxImage::AddHandler(pngLoader);
+	wxImage::AddHandler(gifLoader);
 	LoadAllBitmap();
 
 	wxBitmapButton* map1 = new wxBitmapButton(this, 1001, *mapnum1, wxPoint(320, 10), wxDefaultSize, wxBORDER_NONE);
@@ -33,7 +36,12 @@ Map::Map(ImageFrame * parent) : wxWindow(parent, wxID_ANY), parentFrame(parent)
 	wxBitmapButton* map5 = new wxBitmapButton(this, 1005, *mapnum5, wxPoint(325, 290), wxDefaultSize, wxBORDER_NONE);
 	wxBitmapButton* map6 = new wxBitmapButton(this, 1006, *mapnum6, wxPoint(115, 335), wxDefaultSize, wxBORDER_NONE);
 
-//	mirai = new wxAnimation("miraiwalking.gif",wxANIMATION_TYPE_ANY);
+//	wxAnimationCtrl *mirai;
+//	mirai = new wxAnimationCtrl(this, wxID_ANY);
+//	if (mirai->LoadFile(wxT("miraiwalking.gif")))
+//		mirai->Play();
+
+//	mirai = new wxAnimation(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\miraiwalking.gif"),wxANIMATION_TYPE_ANY);
 	
 //	wxAnimationCtrl *an = new wxAnimationCtrl(this, wxID_ANY, wxAnimation(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\miraiwalking.gif"), wxANIMATION_TYPE_ANY), wxPoint(28, 300));
 //	an->Play();
@@ -41,10 +49,9 @@ Map::Map(ImageFrame * parent) : wxWindow(parent, wxID_ANY), parentFrame(parent)
 
 	wxBitmapButton *buttonstatus = new wxBitmapButton(this, 1007, *bitmapstatus, wxPoint(40, 630), wxDefaultSize, wxBORDER_MASK);
 	wxBitmapButton *buttonbonds = new wxBitmapButton(this, 1008, *bitmapbonds, wxPoint(165, 627), wxDefaultSize, wxBORDER_MASK);
-	wxBitmapButton *buttonshop = new wxBitmapButton(this, 1009, *bitmapshop, wxPoint(270, 628), wxDefaultSize, wxBORDER_MASK);
-	wxBitmapButton *buttonblacksmith = new wxBitmapButton(this, 1010, *bitmapblacksmith, wxPoint(380, 625), wxDefaultSize, wxBORDER_MASK);
+	wxBitmapButton *buttoninvent = new wxBitmapButton(this, 1009, *bitmapinvent, wxPoint(270, 628), wxDefaultSize, wxBORDER_MASK);
+	wxBitmapButton *buttonskill = new wxBitmapButton(this, 1010, *bitmapskill, wxPoint(380, 625), wxDefaultSize, wxBORDER_MASK);
 }
-
 
 Map::~Map()
 {
@@ -61,7 +68,7 @@ void Map::OnPaint(wxPaintEvent & event)
 	pdc.DrawBitmap(*map, wxPoint(0, 0), true);
 	pdc.DrawBitmap(*buttonWindow, wxPoint(0, 455), true);
 	pdc.DrawBitmap(*chibi, wxPoint(28, 488), true);
-	//	pdc.DrawBitmap(*mirai, 0,0);
+//	pdc.DrawBitmap(*mirai, 0,0);
 	
 }
 
@@ -122,13 +129,20 @@ void Map::LoadAllBitmap()
 
 void Map::LoadMapBitmap()
 {
-	wxImage image(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\MAP - FIX.png"), wxBITMAP_TYPE_PNG);
+	wxStandardPaths &stdPaths = wxStandardPaths::Get();
+	fileLocation = stdPaths.GetExecutablePath();
+
+	wxString locationmap = wxFileName(fileLocation).GetPath() + wxT("\\MAP - FIX.png");
+//	wxMessageOutputDebug().Printf("Relative path is at %s", locationmap);
+	wxImage image(locationmap, wxBITMAP_TYPE_PNG);
 	map = new wxBitmap(image);
 
-	wxImage image1(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\chibi sprites.png"), wxBITMAP_TYPE_PNG);
+	wxString locationchibi = wxFileName(fileLocation).GetPath() + wxT("\\chibi sprites.png");
+	wxImage image1(locationchibi, wxBITMAP_TYPE_PNG);
 	chibi = new wxBitmap(image1);
 
-//	wxImage image2(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\miraiwalking.gif"), wxBITMAP_TYPE_GIF);
+//	wxString locmirai = wxFileName(fileLocation).GetPath() + wxT("\\miraiwalking.gif");
+//	wxImage image2(locmirai, wxBITMAP_TYPE_GIF);
 //	mirai = new wxBitmap(image2);
 
 
@@ -136,35 +150,54 @@ void Map::LoadMapBitmap()
 
 void Map::LoadMapNumberBitmap()
 {
-	wxImage image1(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\map1.png"), wxBITMAP_TYPE_PNG);
+	wxString locmap1 = wxFileName(fileLocation).GetPath() + wxT("\\map1.png");
+	wxImage image1(locmap1, wxBITMAP_TYPE_PNG);
 	mapnum1 = new wxBitmap(image1);
-	wxImage image2(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\map2.png"), wxBITMAP_TYPE_PNG);
+
+	wxString locmap2 = wxFileName(fileLocation).GetPath() + wxT("\\map1.png");
+	wxImage image2(locmap2, wxBITMAP_TYPE_PNG);
 	mapnum2 = new wxBitmap(image2);
-	wxImage image3(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\map3.png"), wxBITMAP_TYPE_PNG);
+
+	wxString locmap3 = wxFileName(fileLocation).GetPath() + wxT("\\map3.png");
+	wxImage image3(locmap3, wxBITMAP_TYPE_PNG);
 	mapnum3 = new wxBitmap(image3);
-	wxImage image4(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\map4.png"), wxBITMAP_TYPE_PNG);
+
+	wxString locmap4 = wxFileName(fileLocation).GetPath() + wxT("\\map4.png");
+	wxImage image4(locmap4, wxBITMAP_TYPE_PNG);
 	mapnum4 = new wxBitmap(image4);
-	wxImage image5(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\map5.png"), wxBITMAP_TYPE_PNG);
+
+	wxString locmap5 = wxFileName(fileLocation).GetPath() + wxT("\\map5.png");
+	wxImage image5(locmap5, wxBITMAP_TYPE_PNG);
 	mapnum5 = new wxBitmap(image5);
-	wxImage image6(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\map6.png"), wxBITMAP_TYPE_PNG);
+
+	wxString locmap6 = wxFileName(fileLocation).GetPath() + wxT("\\map6.png");
+	wxImage image6(locmap6, wxBITMAP_TYPE_PNG);
 	mapnum6 = new wxBitmap(image6);
 }
 
 void Map::LoadbuttonWindowBitmap()
 {
-	wxImage image(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\button window.png"), wxBITMAP_TYPE_PNG);
+	wxString locbuttonwindow = wxFileName(fileLocation).GetPath() + wxT("\\button window.png");
+	wxImage image(locbuttonwindow, wxBITMAP_TYPE_PNG);
 	buttonWindow = new wxBitmap(image);
 }
 
 void Map::LoadUpgradeBitmap()
 {
-	wxImage image1(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\status button.png"), wxBITMAP_TYPE_PNG);
+	wxString locstatus = wxFileName(fileLocation).GetPath() + wxT("\\status button.png");
+	wxImage image1(locstatus, wxBITMAP_TYPE_PNG);
 	bitmapstatus = new wxBitmap(image1);
-	wxImage image2(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\bonds button.png"), wxBITMAP_TYPE_PNG);
+
+	wxString locbond = wxFileName(fileLocation).GetPath() + wxT("\\bonds button.png");
+	wxImage image2(locbond, wxBITMAP_TYPE_PNG); 
 	bitmapbonds = new wxBitmap(image2);
-	wxImage image3(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\shop button.png"), wxBITMAP_TYPE_PNG);
-	bitmapshop = new wxBitmap(image3);
-	wxImage image4(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\blacksmith button.png"), wxBITMAP_TYPE_PNG);
-	bitmapblacksmith = new wxBitmap(image4);
+
+	wxString locinven = wxFileName(fileLocation).GetPath() + wxT("\\shop button.png");
+	wxImage image3(locinven, wxBITMAP_TYPE_PNG); 
+	bitmapinvent = new wxBitmap(image3);
+
+	wxString locskill = wxFileName(fileLocation).GetPath() + wxT("\\blacksmith button.png");
+	wxImage image4(locskill, wxBITMAP_TYPE_PNG); 
+	bitmapskill = new wxBitmap(image4);
 
 }
