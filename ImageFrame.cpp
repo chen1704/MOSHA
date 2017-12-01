@@ -3,6 +3,9 @@
 #include "MenuName.h"
 #include "Map.h"
 #include "Battle1.h"
+#include "Hero.h"
+
+Hero* Hero::instance = 0;
 
 ImageFrame::ImageFrame(const wxString &title) : wxFrame(NULL, wxID_ANY, title)
 {

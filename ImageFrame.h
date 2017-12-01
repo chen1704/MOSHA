@@ -12,7 +12,6 @@ class ImageFrame : public wxFrame
 {
 public:
 	ImageFrame(const wxString &title);
-	Hero *mirai;
 	void InitComponents();
 	void ShowStart();
 	void ShowName();

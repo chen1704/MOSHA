@@ -1,6 +1,7 @@
 #pragma once
 #include "wx\wx.h"
 #include "ImageFrame.h"
+#include "Hero.h"
 
 class MenuName : public wxWindow
 {
@@ -11,6 +12,7 @@ public:
 	void OnPaint(wxPaintEvent &event);
 	void ClickOK(wxCommandEvent &event);
 
+	Hero *mirai;
 private:
 	ImageFrame *parentFrame;
 	wxString fileLocation;

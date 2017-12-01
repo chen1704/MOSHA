@@ -1,4 +1,5 @@
 #include "MenuName.h"
+#include "Hero.h"
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
 
@@ -6,6 +7,8 @@ BEGIN_EVENT_TABLE(MenuName, wxWindow)
 EVT_PAINT(MenuName::OnPaint)
 EVT_BUTTON(1001, MenuName::ClickOK)
 END_EVENT_TABLE()
+
+//Hero * Hero::instance = 0;
 
 MenuName::MenuName(ImageFrame * parent)
 	: wxWindow(parent, wxID_ANY), parentFrame(parent)
@@ -15,6 +18,8 @@ MenuName::MenuName(ImageFrame * parent)
 	wxImageHandler *pngLoader = new wxPNGHandler();
 	wxImage::AddHandler(pngLoader);
 	LoadAllBitmap();
+
+	mirai = Hero::getInstance();
 
 	NameEntry = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxPoint(70, 555), wxSize(100, 35),wxTE_CENTRE | wxTE_RICH);
 	NameEntry->SetBackgroundColour(wxColor(*wxYELLOW));
@@ -37,7 +42,8 @@ void MenuName::OnPaint(wxPaintEvent & event)
 void MenuName::ClickOK(wxCommandEvent & event)
 {
 	wxString TempName = NameEntry->GetValue();
-	wxString anu = wxT("Welcome Hero ") + TempName;
+	mirai->name = TempName;
+	wxString anu = wxT("Welcome Hero ") + mirai->name;
 	if (TempName.empty())
 	{
 		wxMessageBox(wxT("Username must not empty!"), wxT("Warning!"), wxICON_WARNING);
@@ -46,7 +52,7 @@ void MenuName::ClickOK(wxCommandEvent & event)
 		wxMessageBox(anu, wxT("Welcome"), wxICON_INFORMATION);
 		parentFrame->ShowMap();
 	}
-	delete menu, buttonWindow, OK;
+//	delete menu, buttonWindow, OK;
 	
 }
 
@@ -71,7 +77,7 @@ void MenuName::LoadbuttonWindowBitmap()
 	wxImage image(locwindow, wxBITMAP_TYPE_PNG);
 	buttonWindow = new wxBitmap(image);
 
-	wxString locstart = wxFileName(fileLocation).GetPath() + wxT("\\status button.png");
+	wxString locstart = wxFileName(fileLocation).GetPath() + wxT("\\button ok.png");
 	wxImage image1(locstart, wxBITMAP_TYPE_PNG);
 	OK = new wxBitmap(image1);
 }
