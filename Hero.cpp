@@ -2,6 +2,7 @@
 
 Hero::Hero()
 {
+	skillatt = 1; skilldef = 1; skillheal = 1;
 }
 
 
