@@ -1,4 +1,5 @@
 #include "Map.h"
+#include "Hero.h"
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
 #include <wx/animate.h>
@@ -21,7 +22,7 @@ END_EVENT_TABLE()
 
 Map::Map(ImageFrame * parent) : wxWindow(parent, wxID_ANY), parentFrame(parent)
 {
-//	Refresh();
+	Refresh();
 	this->SetBackgroundColour(wxColour(*wxWHITE));
 	wxImageHandler *pngLoader = new wxPNGHandler();
 	wxImageHandler *gifLoader = new wxGIFHandler();
@@ -29,23 +30,17 @@ Map::Map(ImageFrame * parent) : wxWindow(parent, wxID_ANY), parentFrame(parent)
 	wxImage::AddHandler(gifLoader);
 	LoadAllBitmap();
 
+	mirai = Hero::getInstance();
+//	heroname = mirai->name;
+//	wxMessageOutputDebug().Printf("hero name = %s", heroname);
+
+
 	wxBitmapButton* map1 = new wxBitmapButton(this, 1001, *mapnum1, wxPoint(320, 10), wxDefaultSize, wxBORDER_NONE);
 	wxBitmapButton* map2 = new wxBitmapButton(this, 1002, *mapnum2, wxPoint(230, 105), wxDefaultSize, wxBORDER_NONE);
 	wxBitmapButton* map3 = new wxBitmapButton(this, 1003, *mapnum3, wxPoint(125, 145), wxDefaultSize, wxBORDER_NONE);
 	wxBitmapButton* map4 = new wxBitmapButton(this, 1004, *mapnum4, wxPoint(285, 190), wxDefaultSize, wxBORDER_NONE);
 	wxBitmapButton* map5 = new wxBitmapButton(this, 1005, *mapnum5, wxPoint(325, 290), wxDefaultSize, wxBORDER_NONE);
 	wxBitmapButton* map6 = new wxBitmapButton(this, 1006, *mapnum6, wxPoint(115, 335), wxDefaultSize, wxBORDER_NONE);
-
-//	wxAnimationCtrl *mirai;
-//	mirai = new wxAnimationCtrl(this, wxID_ANY);
-//	if (mirai->LoadFile(wxT("miraiwalking.gif")))
-//		mirai->Play();
-
-//	mirai = new wxAnimation(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\miraiwalking.gif"),wxANIMATION_TYPE_ANY);
-	
-//	wxAnimationCtrl *an = new wxAnimationCtrl(this, wxID_ANY, wxAnimation(wxT("D:\\ITS SMT 3\\PBO (C)\\FP\\moshapic\\miraiwalking.gif"), wxANIMATION_TYPE_ANY), wxPoint(28, 300));
-//	an->Play();
-	// https://github.com/LuaDist/wxwidgets/blob/master/samples/animate/anitest.cpp
 
 	wxBitmapButton *buttonstatus = new wxBitmapButton(this, 1007, *bitmapstatus, wxPoint(40, 630), wxDefaultSize, wxBORDER_MASK);
 	wxBitmapButton *buttonbonds = new wxBitmapButton(this, 1008, *bitmapbonds, wxPoint(165, 627), wxDefaultSize, wxBORDER_MASK);
@@ -55,19 +50,20 @@ Map::Map(ImageFrame * parent) : wxWindow(parent, wxID_ANY), parentFrame(parent)
 
 Map::~Map()
 {
-	delete map;
-	delete buttonWindow;
-	delete chibi;
-//	delete mirai;
+	delete map, buttonWindow, chibi;
+	delete mapnum1, mapnum2, mapnum3, mapnum4, mapnum5, mapnum6;
+	delete bitmapstatus, bitmapbonds, bitmapinvent, bitmapskill;
 }
 
 void Map::OnPaint(wxPaintEvent & event)
 {
 	wxPaintDC pdc(this);
-
 	pdc.DrawBitmap(*map, wxPoint(0, 0), true);
 	pdc.DrawBitmap(*buttonWindow, wxPoint(0, 455), true);
 	pdc.DrawBitmap(*chibi, wxPoint(28, 488), true);
+	pdc.DrawText(mirai->name, wxPoint(160, 480));
+	//	wxMessageOutputDebug().Printf("ini pakai mirailgsung: %s", mirai->name);
+//	wxMessageOutputDebug().Printf("ini tempheroname: %s", heroname);
 //	pdc.DrawBitmap(*mirai, 0,0);
 	
 }
@@ -75,6 +71,8 @@ void Map::OnPaint(wxPaintEvent & event)
 void Map::ClickMap1(wxCommandEvent & event)
 {
 	wxMessageOutputDebug().Printf("click on map1");
+	parentFrame->ShowBattle1();
+//	DeleteBitmap();
 }
 
 void Map::ClickMap2(wxCommandEvent & event)
@@ -104,11 +102,13 @@ void Map::ClickMap6(wxCommandEvent & event)
 
 void Map::ClickButtonStatus(wxCommandEvent & event)
 {
-	Refresh();
+	parentFrame->ShowMenuStatus();
+	
 }
 
 void Map::ClickButtonBonds(wxCommandEvent & event)
 {
+	
 }
 
 void Map::ClickButtonShop(wxCommandEvent & event)
@@ -154,7 +154,7 @@ void Map::LoadMapNumberBitmap()
 	wxImage image1(locmap1, wxBITMAP_TYPE_PNG);
 	mapnum1 = new wxBitmap(image1);
 
-	wxString locmap2 = wxFileName(fileLocation).GetPath() + wxT("\\map1.png");
+	wxString locmap2 = wxFileName(fileLocation).GetPath() + wxT("\\map2.png");
 	wxImage image2(locmap2, wxBITMAP_TYPE_PNG);
 	mapnum2 = new wxBitmap(image2);
 
@@ -184,19 +184,19 @@ void Map::LoadbuttonWindowBitmap()
 
 void Map::LoadUpgradeBitmap()
 {
-	wxString locstatus = wxFileName(fileLocation).GetPath() + wxT("\\status button.png");
+	wxString locstatus = wxFileName(fileLocation).GetPath() + wxT("\\button status.png");
 	wxImage image1(locstatus, wxBITMAP_TYPE_PNG);
 	bitmapstatus = new wxBitmap(image1);
 
-	wxString locbond = wxFileName(fileLocation).GetPath() + wxT("\\bonds button.png");
+	wxString locbond = wxFileName(fileLocation).GetPath() + wxT("\\button bonds.png");
 	wxImage image2(locbond, wxBITMAP_TYPE_PNG); 
 	bitmapbonds = new wxBitmap(image2);
 
-	wxString locinven = wxFileName(fileLocation).GetPath() + wxT("\\shop button.png");
+	wxString locinven = wxFileName(fileLocation).GetPath() + wxT("\\button inventory.png");
 	wxImage image3(locinven, wxBITMAP_TYPE_PNG); 
 	bitmapinvent = new wxBitmap(image3);
 
-	wxString locskill = wxFileName(fileLocation).GetPath() + wxT("\\blacksmith button.png");
+	wxString locskill = wxFileName(fileLocation).GetPath() + wxT("\\button upgrade.png");
 	wxImage image4(locskill, wxBITMAP_TYPE_PNG); 
 	bitmapskill = new wxBitmap(image4);
 

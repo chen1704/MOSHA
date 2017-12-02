@@ -5,7 +5,6 @@
 
 BEGIN_EVENT_TABLE(MOSHA, wxWindow)
 EVT_PAINT(MOSHA::OnPaint)
-EVT_CHAR(MOSHA::OnChar)
 EVT_BUTTON(1001, MOSHA::ClickStart)
 END_EVENT_TABLE()
 
@@ -26,11 +25,8 @@ MOSHA::MOSHA(ImageFrame *parent) : wxWindow(parent, wxID_ANY), parentFrame(paren
 
 
 MOSHA::~MOSHA()
-{
-	delete menu;
-	delete start;
-	delete buttonWindow;
-	
+{	
+	delete menu, buttonWindow, start, map;
 }
 
 void MOSHA::LoadAllBitmap()
@@ -63,10 +59,7 @@ void MOSHA::LoadStartButton() {
 void MOSHA::ClickStart(wxCommandEvent & event)
 {
 	wxMessageOutputDebug().Printf("di klik di start");
-
-//	parentFrame->ShowMap();
-	parentFrame->ShowBattle1();
-
+	parentFrame->ShowName();
 }
 
 void MOSHA::LoadbuttonWindowBitmap() {
@@ -80,21 +73,11 @@ void MOSHA::LoadbuttonWindowBitmap() {
 void MOSHA::OnPaint(wxPaintEvent &event) {
 	wxPaintDC pdc(this);
 
-	if (this->state == 0) {
 		pdc.DrawBitmap(*menu, wxPoint(0, 0), true);
 		pdc.DrawBitmap(*buttonWindow, wxPoint(0, 455), true);
-	}
-	else if (this->state == 1) {
-		pdc.DrawBitmap(*map, wxPoint(0, 0), true);
-		pdc.DrawBitmap(*buttonWindow, wxPoint(0, 455), true);
-	}
+	
 //	wxMessageOutputDebug().Printf("Halo");
 
 
-}
-
-
-void MOSHA::OnChar(wxKeyEvent &event) {
-	wxMessageOutputDebug().Printf("Keyboard diteken, Keycode = %d", event.GetKeyCode());
 }
 

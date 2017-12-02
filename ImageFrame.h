@@ -16,7 +16,9 @@ public:
 	void ShowStart();
 	void ShowName();
 	void ShowMap();
+	void ShowMenuStatus();
 	void ShowBattle1();
+	Hero *mirai;
 
 private:
 	int frame;

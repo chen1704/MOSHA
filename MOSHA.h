@@ -10,13 +10,13 @@ public:
 	MOSHA(ImageFrame *parent);
 	~MOSHA();
 	void OnPaint(wxPaintEvent &event);
-	void OnChar(wxKeyEvent &event);
 	void ClickStart(wxCommandEvent &event);
-	int ChangeState();
+
 private:
 
 	ImageFrame *parentFrame;
 
+	wxString fileLocation;
 	wxPanel *panel;
 	wxBitmap *menu = nullptr;
 	wxBitmap *buttonWindow = nullptr;

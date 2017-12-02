@@ -2,13 +2,15 @@
 #include "wx\wx.h"
 #include "wx/animate.h"
 #include "ImageFrame.h"
+#include "Hero.h"
 
 class Map : public wxWindow
 {
 public:
 	Map(ImageFrame *parent);
 	~Map();
-
+	Hero *mirai;
+//	string heroname;
 	void OnPaint(wxPaintEvent &event);
 
 	void ClickMap1(wxCommandEvent &event);
@@ -28,15 +30,17 @@ private:
 
 	ImageFrame *parentFrame;
 
+	wxString fileLocation;
 	wxBitmap *map = nullptr;
 	wxBitmap *buttonWindow = nullptr;
 	wxBitmap *chibi = nullptr;
+//	wxTextCtrl *MapName;
 //	wxBitmap *mirai = nullptr;
 //	wxAnimation *mirai;
 
 	/*Map Number bitmap*/
 	wxBitmap *mapnum1, *mapnum2, *mapnum3, *mapnum4, *mapnum5, *mapnum6;
-	wxBitmap *bitmapstatus, *bitmapbonds, *bitmapshop, *bitmapblacksmith;
+	wxBitmap *bitmapstatus, *bitmapbonds, *bitmapinvent, *bitmapskill;
 	wxPanel *panel;
 	void LoadAllBitmap();
 	void LoadMapBitmap();

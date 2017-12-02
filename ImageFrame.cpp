@@ -2,6 +2,7 @@
 #include "MOSHA.h"
 #include "MenuName.h"
 #include "Map.h"
+#include "MenuStatus.h"
 #include "Battle1.h"
 #include "Hero.h"
 
@@ -30,13 +31,18 @@ void ImageFrame::InitComponents()
 	this->map->Show(false);
 	this->boxSizer->Add(map, 1, wxEXPAND, 0);
 
+	this->menustatus = new MenuStatus(this);
+	this->menustatus->Show(false);
+	this->boxSizer->Add(menustatus, 1, wxEXPAND, 0);
+
 	this->battle1 = new Battle1(this);
 	this->battle1->Show(false);
 	this->boxSizer->Add(battle1, 1, wxEXPAND, 0);
 
 	SetSizer(boxSizer);
 
-	ShowStart();
+//	ShowStart();
+	ShowBattle1();
 }
 
 void ImageFrame::ShowStart()
@@ -44,6 +50,7 @@ void ImageFrame::ShowStart()
 	this->mosha->Show(true);
 	this->menuname->Show(false);
 	this->map->Show(false);
+	this->menustatus->Show(false);
 	this->battle1->Show(false);
 
 	fitWindowSize();
@@ -54,6 +61,7 @@ void ImageFrame::ShowName()
 	this->mosha->Show(false);
 	this->menuname->Show(true);
 	this->map->Show(false);
+	this->menustatus->Show(false);
 	this->battle1->Show(false);
 	
 	fitWindowSize();
@@ -61,18 +69,31 @@ void ImageFrame::ShowName()
 
 void ImageFrame::ShowMap()
 {
-	this->map->Show(true);
 	this->mosha->Show(false);
 	this->menuname->Show(false);
+	this->map->Show(true);
+	this->menustatus->Show(false);
+	this->battle1->Show(false);
+	fitWindowSize();
+}
+
+void ImageFrame::ShowMenuStatus()
+{
+	this->mosha->Show(false);
+	this->menuname->Show(false);
+	this->map->Show(false);
+	this->menustatus->Show(true);
 	this->battle1->Show(false);
 	fitWindowSize();
 }
 
 void ImageFrame::ShowBattle1()
 {
-	this->battle1->Show(true);
-	this->map->Show(false);
 	this->mosha->Show(false);
+	this->menuname->Show(false);
+	this->map->Show(false);
+	this->menustatus->Show(false);
+	this->battle1->Show(true);
 	fitWindowSize();
 }
 

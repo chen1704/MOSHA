@@ -2,6 +2,7 @@
 #include "Hero.h"
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
+#include <wx/font.h>
 
 BEGIN_EVENT_TABLE(MenuName, wxWindow)
 EVT_PAINT(MenuName::OnPaint)
@@ -21,8 +22,11 @@ MenuName::MenuName(ImageFrame * parent)
 
 	mirai = Hero::getInstance();
 
-	NameEntry = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxPoint(70, 555), wxSize(100, 35),wxTE_CENTRE | wxTE_RICH);
+	wxFont font(14,wxFONTFAMILY_ROMAN,wxFONTSTYLE_NORMAL,wxFONTWEIGHT_BOLD);
+
+	NameEntry = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxPoint(70, 555), wxSize(100, 40),wxTE_CENTRE | wxTE_RICH);
 	NameEntry->SetBackgroundColour(wxColor(*wxYELLOW));
+	NameEntry->SetFont(font);
 //	NameEntry->SetDefaultStyle(wxTextAttr(wxColor(*wxGREEN), wxColor(*wxBLUE)));
 
 	wxBitmapButton* OKbutton = new wxBitmapButton(this, 1001, *OK, wxPoint(200,570), wxDefaultSize, wxBU_AUTODRAW);
@@ -30,6 +34,7 @@ MenuName::MenuName(ImageFrame * parent)
 
 MenuName::~MenuName()
 {
+	delete menu, buttonWindow, OK;
 }
 
 void MenuName::OnPaint(wxPaintEvent & event)
@@ -41,12 +46,13 @@ void MenuName::OnPaint(wxPaintEvent & event)
 
 void MenuName::ClickOK(wxCommandEvent & event)
 {
-	wxString TempName = NameEntry->GetValue();
+	string TempName = NameEntry->GetValue();
+//	mirai->SetName(TempName);
 	mirai->name = TempName;
-	wxString anu = wxT("Welcome Hero ") + mirai->name;
+	wxString anu = wxT("Welcome Hero ") + TempName;
 	if (TempName.empty())
 	{
-		wxMessageBox(wxT("Username must not empty!"), wxT("Warning!"), wxICON_WARNING);
+		wxMessageBox(wxT("Username must not empty!"), wxT("Warning!"), wxICON_ERROR);
 	}
 	else {
 		wxMessageBox(anu, wxT("Welcome"), wxICON_INFORMATION);
@@ -69,6 +75,7 @@ void MenuName::LoadMenuBitmap()
 	wxString loclogo = wxFileName(fileLocation).GetPath() + wxT("\\menu awal.png");
 	wxImage image(loclogo, wxBITMAP_TYPE_PNG);
 	menu = new wxBitmap(image);
+	menu->ConvertToDisabled(150);
 }
 
 void MenuName::LoadbuttonWindowBitmap()

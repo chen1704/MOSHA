@@ -10,7 +10,7 @@ public:
 	~Hero();
 	static Hero *getInstance();
 	string name;
-	int HP, MP, XP, level;
+	int HP, level;
 	int skillatt, skilldef, skillheal;
 	int itmlog, itmbrick, itmstone, itmearth, itmdia, itmwood;
 	int bondshi, bondhij, bondsak;
