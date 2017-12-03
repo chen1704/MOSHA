@@ -22,13 +22,13 @@ Battle1::Battle1(ImageFrame * parent) :
 
 	this->turn = 0;
 	this->renew = 0;
-	
+
 	LoadAllBitmap();
 	mirai = Hero::getInstance();
 
-	wxBitmapButton* attack = new wxBitmapButton(this, 1001, *buttonatt, wxPoint(102, 600), wxDefaultSize, wxBU_AUTODRAW);
-	wxBitmapButton* defense = new wxBitmapButton(this, 1002, *buttondef, wxPoint(209, 600), wxDefaultSize, wxBU_AUTODRAW);
-	wxBitmapButton* heal = new wxBitmapButton(this, 1003, *buttonheal, wxPoint(316, 600), wxDefaultSize, wxBU_AUTODRAW);
+	wxBitmapButton* attack = new wxBitmapButton(this, 1001, *buttonatt, wxPoint(102, 590), wxDefaultSize, wxBU_AUTODRAW);
+	wxBitmapButton* defense = new wxBitmapButton(this, 1002, *buttondef, wxPoint(209, 590), wxDefaultSize, wxBU_AUTODRAW);
+	wxBitmapButton* heal = new wxBitmapButton(this, 1003, *buttonheal, wxPoint(316, 590), wxDefaultSize, wxBU_AUTODRAW);
 
 	timer = new wxTimer(this, TIMER_ID);
 	timer->Start(100);
@@ -58,166 +58,166 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 	pdc.DrawBitmap(*buttonWindow, wxPoint(0, 455), true);
 	if (turn == 0) //masih belum diapa"in
 	{
-		if (renew % 7 == 0) pdc.DrawBitmap(*mirai0, wxPoint(76, 219));
-		else if (renew % 7 == 1) pdc.DrawBitmap(*mirai1, wxPoint(76, 219));
-		else if (renew % 7 == 2) pdc.DrawBitmap(*mirai2, wxPoint(76, 219));
-		else if (renew % 7 == 3) pdc.DrawBitmap(*mirai3, wxPoint(76, 219));
-		else if (renew % 7 == 4) pdc.DrawBitmap(*mirai4, wxPoint(76, 219));
-		else if (renew % 7 == 5) pdc.DrawBitmap(*mirai5, wxPoint(76, 219));
-		else if (renew % 7 == 6) pdc.DrawBitmap(*mirai6, wxPoint(76, 219));
+		if (renew % 7 == 0) pdc.DrawBitmap(*mirai0, wxPoint(60, 175));
+		else if (renew % 7 == 1) pdc.DrawBitmap(*mirai1, wxPoint(60, 175));
+		else if (renew % 7 == 2) pdc.DrawBitmap(*mirai2, wxPoint(60, 175));
+		else if (renew % 7 == 3) pdc.DrawBitmap(*mirai3, wxPoint(60, 175));
+		else if (renew % 7 == 4) pdc.DrawBitmap(*mirai4, wxPoint(60, 175));
+		else if (renew % 7 == 5) pdc.DrawBitmap(*mirai5, wxPoint(60, 175));
+		else if (renew % 7 == 6) pdc.DrawBitmap(*mirai6, wxPoint(60, 175));
 
-		if (renew % 5 == 0 || renew%5==4) pdc.DrawBitmap(*t1, wxPoint(240, 190));
-		else if (renew % 5 == 1 || renew%5==3) pdc.DrawBitmap(*t2, wxPoint(240, 190));
-		else if (renew % 5 == 2) pdc.DrawBitmap(*t3, wxPoint(240, 190));
+		if (renew % 5 == 0 || renew % 5 == 4) pdc.DrawBitmap(*t1, wxPoint(125, 105));
+		else if (renew % 5 == 1 || renew % 5 == 3) pdc.DrawBitmap(*t2, wxPoint(125, 105));
+		else if (renew % 5 == 2) pdc.DrawBitmap(*t3, wxPoint(125, 105));
 	}
 
 	else if (turn == 1) {
 
-		if (renew % 27 == 0) pdc.DrawBitmap(*ma0, wxPoint(76, 219));
-		else if (renew % 27 == 1) pdc.DrawBitmap(*ma1, wxPoint(76, 219));
-		else if (renew % 27 == 2) pdc.DrawBitmap(*ma2, wxPoint(76, 219));
-		else if (renew % 27 == 3) pdc.DrawBitmap(*ma3, wxPoint(76, 219));
-		else if (renew % 27 == 4) pdc.DrawBitmap(*ma4, wxPoint(76, 219));
-		else if (renew % 27 == 5) pdc.DrawBitmap(*ma5, wxPoint(76, 219));
+		if (renew % 27 == 0) pdc.DrawBitmap(*ma0, wxPoint(60, 175));
+		else if (renew % 27 == 1) pdc.DrawBitmap(*ma1, wxPoint(60, 175));
+		else if (renew % 27 == 2) pdc.DrawBitmap(*ma2, wxPoint(60, 175));
+		else if (renew % 27 == 3) pdc.DrawBitmap(*ma3, wxPoint(60, 175));
+		else if (renew % 27 == 4) pdc.DrawBitmap(*ma4, wxPoint(60, 175));
+		else if (renew % 27 == 5) pdc.DrawBitmap(*ma5, wxPoint(60, 175));
 
-		else if (renew % 27 == 6) pdc.DrawBitmap(*ma6, wxPoint(76, 219));
-		else if (renew % 27 == 7) pdc.DrawBitmap(*ma7, wxPoint(76, 219));
-		else if (renew % 27 == 8) pdc.DrawBitmap(*ma8, wxPoint(76, 219));
-		else if (renew % 27 == 9) pdc.DrawBitmap(*ma9, wxPoint(76, 219));
-		else if (renew % 27 == 10) pdc.DrawBitmap(*ma10, wxPoint(76, 219));
+		else if (renew % 27 == 6) pdc.DrawBitmap(*ma6, wxPoint(60, 175));
+		else if (renew % 27 == 7) pdc.DrawBitmap(*ma7, wxPoint(60, 175));
+		else if (renew % 27 == 8) pdc.DrawBitmap(*ma8, wxPoint(60, 175));
+		else if (renew % 27 == 9) pdc.DrawBitmap(*ma9, wxPoint(60, 175));
+		else if (renew % 27 == 10) pdc.DrawBitmap(*ma10, wxPoint(60, 175));
 
-		else if (renew % 27 == 11) pdc.DrawBitmap(*ma11, wxPoint(76, 219));
-		else if (renew % 27 == 12) pdc.DrawBitmap(*ma12, wxPoint(76, 219));
-		else if (renew % 27 == 13) pdc.DrawBitmap(*ma13, wxPoint(76, 219));
-		else if (renew % 27 == 14) pdc.DrawBitmap(*ma14, wxPoint(76, 219));
+		else if (renew % 27 == 11) pdc.DrawBitmap(*ma11, wxPoint(60, 175));
+		else if (renew % 27 == 12) pdc.DrawBitmap(*ma12, wxPoint(60, 175));
+		else if (renew % 27 == 13) pdc.DrawBitmap(*ma13, wxPoint(60, 175));
+		else if (renew % 27 == 14) pdc.DrawBitmap(*ma14, wxPoint(60, 175));
 
 		//change outfit
-		else if (renew % 27 == 15) pdc.DrawBitmap(*ma18, wxPoint(76, 219));
-		else if (renew % 27 == 16) pdc.DrawBitmap(*ma19, wxPoint(76, 219));
-		else if (renew % 27 == 17) pdc.DrawBitmap(*ma20, wxPoint(76, 219));
-		else if (renew % 27 == 18) pdc.DrawBitmap(*ma21, wxPoint(76, 219));
-		
+		else if (renew % 27 == 15) pdc.DrawBitmap(*ma18, wxPoint(60, 175));
+		else if (renew % 27 == 16) pdc.DrawBitmap(*ma19, wxPoint(60, 175));
+		else if (renew % 27 == 17) pdc.DrawBitmap(*ma20, wxPoint(60, 175));
+		else if (renew % 27 == 18) pdc.DrawBitmap(*ma21, wxPoint(60, 175));
+
 		// + retrokyuu
-		else if (renew % 27 == 19) pdc.DrawBitmap(*md9, wxPoint(75, 219));
-		else if (renew % 27 == 20) pdc.DrawBitmap(*md10, wxPoint(75, 219));
-		else if (renew % 27 == 21) pdc.DrawBitmap(*md11, wxPoint(75, 219));
-		else if (renew % 27 == 22) pdc.DrawBitmap(*md12, wxPoint(75, 219));
-		else if (renew % 27 == 23) pdc.DrawBitmap(*md13, wxPoint(75, 219));
-		else if (renew % 27 == 24) pdc.DrawBitmap(*md14, wxPoint(75, 219));
-		else if (renew % 27 == 25) pdc.DrawBitmap(*md15, wxPoint(75, 219));
+		else if (renew % 27 == 19) pdc.DrawBitmap(*md9, wxPoint(60, 175));
+		else if (renew % 27 == 20) pdc.DrawBitmap(*md10, wxPoint(60, 175));
+		else if (renew % 27 == 21) pdc.DrawBitmap(*md11, wxPoint(60, 175));
+		else if (renew % 27 == 22) pdc.DrawBitmap(*md12, wxPoint(60, 175));
+		else if (renew % 27 == 23) pdc.DrawBitmap(*md13, wxPoint(60, 175));
+		else if (renew % 27 == 24) pdc.DrawBitmap(*md14, wxPoint(60, 175));
+		else if (renew % 27 == 25) pdc.DrawBitmap(*md15, wxPoint(60, 175));
 		else if (renew % 27 == 26) {
-			pdc.DrawBitmap(*md16, wxPoint(75, 219));
+			pdc.DrawBitmap(*md16, wxPoint(60, 175));
 			renew = 0;
 			turn = 4;
 		}
 
-		if (renew % 5 == 0 || renew % 5 == 4) pdc.DrawBitmap(*t1, wxPoint(240, 190));
-		else if (renew % 5 == 1 || renew % 5 == 3) pdc.DrawBitmap(*t2, wxPoint(240, 190));
-		else if (renew % 5 == 2) pdc.DrawBitmap(*t3, wxPoint(240, 190));
+		if (renew % 5 == 0 || renew % 5 == 4) pdc.DrawBitmap(*t1, wxPoint(125, 105));
+		else if (renew % 5 == 1 || renew % 5 == 3) pdc.DrawBitmap(*t2, wxPoint(125, 105));
+		else if (renew % 5 == 2) pdc.DrawBitmap(*t3, wxPoint(125, 105));
 	}
 
 	else if (turn == 2) {
-		if (renew % 23 == 0) pdc.DrawBitmap(*mz0, wxPoint(76, 219));
-		else if (renew % 23 == 1) pdc.DrawBitmap(*mz1, wxPoint(76, 219));
-		else if (renew % 23 == 2) pdc.DrawBitmap(*mz2, wxPoint(76, 219));
-		else if (renew % 23 == 3) pdc.DrawBitmap(*mz3, wxPoint(76, 219));
-		else if (renew % 23 == 4) pdc.DrawBitmap(*mz4, wxPoint(76, 219));
-		else if (renew % 23 == 5) pdc.DrawBitmap(*mz5, wxPoint(76, 219));
+		if (renew % 23 == 0) pdc.DrawBitmap(*mz0, wxPoint(60, 175));
+		else if (renew % 23 == 1) pdc.DrawBitmap(*mz1, wxPoint(60, 175));
+		else if (renew % 23 == 2) pdc.DrawBitmap(*mz2, wxPoint(60, 175));
+		else if (renew % 23 == 3) pdc.DrawBitmap(*mz3, wxPoint(60, 175));
+		else if (renew % 23 == 4) pdc.DrawBitmap(*mz4, wxPoint(60, 175));
+		else if (renew % 23 == 5) pdc.DrawBitmap(*mz5, wxPoint(60, 175));
 
-		else if (renew % 23 == 6) pdc.DrawBitmap(*mz6, wxPoint(76, 219));
-		else if (renew % 23 == 7) pdc.DrawBitmap(*mz7, wxPoint(76, 219));
-		else if (renew % 23 == 8) pdc.DrawBitmap(*mz8, wxPoint(76, 219));
-		else if (renew % 23 == 9) pdc.DrawBitmap(*mz9, wxPoint(76, 219));
-		else if (renew % 23 == 10) pdc.DrawBitmap(*mz10, wxPoint(76, 219));
+		else if (renew % 23 == 6) pdc.DrawBitmap(*mz6, wxPoint(60, 175));
+		else if (renew % 23 == 7) pdc.DrawBitmap(*mz7, wxPoint(60, 175));
+		else if (renew % 23 == 8) pdc.DrawBitmap(*mz8, wxPoint(60, 175));
+		else if (renew % 23 == 9) pdc.DrawBitmap(*mz9, wxPoint(60, 175));
+		else if (renew % 23 == 10) pdc.DrawBitmap(*mz10, wxPoint(60, 175));
 
-		else if (renew % 23 == 11) pdc.DrawBitmap(*mz11, wxPoint(76, 219));
-		else if (renew % 23 == 12) pdc.DrawBitmap(*mz12, wxPoint(76, 219));
-		else if (renew % 23 == 13) pdc.DrawBitmap(*mz13, wxPoint(76, 219));
-		else if (renew % 23 == 14) pdc.DrawBitmap(*mz14, wxPoint(76, 219));
+		else if (renew % 23 == 11) pdc.DrawBitmap(*mz11, wxPoint(60, 175));
+		else if (renew % 23 == 12) pdc.DrawBitmap(*mz12, wxPoint(60, 175));
+		else if (renew % 23 == 13) pdc.DrawBitmap(*mz13, wxPoint(60, 175));
+		else if (renew % 23 == 14) pdc.DrawBitmap(*mz14, wxPoint(60, 175));
 
-		else if (renew % 23 == 15) pdc.DrawBitmap(*mz15, wxPoint(76, 219));
-		else if (renew % 23 == 16) pdc.DrawBitmap(*mz16, wxPoint(76, 219));
-		else if (renew % 23 == 17) pdc.DrawBitmap(*mz17, wxPoint(76, 219));
-		else if (renew % 23 == 18) pdc.DrawBitmap(*mz18, wxPoint(76, 219));
-		else if (renew % 23 == 19) pdc.DrawBitmap(*mz19, wxPoint(76, 219));
+		else if (renew % 23 == 15) pdc.DrawBitmap(*mz15, wxPoint(60, 175));
+		else if (renew % 23 == 16) pdc.DrawBitmap(*mz16, wxPoint(60, 175));
+		else if (renew % 23 == 17) pdc.DrawBitmap(*mz17, wxPoint(60, 175));
+		else if (renew % 23 == 18) pdc.DrawBitmap(*mz18, wxPoint(60, 175));
+		else if (renew % 23 == 19) pdc.DrawBitmap(*mz19, wxPoint(60, 175));
 
-		else if (renew % 23 == 20) pdc.DrawBitmap(*mz20, wxPoint(75, 219));
-		else if (renew % 23 == 21) pdc.DrawBitmap(*mz21, wxPoint(75, 219));
+		else if (renew % 23 == 20) pdc.DrawBitmap(*mz20, wxPoint(60, 175));
+		else if (renew % 23 == 21) pdc.DrawBitmap(*mz21, wxPoint(60, 175));
 		else if (renew % 23 == 22) {
-			pdc.DrawBitmap(*mz22, wxPoint(75, 219));
+			pdc.DrawBitmap(*mz22, wxPoint(60, 175));
 			renew = 0;
 			turn = 4;
 		}
 
-		if (renew % 5 == 0 || renew % 5 == 4) pdc.DrawBitmap(*t1, wxPoint(240, 190));
-		else if (renew % 5 == 1 || renew % 5 == 3) pdc.DrawBitmap(*t2, wxPoint(240, 190));
-		else if (renew % 5 == 2) pdc.DrawBitmap(*t3, wxPoint(240, 190));
+		if (renew % 5 == 0 || renew % 5 == 4) pdc.DrawBitmap(*t1, wxPoint(125, 105));
+		else if (renew % 5 == 1 || renew % 5 == 3) pdc.DrawBitmap(*t2, wxPoint(125, 105));
+		else if (renew % 5 == 2) pdc.DrawBitmap(*t3, wxPoint(125, 105));
 	}
 
 	else if (turn == 3) { //mirai heal
 		pdc.DrawText("Mirai is healing", wxPoint(100, 100));
-		if (renew % 18 == 0) pdc.DrawBitmap(*ma0, wxPoint(76, 219));
-		else if (renew % 18 == 1) pdc.DrawBitmap(*ma1, wxPoint(76, 219));
-		else if (renew % 18 == 2) pdc.DrawBitmap(*ma2, wxPoint(76, 219));
-		else if (renew % 18 == 3) pdc.DrawBitmap(*ma3, wxPoint(76, 219));
-		else if (renew % 18 == 4) pdc.DrawBitmap(*ma4, wxPoint(76, 219));
-		else if (renew % 18 == 5) pdc.DrawBitmap(*ma5, wxPoint(76, 219));
+		if (renew % 18 == 0) pdc.DrawBitmap(*ma0, wxPoint(60, 175));
+		else if (renew % 18 == 1) pdc.DrawBitmap(*ma1, wxPoint(60, 175));
+		else if (renew % 18 == 2) pdc.DrawBitmap(*ma2, wxPoint(60, 175));
+		else if (renew % 18 == 3) pdc.DrawBitmap(*ma3, wxPoint(60, 175));
+		else if (renew % 18 == 4) pdc.DrawBitmap(*ma4, wxPoint(60, 175));
+		else if (renew % 18 == 5) pdc.DrawBitmap(*ma5, wxPoint(60, 175));
 
-		else if (renew % 18 == 6) pdc.DrawBitmap(*ma6, wxPoint(76, 219));
-		else if (renew % 18 == 7) pdc.DrawBitmap(*ma7, wxPoint(76, 219));
-		else if (renew % 18 == 8) pdc.DrawBitmap(*ma8, wxPoint(76, 219));
-		else if (renew % 18 == 9) pdc.DrawBitmap(*ma9, wxPoint(76, 219));
-		else if (renew % 18 == 10) pdc.DrawBitmap(*ma10, wxPoint(76, 219));
+		else if (renew % 18 == 6) pdc.DrawBitmap(*ma6, wxPoint(60, 175));
+		else if (renew % 18 == 7) pdc.DrawBitmap(*ma7, wxPoint(60, 175));
+		else if (renew % 18 == 8) pdc.DrawBitmap(*ma8, wxPoint(60, 175));
+		else if (renew % 18 == 9) pdc.DrawBitmap(*ma9, wxPoint(60, 175));
+		else if (renew % 18 == 10) pdc.DrawBitmap(*ma10, wxPoint(60, 175));
 
-		else if (renew % 18 == 11) pdc.DrawBitmap(*ma11, wxPoint(76, 219));
-		else if (renew % 18 == 12) pdc.DrawBitmap(*ma12, wxPoint(76, 219));
-		else if (renew % 18 == 13) pdc.DrawBitmap(*ma13, wxPoint(76, 219));
-		else if (renew % 18 == 14) pdc.DrawBitmap(*ma14, wxPoint(76, 219));
-		else if (renew % 18 == 15) pdc.DrawBitmap(*ma15, wxPoint(76, 219));
+		else if (renew % 18 == 11) pdc.DrawBitmap(*ma11, wxPoint(60, 175));
+		else if (renew % 18 == 12) pdc.DrawBitmap(*ma12, wxPoint(60, 175));
+		else if (renew % 18 == 13) pdc.DrawBitmap(*ma13, wxPoint(60, 175));
+		else if (renew % 18 == 14) pdc.DrawBitmap(*ma14, wxPoint(60, 175));
+		else if (renew % 18 == 15) pdc.DrawBitmap(*ma15, wxPoint(60, 175));
 
-		else if (renew % 18 == 16) pdc.DrawBitmap(*ma16, wxPoint(76, 219));
+		else if (renew % 18 == 16) pdc.DrawBitmap(*ma16, wxPoint(60, 175));
 		else if (renew % 18 == 17) {
-			pdc.DrawBitmap(*ma17, wxPoint(76, 219));
+			pdc.DrawBitmap(*ma17, wxPoint(60, 175));
 			renew = 0;
 			turn = 4;
 		}
 
-		if (renew % 5 == 0 || renew % 5 == 4) pdc.DrawBitmap(*t1, wxPoint(240, 190));
-		else if (renew % 5 == 1 || renew % 5 == 3) pdc.DrawBitmap(*t2, wxPoint(240, 190));
+		if (renew % 5 == 0 || renew % 5 == 4) pdc.DrawBitmap(*t1, wxPoint(125, 105));
+		else if (renew % 5 == 1 || renew % 5 == 3) pdc.DrawBitmap(*t2, wxPoint(125, 105));
 		else if (renew % 5 == 2) pdc.DrawBitmap(*t3, wxPoint(240, 190));
 	}
 
 	else if (turn == 4) { //Enemy attack
 		pdc.DrawText("Enemy attack", wxPoint(100, 100));
-		if (renew % 7 == 0) pdc.DrawBitmap(*mirai0, wxPoint(76, 219));
-		else if (renew % 7 == 1) pdc.DrawBitmap(*mirai1, wxPoint(76, 219));
-		else if (renew % 7 == 2) pdc.DrawBitmap(*mirai2, wxPoint(76, 219));
-		else if (renew % 7 == 3) pdc.DrawBitmap(*mirai3, wxPoint(76, 219));
-		else if (renew % 7 == 4) pdc.DrawBitmap(*mirai4, wxPoint(76, 219));
-		else if (renew % 7 == 5) pdc.DrawBitmap(*mirai5, wxPoint(76, 219));
-		else if (renew % 7 == 6) pdc.DrawBitmap(*mirai6, wxPoint(76, 219));
+		if (renew % 7 == 0) pdc.DrawBitmap(*mirai0, wxPoint(60, 175));
+		else if (renew % 7 == 1) pdc.DrawBitmap(*mirai1, wxPoint(60, 175));
+		else if (renew % 7 == 2) pdc.DrawBitmap(*mirai2, wxPoint(60, 175));
+		else if (renew % 7 == 3) pdc.DrawBitmap(*mirai3, wxPoint(60, 175));
+		else if (renew % 7 == 4) pdc.DrawBitmap(*mirai4, wxPoint(60, 175));
+		else if (renew % 7 == 5) pdc.DrawBitmap(*mirai5, wxPoint(60, 175));
+		else if (renew % 7 == 6) pdc.DrawBitmap(*mirai6, wxPoint(60, 175));
 
-		if (renew % 18 == 0) pdc.DrawBitmap(*e0, wxPoint(240, 190));
-		else if (renew % 18 == 1) pdc.DrawBitmap(*e1, wxPoint(240, 190));
-		else if (renew % 18 == 2) pdc.DrawBitmap(*e2, wxPoint(240, 190));
-		else if (renew % 18 == 3) pdc.DrawBitmap(*e3, wxPoint(240, 190));
-		else if (renew % 18 == 4) pdc.DrawBitmap(*e4, wxPoint(240, 190));
-		else if (renew % 18 == 5) pdc.DrawBitmap(*e5, wxPoint(240, 190));
+		if (renew % 18 == 0) pdc.DrawBitmap(*e0, wxPoint(80, 105));
+		else if (renew % 18 == 1) pdc.DrawBitmap(*e1, wxPoint(80, 105));
+		else if (renew % 18 == 2) pdc.DrawBitmap(*e2, wxPoint(80, 105));
+		else if (renew % 18 == 3) pdc.DrawBitmap(*e3, wxPoint(80, 105));
+		else if (renew % 18 == 4) pdc.DrawBitmap(*e4, wxPoint(80, 105));
+		else if (renew % 18 == 5) pdc.DrawBitmap(*e5, wxPoint(80, 105));
 
-		else if (renew % 18 == 6) pdc.DrawBitmap(*e6, wxPoint(240, 190));
-		else if (renew % 18 == 7) pdc.DrawBitmap(*e7, wxPoint(240, 190));
-		else if (renew % 18 == 8) pdc.DrawBitmap(*e8, wxPoint(240, 190));
-		else if (renew % 18 == 9) pdc.DrawBitmap(*e9, wxPoint(240, 190));
-		else if (renew % 18 == 10) pdc.DrawBitmap(*e10, wxPoint(240, 190));
+		else if (renew % 18 == 6) pdc.DrawBitmap(*e6, wxPoint(80, 105));
+		else if (renew % 18 == 7) pdc.DrawBitmap(*e7, wxPoint(80, 105));
+		else if (renew % 18 == 8) pdc.DrawBitmap(*e8, wxPoint(80, 105));
+		else if (renew % 18 == 9) pdc.DrawBitmap(*e9, wxPoint(80, 105));
+		else if (renew % 18 == 10) pdc.DrawBitmap(*e10, wxPoint(80, 105));
 
-		else if (renew % 18 == 11) pdc.DrawBitmap(*e11, wxPoint(240, 190));
-		else if (renew % 18 == 12) pdc.DrawBitmap(*e12, wxPoint(240, 190));
-		else if (renew % 18 == 13) pdc.DrawBitmap(*e13, wxPoint(240, 190));
-		else if (renew % 18 == 14) pdc.DrawBitmap(*e14, wxPoint(240, 190));
-		else if (renew % 18 == 15) pdc.DrawBitmap(*e15, wxPoint(240, 190));
+		else if (renew % 18 == 11) pdc.DrawBitmap(*e11, wxPoint(80, 105));
+		else if (renew % 18 == 12) pdc.DrawBitmap(*e12, wxPoint(80, 105));
+		else if (renew % 18 == 13) pdc.DrawBitmap(*e13, wxPoint(80, 105));
+		else if (renew % 18 == 14) pdc.DrawBitmap(*e14, wxPoint(80, 105));
+		else if (renew % 18 == 15) pdc.DrawBitmap(*e15, wxPoint(80, 105));
 
 		else if (renew % 18 == 16) {
-			pdc.DrawBitmap(*e16, wxPoint(240, 190));
+			pdc.DrawBitmap(*e16, wxPoint(80, 105));
 			renew = 0;
 			turn = 0;
 		}
@@ -226,7 +226,7 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 
 void Battle1::OnClickAttack(wxCommandEvent & event)
 {
-//	wxMessageOutputDebug().Printf("the button has been clicked");
+	//	wxMessageOutputDebug().Printf("the button has been clicked");
 	turn = 1;
 	renew = 0;
 }
@@ -246,7 +246,7 @@ void Battle1::OnClickHeal(wxCommandEvent & event)
 void Battle1::OnTimer(wxTimerEvent & event)
 {
 	static int counter = 0;
-//	framerate = counter;
+	//	framerate = counter;
 	++renew;
 	wxMessageOutputDebug().Printf("wxTimer %d", counter++);
 	Refresh();
@@ -320,7 +320,7 @@ void Battle1::LoadSpriteMiraiBitmap()
 	wxImage mi7(locmirai7, wxBITMAP_TYPE_PNG);
 	mirai7 = new wxBitmap(mi7);
 
-//load MIRAI-HEAL
+	//load MIRAI-HEAL
 	wxString miatt;
 	miatt = wxFileName(fileLocation).GetPath() + wxT("\\chara-attack0.png");
 	wxImage a0(miatt, wxBITMAP_TYPE_PNG);
@@ -393,7 +393,7 @@ void Battle1::LoadSpriteMiraiBitmap()
 	wxImage a21(miatt, wxBITMAP_TYPE_PNG);
 	ma21 = new wxBitmap(a21);
 
-// LOAD MIRAI + ATTACK
+	// LOAD MIRAI + ATTACK
 	miatt = wxFileName(fileLocation).GetPath() + wxT("\\chara-defense9.png");
 	wxImage d1(miatt, wxBITMAP_TYPE_PNG);
 	md9 = new wxBitmap(d1);
@@ -421,7 +421,7 @@ void Battle1::LoadSpriteMiraiBitmap()
 	wxImage d8(miatt, wxBITMAP_TYPE_PNG);
 	md16 = new wxBitmap(d8);
 
-//LOAD MIRAI + DEFENSE SHIELD
+	//LOAD MIRAI + DEFENSE SHIELD
 	miatt = wxFileName(fileLocation).GetPath() + wxT("\\def0.png");
 	wxImage z0(miatt, wxBITMAP_TYPE_PNG);
 	mz0 = new wxBitmap(z0);
@@ -557,7 +557,7 @@ void Battle1::LoadSpriteEnemyBitmap()
 	enemy = wxFileName(fileLocation).GetPath() + wxT("\\mageatt14.png");
 	wxImage a14(enemy, wxBITMAP_TYPE_PNG);
 	e14 = new wxBitmap(a14);
-	
+
 	enemy = wxFileName(fileLocation).GetPath() + wxT("\\mageatt15.png");
 	wxImage a15(enemy, wxBITMAP_TYPE_PNG);
 	e15 = new wxBitmap(a15);
