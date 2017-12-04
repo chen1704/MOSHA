@@ -29,6 +29,8 @@ MenuBonds::MenuBonds(ImageFrame *parent) : wxWindow(parent, wxID_ANY), parentFra
 
 MenuBonds::~MenuBonds(){
 	delete map, buttonwindow, buttonbonds, buttoninvent, buttonskill, buttonstatus;
+	delete shimura, hijikata, sakata, namesakata, nameshimura, namehijikata;
+	delete chibi, bond;
 }
 
 void MenuBonds::OnPaint(wxPaintEvent &event) {
