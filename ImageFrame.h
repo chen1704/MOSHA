@@ -8,6 +8,7 @@ class MenuName;
 class Battle1;
 class Hero;
 class MenuBonds;
+class MenuUpgrade;
 
 class ImageFrame : public wxFrame
 {
@@ -19,6 +20,7 @@ public:
 	void ShowMap();
 	void ShowMenuStatus();
 	void ShowMenuBonds();
+	void ShowMenuUpgrade();
 	void ShowBattle1();
 	Hero *mirai;
 
@@ -31,8 +33,8 @@ private:
 	MenuName *menuname;
 	Battle1 *battle1;
 	MenuBonds *menubonds;
+	MenuUpgrade *menuupgrade;
 
 	void fitWindowSize();
 
 };
-
