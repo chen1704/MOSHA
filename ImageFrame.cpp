@@ -5,12 +5,13 @@
 #include "MenuStatus.h"
 #include "Battle1.h"
 #include "Hero.h"
+#include "MenuBonds.h"
 
 Hero* Hero::instance = 0;
 
 ImageFrame::ImageFrame(const wxString &title) : wxFrame(NULL, wxID_ANY, title)
 {
-//	this->SetInitialSize(wxSize(515, 700));
+	//	this->SetInitialSize(wxSize(515, 700));
 	this->InitComponents();
 }
 
@@ -41,8 +42,14 @@ void ImageFrame::InitComponents()
 
 	SetSizer(boxSizer);
 
-//	ShowStart();
-	ShowBattle1();
+	//	ShowStart();
+	//ShowBattle1();
+
+	this->menubonds = new MenuBonds(this);
+	this->menubonds->Show(false);
+	this->boxSizer->Add(menubonds, 1, wxEXPAND, 0);
+
+	ShowMenuBonds();
 }
 
 void ImageFrame::ShowStart()
@@ -52,7 +59,7 @@ void ImageFrame::ShowStart()
 	this->map->Show(false);
 	this->menustatus->Show(false);
 	this->battle1->Show(false);
-
+	this->menubonds->Show(false);
 	fitWindowSize();
 }
 
@@ -63,7 +70,8 @@ void ImageFrame::ShowName()
 	this->map->Show(false);
 	this->menustatus->Show(false);
 	this->battle1->Show(false);
-	
+	this->menubonds->Show(false);
+
 	fitWindowSize();
 }
 
@@ -74,6 +82,7 @@ void ImageFrame::ShowMap()
 	this->map->Show(true);
 	this->menustatus->Show(false);
 	this->battle1->Show(false);
+	this->menubonds->Show(false);
 	fitWindowSize();
 }
 
@@ -84,6 +93,17 @@ void ImageFrame::ShowMenuStatus()
 	this->map->Show(false);
 	this->menustatus->Show(true);
 	this->battle1->Show(false);
+	this->menubonds->Show(false);
+	fitWindowSize();
+}
+
+void ImageFrame::ShowMenuBonds() {
+	this->mosha->Show(false);
+	this->menuname->Show(false);
+	this->map->Show(false);
+	this->menustatus->Show(false);
+	this->battle1->Show(false);
+	this->menubonds->Show(true);
 	fitWindowSize();
 }
 
@@ -94,6 +114,7 @@ void ImageFrame::ShowBattle1()
 	this->map->Show(false);
 	this->menustatus->Show(false);
 	this->battle1->Show(true);
+	this->menubonds->Show(false);
 	fitWindowSize();
 }
 
