@@ -17,11 +17,11 @@ private:
 	ImageFrame *parentFrame;
 	wxString fileLocation;
 	wxBitmap *map, *buttonwindow, *bond, *chibi;
-	wxBitmap *bitmapstatus, *bitmapbonds, *bitmapinvent, *bitmapskill;
+	wxBitmap *bitmapstatus, *bitmapbonds, *bitmapinvent, *bitmapskill, *bitmapexit;
 	wxBitmap *shimura, *hijikata, *sakata;
 	wxBitmap *nameshimura, *namehijikata, *namesakata;
 	//wxBitmap *buttonexit;
-	wxBitmapButton *buttonstatus, *buttonbonds, *buttoninvent, *buttonskill;
+	wxBitmapButton *buttonstatus, *buttonbonds, *buttoninvent, *buttonskill, *buttonexit;
 
 	void LoadAllBitmap();
 	void LoadMapBitmap();
