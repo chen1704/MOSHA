@@ -23,7 +23,7 @@ MenuBonds::MenuBonds(ImageFrame *parent) : wxWindow(parent, wxID_ANY), parentFra
 	buttonbonds = new wxBitmapButton(this, 1008, *bitmapbonds, wxPoint(378, 627), wxDefaultSize, wxBORDER_MASK);
 	buttoninvent = new wxBitmapButton(this, 1009, *bitmapinvent, wxPoint(28, 628), wxDefaultSize, wxBORDER_MASK);
 	buttonskill = new wxBitmapButton(this, 1010, *bitmapskill, wxPoint(146, 625), wxDefaultSize, wxBORDER_MASK);
-	//wxBitmapButton *buttonexit = new wxBitmapButton(this, 1001, *exit, wxPoint(398, 10), wxDefaultSize, wxBORDER_NONE);
+	buttonexit = new wxBitmapButton(this, 1001, *bitmapexit, wxPoint(397, 8), wxDefaultSize, wxBORDER_NONE);
 
 }
 
@@ -99,6 +99,10 @@ void MenuBonds::LoadMenuBitmap() {
 	wxString locskill = wxFileName(fileLocation).GetPath() + wxT("\\button upgrade.png");
 	wxImage image4(locskill, wxBITMAP_TYPE_PNG);
 	bitmapskill = new wxBitmap(image4);
+
+	wxString locexit = wxFileName(fileLocation).GetPath() + wxT("\\exit button.png");
+	wxImage image5(locexit, wxBITMAP_TYPE_PNG);
+	bitmapexit = new wxBitmap(image5);
 }
 
 void MenuBonds::LoadBondsBitmap(){
