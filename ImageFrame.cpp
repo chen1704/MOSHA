@@ -7,6 +7,7 @@
 #include "Hero.h"
 #include "MenuBonds.h"
 #include "MenuUpgrade.h"
+#include "MenuInvent.h"
 
 Hero* Hero::instance = 0;
 
@@ -37,13 +38,18 @@ void ImageFrame::InitComponents()
 	this->menustatus->Show(false);
 	this->boxSizer->Add(menustatus, 1, wxEXPAND, 0);
 
+	this->menuinvent = new MenuInvent(this);
+	this->menuinvent->Show(false);
+	this->boxSizer->Add(menuinvent, 1, wxEXPAND, 0);
+
 	this->battle1 = new Battle1(this);
 	this->battle1->Show(false);
 	this->boxSizer->Add(battle1, 1, wxEXPAND, 0);
 
+
 	SetSizer(boxSizer);
 
-	//	ShowStart();
+	//ShowStart();
 	//ShowBattle1();
 
 	this->menubonds = new MenuBonds(this);
@@ -55,7 +61,7 @@ void ImageFrame::InitComponents()
 	this->boxSizer->Add(menuupgrade, 1, wxEXPAND, 0);
 
 	//ShowMenuBonds();
-	ShowMenuUpgrade();
+	ShowMenuInvent();
 }
 
 void ImageFrame::ShowStart()
@@ -67,6 +73,7 @@ void ImageFrame::ShowStart()
 	this->battle1->Show(false);
 	this->menubonds->Show(false);
 	this->menuupgrade->Show(false);
+	this->menuinvent->Show(false);
 	fitWindowSize();
 }
 
@@ -79,7 +86,7 @@ void ImageFrame::ShowName()
 	this->battle1->Show(false);
 	this->menubonds->Show(false);
 	this->menuupgrade->Show(false);
-
+	this->menuinvent->Show(false);
 	fitWindowSize();
 }
 
@@ -92,6 +99,7 @@ void ImageFrame::ShowMap()
 	this->battle1->Show(false);
 	this->menubonds->Show(false);
 	this->menuupgrade->Show(false);
+	this->menuinvent->Show(false);
 	fitWindowSize();
 }
 
@@ -104,6 +112,7 @@ void ImageFrame::ShowMenuStatus()
 	this->battle1->Show(false);
 	this->menubonds->Show(false);
 	this->menuupgrade->Show(false);
+	this->menuinvent->Show(false);
 	fitWindowSize();
 }
 
@@ -115,6 +124,7 @@ void ImageFrame::ShowMenuBonds() {
 	this->battle1->Show(false);
 	this->menubonds->Show(true);
 	this->menuupgrade->Show(false);
+	this->menuinvent->Show(false);
 	fitWindowSize();
 }
 
@@ -126,9 +136,21 @@ void ImageFrame::ShowMenuUpgrade() {
 	this->battle1->Show(false);
 	this->menubonds->Show(false);
 	this->menuupgrade->Show(true);
+	this->menuinvent->Show(false);
 	fitWindowSize();
 }
 
+void ImageFrame::ShowMenuInvent() {
+	this->mosha->Show(false);
+	this->menuname->Show(false);
+	this->map->Show(false);
+	this->menustatus->Show(false);
+	this->battle1->Show(false);
+	this->menubonds->Show(false);
+	this->menuupgrade->Show(false);
+	this->menuinvent->Show(true);
+	fitWindowSize();
+}
 void ImageFrame::ShowBattle1()
 {
 	this->mosha->Show(false);
@@ -138,6 +160,7 @@ void ImageFrame::ShowBattle1()
 	this->battle1->Show(true);
 	this->menubonds->Show(false);
 	this->menuupgrade->Show(false);
+	this->menuinvent->Show(false);
 	fitWindowSize();
 }
 
