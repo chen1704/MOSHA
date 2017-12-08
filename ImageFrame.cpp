@@ -46,12 +46,7 @@ void ImageFrame::InitComponents()
 	this->battle1->Show(false);
 	this->boxSizer->Add(battle1, 1, wxEXPAND, 0);
 
-
-	SetSizer(boxSizer);
-
-	//ShowStart();
-	//ShowBattle1();
-
+	
 	this->menubonds = new MenuBonds(this);
 	this->menubonds->Show(false);
 	this->boxSizer->Add(menubonds, 1, wxEXPAND, 0);
@@ -60,6 +55,11 @@ void ImageFrame::InitComponents()
 	this->menuupgrade->Show(false);
 	this->boxSizer->Add(menuupgrade, 1, wxEXPAND, 0);
 
+
+	SetSizer(boxSizer);
+
+	//ShowStart();
+	//ShowBattle1();
 	//ShowMenuBonds();
 	ShowMenuInvent();
 }
