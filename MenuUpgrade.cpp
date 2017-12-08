@@ -6,6 +6,7 @@
 
 BEGIN_EVENT_TABLE(MenuUpgrade, wxWindow)
 EVT_PAINT(MenuUpgrade::OnPaint)
+EVT_BUTTON(1001, MenuUpgrade::OnClickExit)
 END_EVENT_TABLE()
 
 MenuUpgrade::MenuUpgrade(ImageFrame *parent) : wxWindow(parent, wxID_ANY), parentFrame(parent) {
@@ -21,7 +22,7 @@ MenuUpgrade::MenuUpgrade(ImageFrame *parent) : wxWindow(parent, wxID_ANY), paren
 	buttonbonds = new wxBitmapButton(this, 1008, *bitmapbonds, wxPoint(378, 627), wxDefaultSize, wxBORDER_MASK);
 	buttoninvent = new wxBitmapButton(this, 1009, *bitmapinvent, wxPoint(28, 628), wxDefaultSize, wxBORDER_MASK);
 	buttonskill = new wxBitmapButton(this, 1010, *bitmapskill, wxPoint(146, 625), wxDefaultSize, wxBORDER_MASK);
-
+	buttonexit = new wxBitmapButton(this, 1001, *bitmapexit, wxPoint(397, 8), wxDefaultSize, wxBORDER_NONE);
 }
 
 
@@ -56,6 +57,12 @@ void MenuUpgrade::OnPaint(wxPaintEvent &event) {
 	pdc.DrawBitmap(*money1, wxPoint(309, 142), true);
 	pdc.DrawBitmap(*money2, wxPoint(311, 260), true);
 	pdc.DrawBitmap(*money3, wxPoint(314, 370), true);
+}
+
+void MenuUpgrade::OnClickExit(wxCommandEvent & event)
+{
+	wxMessageOutputDebug().Printf("Exit Clicked");
+	parentFrame->ShowMap();
 }
 
 void MenuUpgrade::LoadAllBitmap() {
@@ -106,6 +113,10 @@ void MenuUpgrade::LoadMenuBitmap() {
 	wxString locskill = wxFileName(fileLocation).GetPath() + wxT("\\button upgrade.png");
 	wxImage image4(locskill, wxBITMAP_TYPE_PNG);
 	bitmapskill = new wxBitmap(image4);
+
+	wxString locexit = wxFileName(fileLocation).GetPath() + wxT("\\exit button1.png");
+	wxImage image5(locexit, wxBITMAP_TYPE_PNG);
+	bitmapexit = new wxBitmap(image5);
 }
 
 void MenuUpgrade::LoadUpgradeBitmap() {
