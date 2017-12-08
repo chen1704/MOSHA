@@ -10,7 +10,7 @@ public:
 	Map(ImageFrame *parent);
 	~Map();
 	Hero *mirai;
-//	string heroname;
+	//	string heroname;
 	void OnPaint(wxPaintEvent &event);
 
 	void ClickMap1(wxCommandEvent &event);
@@ -22,9 +22,9 @@ public:
 
 	void ClickButtonStatus(wxCommandEvent &event);
 	void ClickButtonBonds(wxCommandEvent &event);
-	void ClickButtonShop(wxCommandEvent &event);
-	void ClickButtonBlackSmith(wxCommandEvent &event);
-	
+	void ClickButtonInventory(wxCommandEvent &event);
+	void ClickButtonUpgrade(wxCommandEvent &event);
+
 
 private:
 
@@ -34,9 +34,9 @@ private:
 	wxBitmap *map = nullptr;
 	wxBitmap *buttonWindow = nullptr;
 	wxBitmap *chibi = nullptr;
-//	wxTextCtrl *MapName;
-//	wxBitmap *mirai = nullptr;
-//	wxAnimation *mirai;
+	//	wxTextCtrl *MapName;
+	//	wxBitmap *mirai = nullptr;
+	//	wxAnimation *mirai;
 
 	/*Map Number bitmap*/
 	wxBitmap *mapnum1, *mapnum2, *mapnum3, *mapnum4, *mapnum5, *mapnum6;
