@@ -20,6 +20,7 @@ private:
 	wxBitmap *menu = nullptr;
 	wxBitmap *buttonWindow = nullptr;
 	wxBitmap *OK = nullptr;
+	wxBitmap *insert = nullptr;
 	wxTextCtrl *NameEntry;
 	void LoadAllBitmap();
 	void LoadMenuBitmap();
@@ -27,4 +28,3 @@ private:
 
 	DECLARE_EVENT_TABLE()
 };
-
