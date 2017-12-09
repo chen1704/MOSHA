@@ -24,6 +24,10 @@ public:
 	void ShowMenuUpgrade();
 	void ShowMenuInvent();
 	void ShowBattle1();
+
+//	void LoadMenuBitmap();
+//	wxBitmap *peta;
+
 	Hero *mirai;
 
 private:
@@ -37,6 +41,8 @@ private:
 	MenuBonds *menubonds;
 	MenuUpgrade *menuupgrade;
 	MenuInvent *menuinvent;
+
+	
 
 	void fitWindowSize();
 

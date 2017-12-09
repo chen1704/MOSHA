@@ -1,3 +1,6 @@
+#include <wx/stdpaths.h>
+#include <wx/filename.h>
+
 #include "ImageFrame.h"
 #include "MOSHA.h"
 #include "MenuName.h"
@@ -60,8 +63,8 @@ void ImageFrame::InitComponents()
 
 	//ShowStart();
 	//ShowBattle1();
-	//ShowMenuBonds();
-	ShowMenuInvent();
+	ShowMenuBonds();
+	//ShowMenuInvent();
 }
 
 void ImageFrame::ShowStart()
@@ -171,3 +174,15 @@ void ImageFrame::fitWindowSize()
 	this->SetSize(wxSize(515, 700));
 	this->Layout();
 }
+
+/*
+void ImageFrame::LoadMenuBitmap()
+{
+	wxStandardPaths &stdPaths = wxStandardPaths::Get();
+	wxString fileLocation = stdPaths.GetExecutablePath();
+	wxString loclogo = wxFileName(fileLocation).GetPath() + wxT("\\menu awal.png");
+	wxImage image(loclogo, wxBITMAP_TYPE_PNG);
+	peta = new wxBitmap(image);
+//	menu->ConvertToDisabled(150);
+}
+*/

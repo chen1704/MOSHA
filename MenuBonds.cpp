@@ -30,6 +30,7 @@ MenuBonds::MenuBonds(ImageFrame *parent) : wxWindow(parent, wxID_ANY), parentFra
 MenuBonds::~MenuBonds(){
 	delete map, buttonwindow, buttonbonds, buttoninvent, buttonskill, buttonstatus;
 	delete shimura, hijikata, sakata, namesakata, nameshimura, namehijikata;
+	delete heartfull, heartnull, hearthalf;
 	delete chibi, bond;
 }
 
@@ -44,8 +45,95 @@ void MenuBonds::OnPaint(wxPaintEvent &event) {
 	pdc.DrawBitmap(*hijikata, wxPoint(281, 175), true);
 	pdc.DrawBitmap(*sakata, wxPoint(101, 288), true);
 	pdc.DrawBitmap(*nameshimura, wxPoint(210,93), true); 
-	pdc.DrawBitmap(*namehijikata, wxPoint(117, 221), true);
+	pdc.DrawBitmap(*namehijikata, wxPoint(177, 221), true); //atau 171
 	pdc.DrawBitmap(*namesakata, wxPoint(234, 341), true);
+
+	//drawnullheart on three boys
+	//shimura null
+	pdc.DrawBitmap(*heartnull, wxPoint(212, 126), true);
+	pdc.DrawBitmap(*heartnull, wxPoint(252, 126), true);
+	pdc.DrawBitmap(*heartnull, wxPoint(292, 126), true);
+	//hijikata null
+	pdc.DrawBitmap(*heartnull, wxPoint(154, 249), true);
+	pdc.DrawBitmap(*heartnull, wxPoint(194, 249), true);
+	pdc.DrawBitmap(*heartnull, wxPoint(234, 249), true);
+	//sakata null
+	pdc.DrawBitmap(*heartnull, wxPoint(234, 368), true);
+	pdc.DrawBitmap(*heartnull, wxPoint(274, 368), true);
+	pdc.DrawBitmap(*heartnull, wxPoint(314, 368), true);
+
+	//bond +1
+	if (mirai->bondshi == 1) pdc.DrawBitmap(*hearthalf, wxPoint(212, 126));
+	if (mirai->bondhij == 1) pdc.DrawBitmap(*hearthalf, wxPoint(154, 249));
+	if (mirai->bondsak == 1) pdc.DrawBitmap(*hearthalf, wxPoint(234, 368));
+
+	//bond + 2
+	if (mirai->bondshi == 2) pdc.DrawBitmap(*heartfull, wxPoint(212, 126));
+	if (mirai->bondhij == 2) pdc.DrawBitmap(*heartfull, wxPoint(154, 249));
+	if (mirai->bondsak == 2) pdc.DrawBitmap(*heartfull, wxPoint(234, 368));
+
+	//bond +3
+	if (mirai->bondshi == 3) {
+		pdc.DrawBitmap(*heartfull, wxPoint(212, 126));
+		pdc.DrawBitmap(*hearthalf, wxPoint(252, 126));
+	}
+	if (mirai->bondhij == 3) {
+		pdc.DrawBitmap(*heartfull, wxPoint(154, 249));
+		pdc.DrawBitmap(*hearthalf, wxPoint(194, 249));
+	}
+	if (mirai->bondsak == 3) {
+		pdc.DrawBitmap(*heartfull, wxPoint(234, 368));
+		pdc.DrawBitmap(*hearthalf, wxPoint(274, 368));
+	}
+
+	//bond+4
+	if (mirai->bondshi == 4) {
+		pdc.DrawBitmap(*heartfull, wxPoint(212, 126));
+		pdc.DrawBitmap(*heartfull, wxPoint(252, 126));
+	}
+	if (mirai->bondhij == 4) {
+		pdc.DrawBitmap(*heartfull, wxPoint(154, 249));
+		pdc.DrawBitmap(*heartfull, wxPoint(194, 249));
+	}
+	if (mirai->bondsak == 4) {
+		pdc.DrawBitmap(*heartfull, wxPoint(234, 368));
+		pdc.DrawBitmap(*heartfull, wxPoint(274, 368));
+	}
+
+	//bond+5
+	if (mirai->bondshi == 5) {
+		pdc.DrawBitmap(*heartfull, wxPoint(212, 126));
+		pdc.DrawBitmap(*heartfull, wxPoint(252, 126));
+		pdc.DrawBitmap(*hearthalf, wxPoint(292, 126));
+	}
+	if (mirai->bondhij == 5) {
+		pdc.DrawBitmap(*heartfull, wxPoint(154, 249));
+		pdc.DrawBitmap(*heartfull, wxPoint(194, 249));
+		pdc.DrawBitmap(*hearthalf, wxPoint(234, 249));
+	}
+	if (mirai->bondsak == 5) {
+		pdc.DrawBitmap(*heartfull, wxPoint(234, 368));
+		pdc.DrawBitmap(*heartfull, wxPoint(274, 368));
+		pdc.DrawBitmap(*hearthalf, wxPoint(314, 368));
+	}
+
+	//bond +6
+	if (mirai->bondshi == 6) {
+		pdc.DrawBitmap(*heartfull, wxPoint(212, 126));
+		pdc.DrawBitmap(*heartfull, wxPoint(252, 126));
+		pdc.DrawBitmap(*heartfull, wxPoint(292, 126));
+	}
+	if (mirai->bondhij == 6) {
+		pdc.DrawBitmap(*heartfull, wxPoint(154, 249));
+		pdc.DrawBitmap(*heartfull, wxPoint(194, 249));
+		pdc.DrawBitmap(*heartfull, wxPoint(234, 249));
+	}
+	if (mirai->bondsak == 6) {
+		pdc.DrawBitmap(*heartfull, wxPoint(234, 368));
+		pdc.DrawBitmap(*heartfull, wxPoint(274, 368));
+		pdc.DrawBitmap(*heartfull, wxPoint(314, 368));
+	}
+
 }
 
 void MenuBonds::OnClickExit(wxCommandEvent & event)
@@ -129,4 +217,16 @@ void MenuBonds::LoadBondsBitmap(){
 	wxString locnsakata = wxFileName(fileLocation).GetPath() + wxT("\\name sakata.png");
 	wxImage image6(locnsakata, wxBITMAP_TYPE_PNG);
 	namesakata = new wxBitmap(image6);
+
+	wxString hnull = wxFileName(fileLocation).GetPath() + wxT("\\bond heart bar null.png");
+	wxImage image7(hnull, wxBITMAP_TYPE_PNG);
+	heartnull = new wxBitmap(image7);
+
+	wxString hhalf = wxFileName(fileLocation).GetPath() + wxT("\\bond heart bar half.png");
+	wxImage image8(hhalf, wxBITMAP_TYPE_PNG);
+	hearthalf = new wxBitmap(image8);
+
+	wxString hfull = wxFileName(fileLocation).GetPath() + wxT("\\bond heart bar full.png");
+	wxImage image9(hfull, wxBITMAP_TYPE_PNG);
+	heartfull = new wxBitmap(image9);
 }

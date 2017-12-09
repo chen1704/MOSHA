@@ -20,6 +20,7 @@ private:
 	wxBitmap *bitmapstatus, *bitmapbonds, *bitmapinvent, *bitmapskill, *bitmapexit;
 	wxBitmap *shimura, *hijikata, *sakata;
 	wxBitmap *nameshimura, *namehijikata, *namesakata;
+	wxBitmap *heartnull, *hearthalf, *heartfull;
 	//wxBitmap *buttonexit;
 	wxBitmapButton *buttonstatus, *buttonbonds, *buttoninvent, *buttonskill, *buttonexit;
 
