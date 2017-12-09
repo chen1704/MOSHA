@@ -20,6 +20,7 @@ private:
 	wxBitmap *balok, *batu, *kayu, *bara, *tanah, *diamond;
 	wxBitmapButton *buttonstatus, *buttonbonds, *buttoninvent, *buttonskill, *buttonexit;
 
+
 	void LoadAllBitmap();
 	void LoadMapBitmap();
 	void LoadMenuBitmap();

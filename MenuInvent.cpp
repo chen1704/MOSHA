@@ -1,6 +1,7 @@
 #include "MenuInvent.h"
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
+#include <wx/font.h>
 
 BEGIN_EVENT_TABLE(MenuInvent, wxWindow)
 EVT_PAINT(MenuInvent::OnPaint)
@@ -41,13 +42,25 @@ void MenuInvent::OnPaint(wxPaintEvent & event)
 	pdc.DrawBitmap(*buttonWindow, wxPoint(0, 455), true);
 	pdc.DrawBitmap(*inventory, wxPoint(55, -1), true);
 	pdc.DrawBitmap(*chibi, wxPoint(30, 490), true);
+
+	//draw bitmap of inventory
 	pdc.DrawBitmap(*balok, wxPoint(100, 124), true);
-	pdc.DrawBitmap(*batu, wxPoint(309, 124), true);
-	pdc.DrawBitmap(*kayu, wxPoint(309, 254), true);
 	pdc.DrawBitmap(*bara, wxPoint(204, 124), true);
+	pdc.DrawBitmap(*batu, wxPoint(309, 124), true);
 	pdc.DrawBitmap(*tanah, wxPoint(100, 254), true);
 	pdc.DrawBitmap(*diamond, wxPoint(204, 254), true);
+	pdc.DrawBitmap(*kayu, wxPoint(309, 254), true);
 
+	//isi jumlah tiap inventory
+	wxFont font(14, wxFONTFAMILY_TELETYPE, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD); //default-bold
+	pdc.SetFont(font);
+	pdc.SetTextForeground(*wxWHITE);
+	pdc.DrawText( (wxString::Format(wxT("%d"),mirai->itmlog)),wxPoint(130, 223));
+	pdc.DrawText((wxString::Format(wxT("%d"), mirai->itmbrick)), wxPoint(235, 223));
+	pdc.DrawText((wxString::Format(wxT("%d"), mirai->itmstone)), wxPoint(345, 223));
+	pdc.DrawText((wxString::Format(wxT("%d"), mirai->itmearth)), wxPoint(130, 350));
+	pdc.DrawText((wxString::Format(wxT("%d"), mirai->itmdia)), wxPoint(235, 350));
+	pdc.DrawText((wxString::Format(wxT("%d"), mirai->itmwood)), wxPoint(345, 350));
 }
 
 void MenuInvent::LoadAllBitmap()
