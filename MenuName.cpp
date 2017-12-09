@@ -22,19 +22,19 @@ MenuName::MenuName(ImageFrame * parent)
 
 	mirai = Hero::getInstance();
 
-	wxFont font(14,wxFONTFAMILY_ROMAN,wxFONTSTYLE_NORMAL,wxFONTWEIGHT_BOLD);
+	wxFont font(14, wxFONTFAMILY_ROMAN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
 
-	NameEntry = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxPoint(70, 555), wxSize(100, 40),wxTE_CENTRE | wxTE_RICH);
-	NameEntry->SetBackgroundColour(wxColor(*wxYELLOW));
+	NameEntry = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxPoint(79, 550), wxSize(349, 40), wxTE_CENTRE | wxTE_RICH);
+	NameEntry->SetBackgroundColour(wxColor(*wxWHITE));
 	NameEntry->SetFont(font);
-//	NameEntry->SetDefaultStyle(wxTextAttr(wxColor(*wxGREEN), wxColor(*wxBLUE)));
+	//	NameEntry->SetDefaultStyle(wxTextAttr(wxColor(*wxGREEN), wxColor(*wxBLUE)));
 
-	wxBitmapButton* OKbutton = new wxBitmapButton(this, 1001, *OK, wxPoint(200,570), wxDefaultSize, wxBU_AUTODRAW);
+	wxBitmapButton* OKbutton = new wxBitmapButton(this, 1001, *OK, wxPoint(197,610), wxDefaultSize, wxBU_AUTODRAW);
 }
 
 MenuName::~MenuName()
 {
-	delete menu, buttonWindow, OK;
+	delete menu, buttonWindow, OK, insert;
 }
 
 void MenuName::OnPaint(wxPaintEvent & event)
@@ -42,12 +42,13 @@ void MenuName::OnPaint(wxPaintEvent & event)
 	wxPaintDC pdc(this);
 	pdc.DrawBitmap(*menu, wxPoint(0, 0), true);
 	pdc.DrawBitmap(*buttonWindow, wxPoint(0, 455), true);
+	pdc.DrawBitmap(*insert, wxPoint(82, 490), true);
 }
 
 void MenuName::ClickOK(wxCommandEvent & event)
 {
 	string TempName = NameEntry->GetValue();
-//	mirai->SetName(TempName);
+	//	mirai->SetName(TempName);
 	mirai->name = TempName;
 	wxString anu = wxT("Welcome Hero ") + TempName;
 	if (TempName.empty())
@@ -58,8 +59,8 @@ void MenuName::ClickOK(wxCommandEvent & event)
 		wxMessageBox(anu, wxT("Welcome"), wxICON_INFORMATION);
 		parentFrame->ShowMap();
 	}
-//	delete menu, buttonWindow, OK;
-	
+	//	delete menu, buttonWindow, OK;
+
 }
 
 void MenuName::LoadAllBitmap()
@@ -84,7 +85,12 @@ void MenuName::LoadbuttonWindowBitmap()
 	wxImage image(locwindow, wxBITMAP_TYPE_PNG);
 	buttonWindow = new wxBitmap(image);
 
-	wxString locstart = wxFileName(fileLocation).GetPath() + wxT("\\button ok.png");
+	wxString locstart = wxFileName(fileLocation).GetPath() + wxT("\\ok button3.png");
 	wxImage image1(locstart, wxBITMAP_TYPE_PNG);
 	OK = new wxBitmap(image1);
+
+	wxString locinsert = wxFileName(fileLocation).GetPath() + wxT("\\insert name.png");
+	wxImage image2(locinsert, wxBITMAP_TYPE_PNG);
+	insert = new wxBitmap(image2);
+	//insert your name ver3
 }
