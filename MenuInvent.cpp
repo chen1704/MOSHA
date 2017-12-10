@@ -6,6 +6,10 @@
 BEGIN_EVENT_TABLE(MenuInvent, wxWindow)
 EVT_PAINT(MenuInvent::OnPaint)
 EVT_BUTTON(1001, MenuInvent::OnClickExit)
+EVT_BUTTON(1007, MenuInvent::OnClickStatus)
+EVT_BUTTON(1008, MenuInvent::OnClickBond)
+//EVT_BUTTON(1009, MenuInvent::OnClickInvent)
+EVT_BUTTON(1010, MenuInvent::OnClickUpgrade)
 END_EVENT_TABLE()
 
 
@@ -77,6 +81,20 @@ void MenuInvent::OnClickExit(wxCommandEvent & event)
 	parentFrame->ShowMap();
 }
 
+void MenuInvent::OnClickStatus(wxCommandEvent &event) {
+	wxMessageOutputDebug().Printf("click on status");
+	parentFrame->ShowMenuStatus();
+}
+
+void MenuInvent::OnClickBond(wxCommandEvent &event) {
+	wxMessageOutputDebug().Printf("click on bond");
+	parentFrame->ShowMenuBonds();
+}
+
+void MenuInvent::OnClickUpgrade(wxCommandEvent &event) {
+	wxMessageOutputDebug().Printf("click on upgrade skill");
+	parentFrame->ShowMenuUpgrade();
+}
 void MenuInvent::LoadMapBitmap()
 {
 	wxStandardPaths &stdPaths = wxStandardPaths::Get();
