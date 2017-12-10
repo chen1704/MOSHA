@@ -16,7 +16,7 @@ public:
 private:
 	ImageFrame *parentFrame;
 	wxString fileLocation;
-	wxBitmap *huruf[100];
+	wxBitmap *huruf[60];
 	wxBitmap *map, *buttonWindow, *chibi, *hp, *mp;
 	wxBitmap *bitmapstatus, *bitmapbonds, *bitmapinvent, *bitmapskill, *level, *description;
 	wxBitmap *layoutstatus, *exit, *chibistatus;
@@ -30,6 +30,7 @@ private:
 	void LoadUpgradeBitmap();
 	void LoadSkillBitmap();
 	void LoadHurufbesarBitmap();
+	void LoadHurufkecilBitmap();
 	DECLARE_EVENT_TABLE()
 
 };
