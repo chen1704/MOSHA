@@ -16,7 +16,7 @@ public:
 private:
 	ImageFrame *parentFrame;
 	wxString fileLocation;
-	wxBitmap *map, *buttonwindow, *upgrade, *chibi, *moneypanel;
+	wxBitmap *map, *buttonwindow, *upgrade, *chibi, *moneypanel, *description;
 	wxBitmap *bitmapstatus, *bitmapbonds, *bitmapinvent, *bitmapskill, *bitmapexit;
 	wxBitmap *upattack, *uppotion, *upshield, *tupattack, *tuppotion, *tupshield;
 	wxBitmap *attackitem1, *attackitem2, *shielditem1, *shielditem2, *potionitem1, *potionitem2;
