@@ -19,15 +19,15 @@ MenuBonds::MenuBonds(ImageFrame *parent) : wxWindow(parent, wxID_ANY), parentFra
 
 	LoadAllBitmap();
 
-	buttonstatus = new wxBitmapButton(this, 1007, *bitmapstatus, wxPoint(258, 622), wxDefaultSize, wxBORDER_MASK);
-	buttonbonds = new wxBitmapButton(this, 1008, *bitmapbonds, wxPoint(378, 627), wxDefaultSize, wxBORDER_MASK);
-	buttoninvent = new wxBitmapButton(this, 1009, *bitmapinvent, wxPoint(28, 628), wxDefaultSize, wxBORDER_MASK);
-	buttonskill = new wxBitmapButton(this, 1010, *bitmapskill, wxPoint(146, 625), wxDefaultSize, wxBORDER_MASK);
+	buttonstatus = new wxBitmapButton(this, 1007, *bitmapstatus, wxPoint(256, 619), wxDefaultSize, wxBORDER_MASK);
+	buttonbonds = new wxBitmapButton(this, 1008, *bitmapbonds, wxPoint(376, 620), wxDefaultSize, wxBORDER_MASK);
+	buttoninvent = new wxBitmapButton(this, 1009, *bitmapinvent, wxPoint(138, 621), wxDefaultSize, wxBORDER_MASK);
+	buttonskill = new wxBitmapButton(this, 1010, *bitmapskill, wxPoint(32, 620), wxDefaultSize, wxBORDER_MASK);
 	buttonexit = new wxBitmapButton(this, 1001, *bitmapexit, wxPoint(397, 8), wxDefaultSize, wxBORDER_NONE);
 
 }
 
-MenuBonds::~MenuBonds(){
+MenuBonds::~MenuBonds() {
 	delete map, buttonwindow, buttonbonds, buttoninvent, buttonskill, buttonstatus;
 	delete shimura, hijikata, sakata, namesakata, nameshimura, namehijikata;
 	delete heartfull, heartnull, hearthalf;
@@ -41,10 +41,11 @@ void MenuBonds::OnPaint(wxPaintEvent &event) {
 	pdc.DrawBitmap(*buttonwindow, wxPoint(0, 455), true);
 	pdc.DrawBitmap(*bond, wxPoint(55, -1), true);
 	pdc.DrawBitmap(*chibi, wxPoint(30, 490), true);
-	pdc.DrawBitmap(*shimura, wxPoint(94,71), true);
+	pdc.DrawBitmap(*description, wxPoint(142, 494), true);
+	pdc.DrawBitmap(*shimura, wxPoint(94, 71), true);
 	pdc.DrawBitmap(*hijikata, wxPoint(281, 175), true);
 	pdc.DrawBitmap(*sakata, wxPoint(101, 288), true);
-	pdc.DrawBitmap(*nameshimura, wxPoint(210,93), true); 
+	pdc.DrawBitmap(*nameshimura, wxPoint(210, 93), true);
 	pdc.DrawBitmap(*namehijikata, wxPoint(177, 221), true); //atau 171
 	pdc.DrawBitmap(*namesakata, wxPoint(234, 341), true);
 
@@ -167,6 +168,10 @@ void MenuBonds::LoadMapBitmap() {
 	wxString locchibi = wxFileName(fileLocation).GetPath() + wxT("\\chibi sprites.png");
 	wxImage image3(locchibi, wxBITMAP_TYPE_PNG);
 	chibi = new wxBitmap(image3);
+
+	wxString locdes = wxFileName(fileLocation).GetPath() + wxT("\\bond description.png");
+	wxImage image4(locdes, wxBITMAP_TYPE_PNG);
+	description = new wxBitmap(image4);
 	//chibi sprites
 	//menu bonds
 }
@@ -193,7 +198,7 @@ void MenuBonds::LoadMenuBitmap() {
 	bitmapexit = new wxBitmap(image5);
 }
 
-void MenuBonds::LoadBondsBitmap(){
+void MenuBonds::LoadBondsBitmap() {
 	wxString locshimura = wxFileName(fileLocation).GetPath() + wxT("\\bond shimura.png");
 	wxImage image1(locshimura, wxBITMAP_TYPE_PNG);
 	shimura = new wxBitmap(image1);
