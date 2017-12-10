@@ -10,7 +10,8 @@ public:
 	~Hero();
 	static Hero *getInstance();
 	string name;
-	int HP, level;
+	int HP, MP, level;
+	int hpmax, mpmax;
 	int skillatt, skilldef, skillheal;
 	int itmlog, itmbrick, itmstone, itmearth, itmdia, itmwood;
 	int bondshi, bondhij, bondsak;
@@ -19,6 +20,6 @@ private:
 	Hero();
 	Hero(const Hero& obj);
 	static Hero* instance;
-//	string name;
+	//	string name;
 };
 
