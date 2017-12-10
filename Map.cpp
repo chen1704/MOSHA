@@ -67,6 +67,8 @@ void Map::OnPaint(wxPaintEvent & event)
 	//pdc.DrawText(mirai->name, wxPoint(160, 480));
 	pdc.DrawBitmap(*hp, wxPoint(162, 522), true);
 	pdc.DrawBitmap(*mp, wxPoint(157, 565), true);
+	pdc.DrawBitmap(*hpbar, wxPoint(207, 524), true);
+	pdc.DrawBitmap(*mpbar, wxPoint(207, 566), true);
 
 	int i, x, n, y, o;
 	x = 165; y = 480; o = mirainama.size();
@@ -211,6 +213,14 @@ void Map::LoadbuttonWindowBitmap()
 	wxString locmp = wxFileName(fileLocation).GetPath() + wxT("\\window mp.png");
 	wxImage image3(locmp, wxBITMAP_TYPE_PNG);
 	mp = new wxBitmap(image3);
+
+	wxString lochpbar = wxFileName(fileLocation).GetPath() + wxT("\\bar hp status.png");
+	wxImage image4(lochpbar, wxBITMAP_TYPE_PNG);
+	hpbar = new wxBitmap(image4);
+
+	wxString locmpbar = wxFileName(fileLocation).GetPath() + wxT("\\bar mp status.png");
+	wxImage image5(locmpbar, wxBITMAP_TYPE_PNG);
+	mpbar = new wxBitmap(image5);
 }
 
 void Map::LoadUpgradeBitmap()
