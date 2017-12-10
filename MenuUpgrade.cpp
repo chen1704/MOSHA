@@ -7,6 +7,10 @@
 BEGIN_EVENT_TABLE(MenuUpgrade, wxWindow)
 EVT_PAINT(MenuUpgrade::OnPaint)
 EVT_BUTTON(1001, MenuUpgrade::OnClickExit)
+EVT_BUTTON(1007, MenuUpgrade::OnClickStatus)
+EVT_BUTTON(1008, MenuUpgrade::OnClickBond)
+EVT_BUTTON(1009, MenuUpgrade::OnClickInvent)
+//EVT_BUTTON(1010, MenuBonds::OnClickUpgrade)
 END_EVENT_TABLE()
 
 MenuUpgrade::MenuUpgrade(ImageFrame *parent) : wxWindow(parent, wxID_ANY), parentFrame(parent) {
@@ -66,6 +70,20 @@ void MenuUpgrade::OnClickExit(wxCommandEvent & event)
 	parentFrame->ShowMap();
 }
 
+void MenuUpgrade::OnClickStatus(wxCommandEvent &event) {
+	wxMessageOutputDebug().Printf("click on status");
+	parentFrame->ShowMenuStatus();
+}
+
+void MenuUpgrade::OnClickBond(wxCommandEvent &event) {
+	wxMessageOutputDebug().Printf("click on bonds");
+	parentFrame->ShowMenuBonds();
+}
+
+void MenuUpgrade::OnClickInvent(wxCommandEvent &event) {
+	wxMessageOutputDebug().Printf("click on inventory");
+	parentFrame->ShowMenuInvent();
+}
 void MenuUpgrade::LoadAllBitmap() {
 	this->LoadMapBitmap();
 	this->LoadMenuBitmap();
