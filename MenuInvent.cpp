@@ -19,13 +19,13 @@ MenuInvent::MenuInvent(ImageFrame * parent) : wxWindow(parent, wxID_ANY), parent
 	LoadAllBitmap();
 	mirai = Hero::getInstance();
 
-	buttonstatus = new wxBitmapButton(this, 1007, *bitmapstatus, wxPoint(258, 622), wxDefaultSize, wxBORDER_MASK);
-	buttonbonds = new wxBitmapButton(this, 1008, *bitmapbonds, wxPoint(378, 627), wxDefaultSize, wxBORDER_MASK);
-	buttoninvent = new wxBitmapButton(this, 1009, *bitmapinvent, wxPoint(28, 628), wxDefaultSize, wxBORDER_MASK);
-	buttonskill = new wxBitmapButton(this, 1010, *bitmapskill, wxPoint(146, 625), wxDefaultSize, wxBORDER_MASK);
+	buttonstatus = new wxBitmapButton(this, 1007, *bitmapstatus, wxPoint(256, 619), wxDefaultSize, wxBORDER_MASK);
+	buttonbonds = new wxBitmapButton(this, 1008, *bitmapbonds, wxPoint(376, 620), wxDefaultSize, wxBORDER_MASK);
+	buttoninvent = new wxBitmapButton(this, 1009, *bitmapinvent, wxPoint(138, 621), wxDefaultSize, wxBORDER_MASK);
+	buttonskill = new wxBitmapButton(this, 1010, *bitmapskill, wxPoint(32, 620), wxDefaultSize, wxBORDER_MASK);
 	buttonexit = new wxBitmapButton(this, 1001, *bitmapexit, wxPoint(397, 8), wxDefaultSize, wxBORDER_NONE);
 
-	
+
 }
 
 MenuInvent::~MenuInvent()
@@ -42,6 +42,7 @@ void MenuInvent::OnPaint(wxPaintEvent & event)
 	pdc.DrawBitmap(*buttonWindow, wxPoint(0, 455), true);
 	pdc.DrawBitmap(*inventory, wxPoint(55, -1), true);
 	pdc.DrawBitmap(*chibi, wxPoint(30, 490), true);
+	pdc.DrawBitmap(*description, wxPoint(140, 487), true);
 
 	//draw bitmap of inventory
 	pdc.DrawBitmap(*balok, wxPoint(100, 124), true);
@@ -55,7 +56,7 @@ void MenuInvent::OnPaint(wxPaintEvent & event)
 	wxFont font(14, wxFONTFAMILY_TELETYPE, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD); //default-bold
 	pdc.SetFont(font);
 	pdc.SetTextForeground(*wxWHITE);
-	pdc.DrawText( (wxString::Format(wxT("%d"),mirai->itmlog)),wxPoint(130, 223));
+	pdc.DrawText((wxString::Format(wxT("%d"), mirai->itmlog)), wxPoint(130, 223));
 	pdc.DrawText((wxString::Format(wxT("%d"), mirai->itmbrick)), wxPoint(235, 223));
 	pdc.DrawText((wxString::Format(wxT("%d"), mirai->itmstone)), wxPoint(345, 223));
 	pdc.DrawText((wxString::Format(wxT("%d"), mirai->itmearth)), wxPoint(130, 350));
@@ -96,6 +97,10 @@ void MenuInvent::LoadMapBitmap()
 	wxString locchibi = wxFileName(fileLocation).GetPath() + wxT("\\chibi sprites.png");
 	wxImage image3(locchibi, wxBITMAP_TYPE_PNG);
 	chibi = new wxBitmap(image3);
+
+	wxString locdes = wxFileName(fileLocation).GetPath() + wxT("\\inventory description.png");
+	wxImage image4(locdes, wxBITMAP_TYPE_PNG);
+	description = new wxBitmap(image4);
 }
 
 void MenuInvent::LoadMenuBitmap()
