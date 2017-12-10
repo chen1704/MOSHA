@@ -3,6 +3,7 @@
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
 #include <wx/font.h>
+#include <vector>
 
 BEGIN_EVENT_TABLE(MenuName, wxWindow)
 EVT_PAINT(MenuName::OnPaint)
@@ -51,14 +52,27 @@ void MenuName::ClickOK(wxCommandEvent & event)
 	//	mirai->SetName(TempName);
 	mirai->name = TempName;
 	wxString anu = wxT("Welcome Hero ") + TempName;
+	vector<char> mirainama(mirai->name.begin(), mirai->name.end());
+	int i, n,o, ok;
+	o = mirainama.size();
 	if (TempName.empty())
 	{
 		wxMessageBox(wxT("Username must not empty!"), wxT("Warning!"), wxICON_ERROR);
 	}
 	else {
+		for (i = 0; i < o; i++) {
+			n = mirainama[i] - '0';
+			n -= 16;
+			if ((n <= 0) || (n > 42 && n < 49) || (n >= 75)) { 
+				wxMessageBox(wxT("Number and Symbol will not be shown"), wxT("Warning!"), wxICON_ERROR); 
+				break;
+			}
+		}
 		wxMessageBox(anu, wxT("Welcome"), wxICON_INFORMATION);
 		parentFrame->ShowMap();
+		
 	}
+
 	//	delete menu, buttonWindow, OK;
 
 }
