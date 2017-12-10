@@ -29,11 +29,13 @@ public:
 private:
 
 	ImageFrame *parentFrame;
-
+	wxBitmap *huruf[100];
 	wxString fileLocation;
 	wxBitmap *map = nullptr;
 	wxBitmap *buttonWindow = nullptr;
 	wxBitmap *chibi = nullptr;
+	wxBitmap *mp = nullptr;
+	wxBitmap *hp = nullptr;
 	//	wxTextCtrl *MapName;
 	//	wxBitmap *mirai = nullptr;
 	//	wxAnimation *mirai;
@@ -47,6 +49,7 @@ private:
 	void LoadMapNumberBitmap();
 	void LoadbuttonWindowBitmap();
 	void LoadUpgradeBitmap();
+	void LoadHurufbesarBitmap();
 	DECLARE_EVENT_TABLE();
 };
 
