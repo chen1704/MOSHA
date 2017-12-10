@@ -16,7 +16,7 @@ public:
 private:
 	ImageFrame *parentFrame;
 	wxString fileLocation;
-	wxBitmap *map, *buttonwindow, *bond, *chibi;
+	wxBitmap *map, *buttonwindow, *bond, *chibi, *description;
 	wxBitmap *bitmapstatus, *bitmapbonds, *bitmapinvent, *bitmapskill, *bitmapexit;
 	wxBitmap *shimura, *hijikata, *sakata;
 	wxBitmap *nameshimura, *namehijikata, *namesakata;
@@ -28,6 +28,6 @@ private:
 	void LoadMapBitmap();
 	void LoadMenuBitmap();
 	void LoadBondsBitmap();
-	
+
 	DECLARE_EVENT_TABLE()
 };
