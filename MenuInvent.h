@@ -15,7 +15,7 @@ public:
 private:
 	ImageFrame *parentFrame;
 	wxString fileLocation;
-	wxBitmap *map, *buttonWindow, *inventory, *chibi;
+	wxBitmap *map, *buttonWindow, *inventory, *chibi, *description;
 	wxBitmap *bitmapstatus, *bitmapbonds, *bitmapinvent, *bitmapskill, *bitmapexit;
 	wxBitmap *balok, *batu, *kayu, *bara, *tanah, *diamond;
 	wxBitmapButton *buttonstatus, *buttonbonds, *buttoninvent, *buttonskill, *buttonexit;
