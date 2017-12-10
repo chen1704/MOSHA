@@ -21,7 +21,7 @@ private:
 	wxTimer *timer;
 	wxString fileLocation;
 
-	wxBitmap *map, *buttonWindow;
+	wxBitmap *map, *buttonWindow, *hp, *mp, *mpbar, *hpbar, *hpbarenemy;
 	wxBitmap *buttonatt, *buttondef, *buttonheal;
 	//mirai walking
 	wxBitmap *mirai0, *mirai1, *mirai2, *mirai3, *mirai4, *mirai5,
@@ -38,7 +38,7 @@ private:
 	wxBitmap *e0, *e1, *e2, *e3, *e4, *e5, *e6, *e7, *e8, *e9, *e10, //enemy biasa
 		*e11, *e12, *e13, *e14, *e15, *e16,
 		*t1, *t2, *t3; //enemy attack
-	
+
 	wxBitmapButton *attack, *defense, *heal;
 	int framerate;
 	int renew;
