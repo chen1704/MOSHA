@@ -29,7 +29,7 @@ public:
 private:
 
 	ImageFrame *parentFrame;
-	wxBitmap *huruf[100];
+	wxBitmap *huruf[60];
 	wxString fileLocation;
 	wxBitmap *map = nullptr;
 	wxBitmap *buttonWindow = nullptr;
@@ -50,6 +50,7 @@ private:
 	void LoadbuttonWindowBitmap();
 	void LoadUpgradeBitmap();
 	void LoadHurufbesarBitmap();
+	void LoadHurufkecilBitmap();
 	DECLARE_EVENT_TABLE();
 };
 
