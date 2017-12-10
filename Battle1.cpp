@@ -26,9 +26,9 @@ Battle1::Battle1(ImageFrame * parent) :
 	LoadAllBitmap();
 	mirai = Hero::getInstance();
 
-	wxBitmapButton* attack = new wxBitmapButton(this, 1001, *buttonatt, wxPoint(102, 590), wxDefaultSize, wxBU_AUTODRAW);
-	wxBitmapButton* defense = new wxBitmapButton(this, 1002, *buttondef, wxPoint(209, 590), wxDefaultSize, wxBU_AUTODRAW);
-	wxBitmapButton* heal = new wxBitmapButton(this, 1003, *buttonheal, wxPoint(316, 590), wxDefaultSize, wxBU_AUTODRAW);
+	attack = new wxBitmapButton(this, 1001, *buttonatt, wxPoint(102, 600), wxDefaultSize, wxBU_AUTODRAW);
+	defense = new wxBitmapButton(this, 1002, *buttondef, wxPoint(209, 600), wxDefaultSize, wxBU_AUTODRAW);
+	heal = new wxBitmapButton(this, 1003, *buttonheal, wxPoint(316, 600), wxDefaultSize, wxBU_AUTODRAW);
 
 	timer = new wxTimer(this, TIMER_ID);
 	timer->Start(100);
@@ -56,8 +56,16 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 	PrepareDC(pdc);
 	pdc.DrawBitmap(*map, wxPoint(0, 0), true);
 	pdc.DrawBitmap(*buttonWindow, wxPoint(0, 455), true);
+	pdc.DrawBitmap(*hp, wxPoint(179, 523), true);
+	pdc.DrawBitmap(*mp, wxPoint(175, 559), true);
+	pdc.DrawBitmap(*hpbar, wxPoint(225, 522), true);
+	pdc.DrawBitmap(*mpbar, wxPoint(225, 558), true);
+	pdc.DrawBitmap(*hpbarenemy, wxPoint(311,26), true);
 	if (turn == 0) //masih belum diapa"in
 	{
+		attack->Enable(true);
+		defense->Enable(true);
+		heal->Enable(true);
 		if (renew % 7 == 0) pdc.DrawBitmap(*mirai0, wxPoint(60, 175));
 		else if (renew % 7 == 1) pdc.DrawBitmap(*mirai1, wxPoint(60, 175));
 		else if (renew % 7 == 2) pdc.DrawBitmap(*mirai2, wxPoint(60, 175));
@@ -184,7 +192,7 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 
 		if (renew % 5 == 0 || renew % 5 == 4) pdc.DrawBitmap(*t1, wxPoint(125, 105));
 		else if (renew % 5 == 1 || renew % 5 == 3) pdc.DrawBitmap(*t2, wxPoint(125, 105));
-		else if (renew % 5 == 2) pdc.DrawBitmap(*t3, wxPoint(240, 190));
+		else if (renew % 5 == 2) pdc.DrawBitmap(*t3, wxPoint(125, 105));
 	}
 
 	else if (turn == 4) { //Enemy attack
@@ -197,27 +205,27 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 		else if (renew % 7 == 5) pdc.DrawBitmap(*mirai5, wxPoint(60, 175));
 		else if (renew % 7 == 6) pdc.DrawBitmap(*mirai6, wxPoint(60, 175));
 
-		if (renew % 18 == 0) pdc.DrawBitmap(*e0, wxPoint(80, 105));
-		else if (renew % 18 == 1) pdc.DrawBitmap(*e1, wxPoint(80, 105));
-		else if (renew % 18 == 2) pdc.DrawBitmap(*e2, wxPoint(80, 105));
-		else if (renew % 18 == 3) pdc.DrawBitmap(*e3, wxPoint(80, 105));
-		else if (renew % 18 == 4) pdc.DrawBitmap(*e4, wxPoint(80, 105));
-		else if (renew % 18 == 5) pdc.DrawBitmap(*e5, wxPoint(80, 105));
+		if (renew % 18 == 0) pdc.DrawBitmap(*e0, wxPoint(125, 105));
+		else if (renew % 18 == 1) pdc.DrawBitmap(*e1, wxPoint(125, 105));
+		else if (renew % 18 == 2) pdc.DrawBitmap(*e2, wxPoint(125, 105));
+		else if (renew % 18 == 3) pdc.DrawBitmap(*e3, wxPoint(125, 105));
+		else if (renew % 18 == 4) pdc.DrawBitmap(*e4, wxPoint(125, 105));
+		else if (renew % 18 == 5) pdc.DrawBitmap(*e5, wxPoint(125, 105));
 
-		else if (renew % 18 == 6) pdc.DrawBitmap(*e6, wxPoint(80, 105));
-		else if (renew % 18 == 7) pdc.DrawBitmap(*e7, wxPoint(80, 105));
-		else if (renew % 18 == 8) pdc.DrawBitmap(*e8, wxPoint(80, 105));
-		else if (renew % 18 == 9) pdc.DrawBitmap(*e9, wxPoint(80, 105));
-		else if (renew % 18 == 10) pdc.DrawBitmap(*e10, wxPoint(80, 105));
+		else if (renew % 18 == 6) pdc.DrawBitmap(*e6, wxPoint(125, 105));
+		else if (renew % 18 == 7) pdc.DrawBitmap(*e7, wxPoint(125, 105));
+		else if (renew % 18 == 8) pdc.DrawBitmap(*e8, wxPoint(125, 105));
+		else if (renew % 18 == 9) pdc.DrawBitmap(*e9, wxPoint(125, 105));
+		else if (renew % 18 == 10) pdc.DrawBitmap(*e10, wxPoint(125, 105));
 
-		else if (renew % 18 == 11) pdc.DrawBitmap(*e11, wxPoint(80, 105));
-		else if (renew % 18 == 12) pdc.DrawBitmap(*e12, wxPoint(80, 105));
-		else if (renew % 18 == 13) pdc.DrawBitmap(*e13, wxPoint(80, 105));
-		else if (renew % 18 == 14) pdc.DrawBitmap(*e14, wxPoint(80, 105));
-		else if (renew % 18 == 15) pdc.DrawBitmap(*e15, wxPoint(80, 105));
+		else if (renew % 18 == 11) pdc.DrawBitmap(*e11, wxPoint(125, 105));
+		else if (renew % 18 == 12) pdc.DrawBitmap(*e12, wxPoint(125, 105));
+		else if (renew % 18 == 13) pdc.DrawBitmap(*e13, wxPoint(125, 105));
+		else if (renew % 18 == 14) pdc.DrawBitmap(*e14, wxPoint(125, 105));
+		else if (renew % 18 == 15) pdc.DrawBitmap(*e15, wxPoint(125, 105));
 
 		else if (renew % 18 == 16) {
-			pdc.DrawBitmap(*e16, wxPoint(80, 105));
+			pdc.DrawBitmap(*e16, wxPoint(125, 105));
 			renew = 0;
 			turn = 0;
 		}
@@ -229,18 +237,28 @@ void Battle1::OnClickAttack(wxCommandEvent & event)
 	//	wxMessageOutputDebug().Printf("the button has been clicked");
 	turn = 1;
 	renew = 0;
+	attack->Enable(false);
+	defense->Enable(false);
+	heal->Enable(false);
+
 }
 
 void Battle1::OnClickDefense(wxCommandEvent & event)
 {
 	turn = 2;
 	renew = 0;
+	attack->Enable(false);
+	defense->Enable(false);
+	heal->Enable(false);
 }
 
 void Battle1::OnClickHeal(wxCommandEvent & event)
 {
 	turn = 3;
 	renew = 0;
+	attack->Enable(false);
+	defense->Enable(false);
+	heal->Enable(false);
 }
 
 void Battle1::OnTimer(wxTimerEvent & event)
@@ -264,6 +282,7 @@ void Battle1::LoadMapBitmap()
 	wxStandardPaths &stdPaths = wxStandardPaths::Get();
 	fileLocation = stdPaths.GetExecutablePath();
 	wxString loc;
+
 	loc = wxFileName(fileLocation).GetPath() + wxT("\\bacground battle 1.png");
 	wxImage image(loc, wxBITMAP_TYPE_PNG);
 	map = new wxBitmap(image);
@@ -284,6 +303,25 @@ void Battle1::LoadMapBitmap()
 	wxImage image5(locmap3, wxBITMAP_TYPE_PNG);
 	buttonheal = new wxBitmap(image5);
 
+	wxString lochp = wxFileName(fileLocation).GetPath() + wxT("\\window hp.png");
+	wxImage image6(lochp, wxBITMAP_TYPE_PNG);
+	hp = new wxBitmap(image6);
+
+	wxString locmp = wxFileName(fileLocation).GetPath() + wxT("\\window mp.png");
+	wxImage image7(locmp, wxBITMAP_TYPE_PNG);
+	mp = new wxBitmap(image7);
+
+	wxString lochpbar = wxFileName(fileLocation).GetPath() + wxT("\\bar hp.png");
+	wxImage image8(lochpbar, wxBITMAP_TYPE_PNG);
+	hpbar = new wxBitmap(image8);
+
+	wxString locmpbar = wxFileName(fileLocation).GetPath() + wxT("\\bar mp.png");
+	wxImage image9(locmpbar, wxBITMAP_TYPE_PNG);
+	mpbar = new wxBitmap(image9);
+
+	wxString lochpenemy = wxFileName(fileLocation).GetPath() + wxT("\\bar enemy.png");
+	wxImage image10(lochpenemy, wxBITMAP_TYPE_PNG);
+	hpbarenemy = new wxBitmap(image10);
 }
 
 void Battle1::LoadSpriteMiraiBitmap()
