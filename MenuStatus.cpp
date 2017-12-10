@@ -8,6 +8,10 @@
 BEGIN_EVENT_TABLE(MenuStatus, wxWindow)
 EVT_PAINT(MenuStatus::OnPaint)
 EVT_BUTTON(1001, MenuStatus::OnClickExit)
+//EVT_BUTTON(1007, MenuUpgrade::OnClickStatus)
+EVT_BUTTON(1008, MenuStatus::OnClickBond)
+EVT_BUTTON(1009, MenuStatus::OnClickInvent)
+EVT_BUTTON(1010, MenuStatus::OnClickUpgrade)
 END_EVENT_TABLE()
 
 
@@ -82,6 +86,21 @@ void MenuStatus::OnClickExit(wxCommandEvent & event)
 {
 	wxMessageOutputDebug().Printf("Menu Status clicked exit!");
 	parentFrame->ShowMap();
+}
+
+void MenuStatus::OnClickBond(wxCommandEvent &event) {
+	wxMessageOutputDebug().Printf("click on bonds");
+	parentFrame->ShowMenuBonds();
+}
+
+void MenuStatus::OnClickUpgrade(wxCommandEvent &event) {
+	wxMessageOutputDebug().Printf("click on upgrade");
+	parentFrame->ShowMenuUpgrade();
+}
+
+void MenuStatus::OnClickInvent(wxCommandEvent &event) {
+	wxMessageOutputDebug().Printf("click on inventory");
+	parentFrame->ShowMenuInvent();
 }
 
 void MenuStatus::LoadAllBitmap()
