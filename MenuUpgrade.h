@@ -11,6 +11,9 @@ public:
 	~MenuUpgrade();
 	void OnPaint(wxPaintEvent &event);
 	void OnClickExit(wxCommandEvent &event);
+	void OnClickStatus(wxCommandEvent &event);
+	void OnClickBond(wxCommandEvent &event);
+	void OnClickInvent(wxCommandEvent &event);
 
 	Hero *mirai;
 private:
