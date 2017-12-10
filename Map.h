@@ -36,6 +36,8 @@ private:
 	wxBitmap *chibi = nullptr;
 	wxBitmap *mp = nullptr;
 	wxBitmap *hp = nullptr;
+	wxBitmap *hpbar = nullptr;
+	wxBitmap *mpbar = nullptr;
 	//	wxTextCtrl *MapName;
 	//	wxBitmap *mirai = nullptr;
 	//	wxAnimation *mirai;
@@ -43,6 +45,7 @@ private:
 	/*Map Number bitmap*/
 	wxBitmap *mapnum1, *mapnum2, *mapnum3, *mapnum4, *mapnum5, *mapnum6;
 	wxBitmap *bitmapstatus, *bitmapbonds, *bitmapinvent, *bitmapskill;
+	
 	wxPanel *panel;
 	void LoadAllBitmap();
 	void LoadMapBitmap();
