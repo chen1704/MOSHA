@@ -2,6 +2,7 @@
 #include "wx\wx.h"
 #include "ImageFrame.h"
 #include "Hero.h"
+#include<vector>
 
 class MenuStatus : public wxWindow
 {
@@ -15,19 +16,20 @@ public:
 private:
 	ImageFrame *parentFrame;
 	wxString fileLocation;
-	wxBitmap *map, *buttonWindow, *chibi;
-	wxBitmap *bitmapstatus, *bitmapbonds, *bitmapinvent, *bitmapskill;
+	wxBitmap *huruf[100];
+	wxBitmap *map, *buttonWindow, *chibi, *hp, *mp;
+	wxBitmap *bitmapstatus, *bitmapbonds, *bitmapinvent, *bitmapskill, *level, *description;
 	wxBitmap *layoutstatus, *exit, *chibistatus;
 	wxBitmap *skillattack, *skillshield, *skillheal;
 	wxBitmap *txtattack, *txtshield, *txtheal;
-//	wxString *convatt, *convdef, *convheal;
+	//	wxString *convatt, *convdef, *convheal;
 
 	void LoadAllBitmap();
 	void LoadMapBitmap();
 	void LoadbuttonWindowBitmap();
 	void LoadUpgradeBitmap();
 	void LoadSkillBitmap();
+	void LoadHurufbesarBitmap();
 	DECLARE_EVENT_TABLE()
-	
-};
 
+};
