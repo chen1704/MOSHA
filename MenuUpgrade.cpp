@@ -7,10 +7,6 @@
 BEGIN_EVENT_TABLE(MenuUpgrade, wxWindow)
 EVT_PAINT(MenuUpgrade::OnPaint)
 EVT_BUTTON(1001, MenuUpgrade::OnClickExit)
-EVT_BUTTON(1007, MenuUpgrade::OnClickStatus)
-EVT_BUTTON(1008, MenuUpgrade::OnClickBond)
-EVT_BUTTON(1009, MenuUpgrade::OnClickInvent)
-//EVT_BUTTON(1010, MenuBonds::OnClickUpgrade)
 END_EVENT_TABLE()
 
 MenuUpgrade::MenuUpgrade(ImageFrame *parent) : wxWindow(parent, wxID_ANY), parentFrame(parent) {
@@ -20,6 +16,7 @@ MenuUpgrade::MenuUpgrade(ImageFrame *parent) : wxWindow(parent, wxID_ANY), paren
 	wxImage::AddHandler(pngLoader);
 
 	LoadAllBitmap();
+	LoadRequirement();
 	mirai = Hero::getInstance();
 
 	buttonstatus = new wxBitmapButton(this, 1007, *bitmapstatus, wxPoint(256, 619), wxDefaultSize, wxBORDER_MASK);
@@ -31,7 +28,7 @@ MenuUpgrade::MenuUpgrade(ImageFrame *parent) : wxWindow(parent, wxID_ANY), paren
 
 
 MenuUpgrade::~MenuUpgrade(){
-	delete map, buttonwindow, upgrade, chibi, moneypanel, description;
+	delete map, buttonwindow, upgrade, chibi, moneypanel;
 	delete buttonstatus, buttoninvent, buttonskill, buttonbonds;
 	delete upattack, upshield, uppotion;
 	delete tupattack, tupshield, tuppotion;
@@ -46,7 +43,6 @@ void MenuUpgrade::OnPaint(wxPaintEvent &event) {
 	pdc.DrawBitmap(*upgrade, wxPoint(55, -1), true);
 	pdc.DrawBitmap(*chibi, wxPoint(30, 490), true);
 	pdc.DrawBitmap(*moneypanel, wxPoint(296, 58), true);
-	pdc.DrawBitmap(*description, wxPoint(141, 490), true);
 	pdc.DrawBitmap(*upattack, wxPoint(100,95), true);
 	pdc.DrawBitmap(*upshield, wxPoint(100, 208), true);
 	pdc.DrawBitmap(*uppotion, wxPoint(100, 327), true);
@@ -62,6 +58,25 @@ void MenuUpgrade::OnPaint(wxPaintEvent &event) {
 	pdc.DrawBitmap(*money1, wxPoint(309, 142), true);
 	pdc.DrawBitmap(*money2, wxPoint(311, 260), true);
 	pdc.DrawBitmap(*money3, wxPoint(314, 370), true);
+
+	wxFont font(14, wxFONTFAMILY_TELETYPE, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD); //default-bold
+	pdc.SetFont(font);
+	pdc.DrawText(wxString::Format("%d", mirai->money), wxPoint(341, 73));
+
+	//draw requirement
+	pdc.SetTextForeground(*wxWHITE);
+	pdc.DrawText(wxString::Format("%d", rbalok), wxPoint(207, 180));
+	pdc.DrawText(wxString::Format("%d", rbatu), wxPoint(268, 180));
+	pdc.DrawText(wxString::Format("%d", rbara), wxPoint(207, 296));
+	pdc.DrawText(wxString::Format("%d", rkayu), wxPoint(270, 296));
+	pdc.DrawText(wxString::Format("%d", rtanah), wxPoint(207, 406));
+	pdc.DrawText(wxString::Format("%d", rdiamond), wxPoint(268, 406));
+
+	//draw money requirement
+	pdc.DrawText(wxString::Format("%d", moneyatt), wxPoint(349, 156));
+	pdc.DrawText(wxString::Format("%d", moneydef), wxPoint(353, 267));
+	pdc.DrawText(wxString::Format("%d", moneyheal), wxPoint(354, 386));
+
 }
 
 void MenuUpgrade::OnClickExit(wxCommandEvent & event)
@@ -84,6 +99,14 @@ void MenuUpgrade::OnClickInvent(wxCommandEvent &event) {
 	wxMessageOutputDebug().Printf("click on inventory");
 	parentFrame->ShowMenuInvent();
 }
+
+void MenuUpgrade::LoadRequirement()
+{
+	rbalok = 2; rbatu = 3; moneyatt = 50;
+	rbara = 2; rkayu = 3; moneydef = 50;
+	rtanah = 3; rdiamond = 3; moneyheal = 100;
+}
+
 void MenuUpgrade::LoadAllBitmap() {
 	this->LoadMapBitmap();
 	this->LoadMenuBitmap();
@@ -114,10 +137,6 @@ void MenuUpgrade::LoadMapBitmap() {
 	wxString locmoneypan = wxFileName(fileLocation).GetPath() + wxT("\\money panel.png");
 	wxImage image4(locmoneypan, wxBITMAP_TYPE_PNG);
 	moneypanel = new wxBitmap(image4);
-
-	wxString lochp = wxFileName(fileLocation).GetPath() + wxT("\\upgrade description.png");
-	wxImage image5(lochp, wxBITMAP_TYPE_PNG);
-	description = new wxBitmap(image5);
 }
 
 void MenuUpgrade::LoadMenuBitmap() {

@@ -35,12 +35,12 @@ Map::Map(ImageFrame * parent) : wxWindow(parent, wxID_ANY), parentFrame(parent)
 	//	wxMessageOutputDebug().Printf("hero name = %s", heroname);
 
 
-	wxBitmapButton* map1 = new wxBitmapButton(this, 1001, *mapnum1, wxPoint(320, 10), wxDefaultSize, wxBORDER_NONE);
-	wxBitmapButton* map2 = new wxBitmapButton(this, 1002, *mapnum2, wxPoint(230, 105), wxDefaultSize, wxBORDER_NONE);
-	wxBitmapButton* map3 = new wxBitmapButton(this, 1003, *mapnum3, wxPoint(125, 145), wxDefaultSize, wxBORDER_NONE);
-	wxBitmapButton* map4 = new wxBitmapButton(this, 1004, *mapnum4, wxPoint(285, 190), wxDefaultSize, wxBORDER_NONE);
-	wxBitmapButton* map5 = new wxBitmapButton(this, 1005, *mapnum5, wxPoint(325, 290), wxDefaultSize, wxBORDER_NONE);
-	wxBitmapButton* map6 = new wxBitmapButton(this, 1006, *mapnum6, wxPoint(115, 335), wxDefaultSize, wxBORDER_NONE);
+	wxBitmapButton* map1 = new wxBitmapButton(this, 1001, *mapnum[1], wxPoint(320, 10), wxDefaultSize, wxBORDER_NONE);
+	wxBitmapButton* map2 = new wxBitmapButton(this, 1002, *mapnum[2], wxPoint(230, 105), wxDefaultSize, wxBORDER_NONE);
+	wxBitmapButton* map3 = new wxBitmapButton(this, 1003, *mapnum[3], wxPoint(125, 145), wxDefaultSize, wxBORDER_NONE);
+	wxBitmapButton* map4 = new wxBitmapButton(this, 1004, *mapnum[4], wxPoint(285, 190), wxDefaultSize, wxBORDER_NONE);
+	wxBitmapButton* map5 = new wxBitmapButton(this, 1005, *mapnum[5], wxPoint(325, 290), wxDefaultSize, wxBORDER_NONE);
+	wxBitmapButton* map6 = new wxBitmapButton(this, 1006, *mapnum[6], wxPoint(115, 335), wxDefaultSize, wxBORDER_NONE);
 
 	wxBitmapButton *buttonstatus = new wxBitmapButton(this, 1007, *bitmapstatus, wxPoint(256, 619), wxDefaultSize, wxBORDER_MASK);
 	wxBitmapButton *buttonbonds = new wxBitmapButton(this, 1008, *bitmapbonds, wxPoint(376, 620), wxDefaultSize, wxBORDER_MASK);
@@ -51,14 +51,15 @@ Map::Map(ImageFrame * parent) : wxWindow(parent, wxID_ANY), parentFrame(parent)
 Map::~Map()
 {
 	delete map, buttonWindow, chibi, hp, mp;
-	delete mapnum1, mapnum2, mapnum3, mapnum4, mapnum5, mapnum6;
 	delete bitmapstatus, bitmapbonds, bitmapinvent, bitmapskill;
+	for (int i = 1; i <= 6; i++) delete mapnum[i];
+	for (int i = 1; i <= 58; i++) delete huruf[i];
 }
 
 void Map::OnPaint(wxPaintEvent & event)
 {
 	vector<char> mirainama(mirai->name.begin(), mirai->name.end());
-	
+
 
 	wxPaintDC pdc(this);
 	pdc.DrawBitmap(*map, wxPoint(0, 0), true);
@@ -177,27 +178,27 @@ void Map::LoadMapNumberBitmap()
 {
 	wxString locmap1 = wxFileName(fileLocation).GetPath() + wxT("\\map1.png");
 	wxImage image1(locmap1, wxBITMAP_TYPE_PNG);
-	mapnum1 = new wxBitmap(image1);
+	mapnum[1] = new wxBitmap(image1);
 
 	wxString locmap2 = wxFileName(fileLocation).GetPath() + wxT("\\map2.png");
 	wxImage image2(locmap2, wxBITMAP_TYPE_PNG);
-	mapnum2 = new wxBitmap(image2);
+	mapnum[2] = new wxBitmap(image2);
 
 	wxString locmap3 = wxFileName(fileLocation).GetPath() + wxT("\\map3.png");
 	wxImage image3(locmap3, wxBITMAP_TYPE_PNG);
-	mapnum3 = new wxBitmap(image3);
+	mapnum[3] = new wxBitmap(image3);
 
 	wxString locmap4 = wxFileName(fileLocation).GetPath() + wxT("\\map4.png");
 	wxImage image4(locmap4, wxBITMAP_TYPE_PNG);
-	mapnum4 = new wxBitmap(image4);
+	mapnum[4] = new wxBitmap(image4);
 
 	wxString locmap5 = wxFileName(fileLocation).GetPath() + wxT("\\map5.png");
 	wxImage image5(locmap5, wxBITMAP_TYPE_PNG);
-	mapnum5 = new wxBitmap(image5);
+	mapnum[5] = new wxBitmap(image5);
 
 	wxString locmap6 = wxFileName(fileLocation).GetPath() + wxT("\\map6.png");
 	wxImage image6(locmap6, wxBITMAP_TYPE_PNG);
-	mapnum6 = new wxBitmap(image6);
+	mapnum[6] = new wxBitmap(image6);
 }
 
 void Map::LoadbuttonWindowBitmap()

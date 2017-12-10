@@ -43,9 +43,10 @@ private:
 	//	wxAnimation *mirai;
 
 	/*Map Number bitmap*/
-	wxBitmap *mapnum1, *mapnum2, *mapnum3, *mapnum4, *mapnum5, *mapnum6;
+//	wxBitmap *mapnum1, *mapnum2, *mapnum3, *mapnum4, *mapnum5, *mapnum6;
+	wxBitmap *mapnum[7];
 	wxBitmap *bitmapstatus, *bitmapbonds, *bitmapinvent, *bitmapskill;
-	
+
 	wxPanel *panel;
 	void LoadAllBitmap();
 	void LoadMapBitmap();
@@ -56,4 +57,3 @@ private:
 	void LoadHurufkecilBitmap();
 	DECLARE_EVENT_TABLE();
 };
-

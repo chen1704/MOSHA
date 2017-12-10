@@ -44,11 +44,12 @@ MenuStatus::~MenuStatus()
 	delete layoutstatus, exit, chibistatus;
 	delete skillattack, skillshield, skillheal;
 	delete txtattack, txtshield, txtheal;
+	for (int i = 1; i <= 58; i++) delete huruf[i];
 	//	delete convatt, convdef, convheal;
 
 }
 
-void MenuStatus::OnPaint(wxPaintEvent & event) 
+void MenuStatus::OnPaint(wxPaintEvent & event)
 {
 	vector<char> mirainama(mirai->name.begin(), mirai->name.end());
 
