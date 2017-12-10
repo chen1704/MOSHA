@@ -10,7 +10,9 @@ public:
 	~MenuInvent();
 	void OnPaint(wxPaintEvent &event);
 	void OnClickExit(wxCommandEvent &event);
-
+	void OnClickStatus(wxCommandEvent &event);
+	void OnClickBond(wxCommandEvent &event);
+	void OnClickUpgrade(wxCommandEvent &event);
 	Hero *mirai;
 private:
 	ImageFrame *parentFrame;
