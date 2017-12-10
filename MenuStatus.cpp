@@ -2,11 +2,14 @@
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
 #include "Hero.h"
+#include <string.h>
+#include <vector>
 
 BEGIN_EVENT_TABLE(MenuStatus, wxWindow)
 EVT_PAINT(MenuStatus::OnPaint)
 EVT_BUTTON(1001, MenuStatus::OnClickExit)
 END_EVENT_TABLE()
+
 
 MenuStatus::MenuStatus(ImageFrame *parent)
 	: wxWindow(parent, wxID_ANY), parentFrame(parent)
@@ -15,40 +18,44 @@ MenuStatus::MenuStatus(ImageFrame *parent)
 	this->SetBackgroundColour(wxColour(*wxWHITE));
 	wxImageHandler *pngLoader = new wxPNGHandler();
 	wxImage::AddHandler(pngLoader);
-	LoadAllBitmap();
 
 	mirai = Hero::getInstance();
+	//mirainama(mirai->name.begin(), mirai->name.end());
 
+	LoadAllBitmap();
 
-	wxBitmapButton *buttonstatus = new wxBitmapButton(this, 1007, *bitmapstatus, wxPoint(40, 630), wxDefaultSize, wxBORDER_MASK);
-	wxBitmapButton *buttonbonds = new wxBitmapButton(this, 1008, *bitmapbonds, wxPoint(165, 627), wxDefaultSize, wxBORDER_MASK);
-	wxBitmapButton *buttoninvent = new wxBitmapButton(this, 1009, *bitmapinvent, wxPoint(270, 628), wxDefaultSize, wxBORDER_MASK);
-	wxBitmapButton *buttonskill = new wxBitmapButton(this, 1010, *bitmapskill, wxPoint(380, 625), wxDefaultSize, wxBORDER_MASK);
+	wxBitmapButton *buttonstatus = new wxBitmapButton(this, 1007, *bitmapstatus, wxPoint(256, 619), wxDefaultSize, wxBORDER_MASK);
+	wxBitmapButton *buttonbonds = new wxBitmapButton(this, 1008, *bitmapbonds, wxPoint(376, 620), wxDefaultSize, wxBORDER_MASK);
+	wxBitmapButton *buttoninvent = new wxBitmapButton(this, 1009, *bitmapinvent, wxPoint(138, 621), wxDefaultSize, wxBORDER_MASK);
+	wxBitmapButton *buttonskill = new wxBitmapButton(this, 1010, *bitmapskill, wxPoint(32, 620), wxDefaultSize, wxBORDER_MASK);
 
-	wxBitmapButton *buttonexit = new wxBitmapButton(this, 1001, *exit, wxPoint(398, 10),wxDefaultSize,wxBORDER_NONE);
+	wxBitmapButton *buttonexit = new wxBitmapButton(this, 1001, *exit, wxPoint(398, 10), wxDefaultSize, wxBORDER_NONE);
 }
 
 
 MenuStatus::~MenuStatus()
 {
-	delete map, buttonWindow, chibi;
+	delete map, buttonWindow, chibi, level;
 	delete bitmapstatus, bitmapbonds, bitmapinvent, bitmapskill;
 	delete layoutstatus, exit, chibistatus;
 	delete skillattack, skillshield, skillheal;
 	delete txtattack, txtshield, txtheal;
-//	delete convatt, convdef, convheal;
+	//	delete convatt, convdef, convheal;
 
 }
 
-void MenuStatus::OnPaint(wxPaintEvent & event)
+void MenuStatus::OnPaint(wxPaintEvent & event) 
 {
+	vector<char> mirainama(mirai->name.begin(), mirai->name.end());
+
 	wxPaintDC pdc(this);
 	pdc.DrawBitmap(*map, wxPoint(0, 0), true);
 	pdc.DrawBitmap(*buttonWindow, wxPoint(0, 455), true);
 	pdc.DrawBitmap(*chibi, wxPoint(28, 488), true);
-	pdc.DrawText(mirai->name, wxPoint(160, 480));
 	pdc.DrawBitmap(*layoutstatus, wxPoint(56, 1));
 	pdc.DrawBitmap(*chibistatus, wxPoint(96, 88));
+	pdc.DrawBitmap(*level, wxPoint(260, 221), true);
+	pdc.DrawBitmap(*description, wxPoint(151, 493), true);
 
 	pdc.DrawBitmap(*skillattack, wxPoint(110, 329), true);
 	pdc.DrawBitmap(*skillshield, wxPoint(212, 329), true);
@@ -56,12 +63,18 @@ void MenuStatus::OnPaint(wxPaintEvent & event)
 	pdc.DrawBitmap(*txtattack, wxPoint(116, 291), true);
 	pdc.DrawBitmap(*txtshield, wxPoint(227, 298), true);
 	pdc.DrawBitmap(*txtheal, wxPoint(322, 289), true);
-	pdc.DrawText(wxString::Format(wxT("%d"),mirai->skillatt), wxPoint(128, 404));
+	pdc.DrawText(wxString::Format(wxT("%d"), mirai->skillatt), wxPoint(128, 404));
 	pdc.DrawText(wxString::Format(wxT("%d"), mirai->skilldef), wxPoint(238, 404));
 	pdc.DrawText(wxString::Format(wxT("%d"), mirai->skillheal), wxPoint(338, 404));
 	pdc.DrawBitmap(*exit, wxPoint(398, 8), true);
 
-
+	int i, x, n, y, o;
+	x = 260; y = 192; o = mirainama.size();
+	for (i = 0; i < o; i++) {
+		n = mirainama[i] - '0';
+		pdc.DrawBitmap(*huruf[n], wxPoint(x, y), true);
+		x += 16;
+	}
 }
 
 void MenuStatus::OnClickExit(wxCommandEvent & event)
@@ -76,6 +89,7 @@ void MenuStatus::LoadAllBitmap()
 	this->LoadUpgradeBitmap();
 	this->LoadbuttonWindowBitmap();
 	this->LoadSkillBitmap();
+	this->LoadHurufbesarBitmap();
 }
 
 void MenuStatus::LoadMapBitmap()
@@ -109,6 +123,15 @@ void MenuStatus::LoadbuttonWindowBitmap()
 	wxString locationchibi = wxFileName(fileLocation).GetPath() + wxT("\\chibi sprites.png");
 	wxImage image1(locationchibi, wxBITMAP_TYPE_PNG);
 	chibi = new wxBitmap(image1);
+
+	wxString lochp = wxFileName(fileLocation).GetPath() + wxT("\\tulisan level.png");
+	wxImage image2(lochp, wxBITMAP_TYPE_PNG);
+	level = new wxBitmap(image2);
+
+	wxString locdes = wxFileName(fileLocation).GetPath() + wxT("\\status description.png");
+	wxImage image3(locdes, wxBITMAP_TYPE_PNG);
+	description = new wxBitmap(image3);
+
 }
 
 void MenuStatus::LoadUpgradeBitmap()
@@ -155,4 +178,110 @@ void MenuStatus::LoadSkillBitmap()
 	wxString locmap6 = wxFileName(fileLocation).GetPath() + wxT("\\tulisan-heal.png");
 	wxImage image6(locmap6, wxBITMAP_TYPE_PNG);
 	txtheal = new wxBitmap(image6);
+}
+
+void MenuStatus::LoadHurufbesarBitmap() {
+	wxString loca = wxFileName(fileLocation).GetPath() + wxT("\\a.png");
+	wxImage image1(loca, wxBITMAP_TYPE_PNG);
+	huruf[17] = new wxBitmap(image1);
+
+	wxString locb = wxFileName(fileLocation).GetPath() + wxT("\\b.png");
+	wxImage image2(locb, wxBITMAP_TYPE_PNG);
+	huruf[18] = new wxBitmap(image2);
+
+	wxString locc = wxFileName(fileLocation).GetPath() + wxT("\\c.png");
+	wxImage image3(locc, wxBITMAP_TYPE_PNG);
+	huruf[19] = new wxBitmap(image3);
+
+	wxString locd = wxFileName(fileLocation).GetPath() + wxT("\\d.png");
+	wxImage image4(locd, wxBITMAP_TYPE_PNG);
+	huruf[20] = new wxBitmap(image4);
+
+	wxString loce = wxFileName(fileLocation).GetPath() + wxT("\\e.png");
+	wxImage image5(loce, wxBITMAP_TYPE_PNG);
+	huruf[21] = new wxBitmap(image5);
+
+	wxString locf = wxFileName(fileLocation).GetPath() + wxT("\\f.png");
+	wxImage image6(locf, wxBITMAP_TYPE_PNG);
+	huruf[22] = new wxBitmap(image6);
+
+	wxString locg = wxFileName(fileLocation).GetPath() + wxT("\\g.png");
+	wxImage image7(locg, wxBITMAP_TYPE_PNG);
+	huruf[23] = new wxBitmap(image7);
+
+	wxString loch = wxFileName(fileLocation).GetPath() + wxT("\\h.png");
+	wxImage image8(loch, wxBITMAP_TYPE_PNG);
+	huruf[24] = new wxBitmap(image8);
+
+	wxString loci = wxFileName(fileLocation).GetPath() + wxT("\\i.png");
+	wxImage image26(loci, wxBITMAP_TYPE_PNG);
+	huruf[25] = new wxBitmap(image26);
+
+	wxString locj = wxFileName(fileLocation).GetPath() + wxT("\\j.png");
+	wxImage image9(locj, wxBITMAP_TYPE_PNG);
+	huruf[26] = new wxBitmap(image9);
+
+	wxString lock = wxFileName(fileLocation).GetPath() + wxT("\\k.png");
+	wxImage image10(lock, wxBITMAP_TYPE_PNG);
+	huruf[27] = new wxBitmap(image10);
+
+	wxString locl = wxFileName(fileLocation).GetPath() + wxT("\\l.png");
+	wxImage image11(locl, wxBITMAP_TYPE_PNG);
+	huruf[28] = new wxBitmap(image11);
+
+	wxString locm = wxFileName(fileLocation).GetPath() + wxT("\\m.png");
+	wxImage image12(locm, wxBITMAP_TYPE_PNG);
+	huruf[29] = new wxBitmap(image12);
+
+	wxString locn = wxFileName(fileLocation).GetPath() + wxT("\\n.png");
+	wxImage image13(locn, wxBITMAP_TYPE_PNG);
+	huruf[30] = new wxBitmap(image13);
+
+	wxString loco = wxFileName(fileLocation).GetPath() + wxT("\\o.png");
+	wxImage image14(loco, wxBITMAP_TYPE_PNG);
+	huruf[31] = new wxBitmap(image14);
+
+	wxString locp = wxFileName(fileLocation).GetPath() + wxT("\\p.png");
+	wxImage image15(locp, wxBITMAP_TYPE_PNG);
+	huruf[32] = new wxBitmap(image15);
+
+	wxString locq = wxFileName(fileLocation).GetPath() + wxT("\\q.png");
+	wxImage image16(locq, wxBITMAP_TYPE_PNG);
+	huruf[33] = new wxBitmap(image16);
+
+	wxString locr = wxFileName(fileLocation).GetPath() + wxT("\\r.png");
+	wxImage image17(locr, wxBITMAP_TYPE_PNG);
+	huruf[34] = new wxBitmap(image17);
+
+	wxString locs = wxFileName(fileLocation).GetPath() + wxT("\\s.png");
+	wxImage image18(locs, wxBITMAP_TYPE_PNG);
+	huruf[35] = new wxBitmap(image18);
+
+	wxString loct = wxFileName(fileLocation).GetPath() + wxT("\\t.png");
+	wxImage image19(loct, wxBITMAP_TYPE_PNG);
+	huruf[36] = new wxBitmap(image19);
+
+	wxString locu = wxFileName(fileLocation).GetPath() + wxT("\\u.png");
+	wxImage image20(locu, wxBITMAP_TYPE_PNG);
+	huruf[37] = new wxBitmap(image20);
+
+	wxString locv = wxFileName(fileLocation).GetPath() + wxT("\\v.png");
+	wxImage image21(locv, wxBITMAP_TYPE_PNG);
+	huruf[38] = new wxBitmap(image21);
+
+	wxString locw = wxFileName(fileLocation).GetPath() + wxT("\\w.png");
+	wxImage image22(locw, wxBITMAP_TYPE_PNG);
+	huruf[39] = new wxBitmap(image22);
+
+	wxString locx = wxFileName(fileLocation).GetPath() + wxT("\\x.png");
+	wxImage image23(locx, wxBITMAP_TYPE_PNG);
+	huruf[40] = new wxBitmap(image23);
+
+	wxString locy = wxFileName(fileLocation).GetPath() + wxT("\\y.png");
+	wxImage image24(locy, wxBITMAP_TYPE_PNG);
+	huruf[41] = new wxBitmap(image24);
+
+	wxString locz = wxFileName(fileLocation).GetPath() + wxT("\\z.png");
+	wxImage image25(locz, wxBITMAP_TYPE_PNG);
+	huruf[42] = new wxBitmap(image25);
 }
