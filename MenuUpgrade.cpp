@@ -18,16 +18,16 @@ MenuUpgrade::MenuUpgrade(ImageFrame *parent) : wxWindow(parent, wxID_ANY), paren
 	LoadAllBitmap();
 	mirai = Hero::getInstance();
 
-	buttonstatus = new wxBitmapButton(this, 1007, *bitmapstatus, wxPoint(258, 622), wxDefaultSize, wxBORDER_MASK);
-	buttonbonds = new wxBitmapButton(this, 1008, *bitmapbonds, wxPoint(378, 627), wxDefaultSize, wxBORDER_MASK);
-	buttoninvent = new wxBitmapButton(this, 1009, *bitmapinvent, wxPoint(28, 628), wxDefaultSize, wxBORDER_MASK);
-	buttonskill = new wxBitmapButton(this, 1010, *bitmapskill, wxPoint(146, 625), wxDefaultSize, wxBORDER_MASK);
+	buttonstatus = new wxBitmapButton(this, 1007, *bitmapstatus, wxPoint(256, 619), wxDefaultSize, wxBORDER_MASK);
+	buttonbonds = new wxBitmapButton(this, 1008, *bitmapbonds, wxPoint(376, 620), wxDefaultSize, wxBORDER_MASK);
+	buttoninvent = new wxBitmapButton(this, 1009, *bitmapinvent, wxPoint(138, 621), wxDefaultSize, wxBORDER_MASK);
+	buttonskill = new wxBitmapButton(this, 1010, *bitmapskill, wxPoint(32, 620), wxDefaultSize, wxBORDER_MASK);
 	buttonexit = new wxBitmapButton(this, 1001, *bitmapexit, wxPoint(397, 8), wxDefaultSize, wxBORDER_NONE);
 }
 
 
 MenuUpgrade::~MenuUpgrade(){
-	delete map, buttonwindow, upgrade, chibi, moneypanel;
+	delete map, buttonwindow, upgrade, chibi, moneypanel, description;
 	delete buttonstatus, buttoninvent, buttonskill, buttonbonds;
 	delete upattack, upshield, uppotion;
 	delete tupattack, tupshield, tuppotion;
@@ -42,6 +42,7 @@ void MenuUpgrade::OnPaint(wxPaintEvent &event) {
 	pdc.DrawBitmap(*upgrade, wxPoint(55, -1), true);
 	pdc.DrawBitmap(*chibi, wxPoint(30, 490), true);
 	pdc.DrawBitmap(*moneypanel, wxPoint(296, 58), true);
+	pdc.DrawBitmap(*description, wxPoint(141, 490), true);
 	pdc.DrawBitmap(*upattack, wxPoint(100,95), true);
 	pdc.DrawBitmap(*upshield, wxPoint(100, 208), true);
 	pdc.DrawBitmap(*uppotion, wxPoint(100, 327), true);
@@ -95,6 +96,10 @@ void MenuUpgrade::LoadMapBitmap() {
 	wxString locmoneypan = wxFileName(fileLocation).GetPath() + wxT("\\money panel.png");
 	wxImage image4(locmoneypan, wxBITMAP_TYPE_PNG);
 	moneypanel = new wxBitmap(image4);
+
+	wxString lochp = wxFileName(fileLocation).GetPath() + wxT("\\upgrade description.png");
+	wxImage image5(lochp, wxBITMAP_TYPE_PNG);
+	description = new wxBitmap(image5);
 }
 
 void MenuUpgrade::LoadMenuBitmap() {
