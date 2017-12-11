@@ -71,9 +71,15 @@ void Map::OnPaint(wxPaintEvent & event)
 	pdc.DrawBitmap(*hpbar, wxPoint(207, 524), true);
 	pdc.DrawBitmap(*mpbar, wxPoint(207, 566), true);
 
+	pdc.SetBrush(*wxRED_BRUSH);
+	pdc.DrawRectangle(wxPoint(215, 531), wxSize((242 / mirai->hpmax)*mirai->HP, 20));
+	pdc.SetBrush(*wxBLUE_BRUSH);
+	pdc.DrawRectangle(wxPoint(215, 572), wxSize((242 / mirai->mpmax)*mirai->MP, 20));
+
 	int i, x, n, y, o;
 	x = 165; y = 480; o = mirainama.size();
 	for (i = 0; i < o; i++) {
+		if (mirainama[i] < 65 || mirainama[i]>122) continue;
 		n = mirainama[i] - '0';
 		n -= 16;
 		pdc.DrawBitmap(*huruf[n], wxPoint(x, y), true);

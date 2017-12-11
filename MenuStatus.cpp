@@ -1,7 +1,8 @@
 #include "MenuStatus.h"
+#include "Hero.h"
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
-#include "Hero.h"
+#include <wx/font.h>
 #include <string.h>
 #include <vector>
 
@@ -68,14 +69,19 @@ void MenuStatus::OnPaint(wxPaintEvent & event)
 	pdc.DrawBitmap(*txtattack, wxPoint(116, 291), true);
 	pdc.DrawBitmap(*txtshield, wxPoint(227, 298), true);
 	pdc.DrawBitmap(*txtheal, wxPoint(322, 289), true);
-	pdc.DrawText(wxString::Format(wxT("%d"), mirai->skillatt), wxPoint(128, 404));
-	pdc.DrawText(wxString::Format(wxT("%d"), mirai->skilldef), wxPoint(238, 404));
-	pdc.DrawText(wxString::Format(wxT("%d"), mirai->skillheal), wxPoint(338, 404));
+
+	wxFont font(18, wxFONTFAMILY_TELETYPE, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
+	pdc.SetFont(font);
+	pdc.DrawText(wxString::Format(wxT("%d"), mirai->skillatt), wxPoint(130, 404));
+	pdc.DrawText(wxString::Format(wxT("%d"), mirai->skilldef), wxPoint(236, 404));
+	pdc.DrawText(wxString::Format(wxT("%d"), mirai->skillheal), wxPoint(340, 404));
+	pdc.DrawText(wxString::Format(wxT("%d"), mirai->level), wxPoint(350, 223));
 	pdc.DrawBitmap(*exit, wxPoint(398, 8), true);
 
 	int i, x, n, y, o;
 	x = 260; y = 192; o = mirainama.size();
 	for (i = 0; i < o; i++) {
+		if (mirainama[i] < 65 || mirainama[i]>122) continue;
 		n = mirainama[i] - '0';
 		n -= 16;
 		pdc.DrawBitmap(*huruf[n], wxPoint(x, y), true);

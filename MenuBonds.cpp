@@ -158,14 +158,32 @@ void MenuBonds::OnClickExit(wxCommandEvent & event)
 
 void MenuBonds::OnClickShimura(wxCommandEvent &event) {
 	wxMessageOutputDebug().Printf("Get Reward from Shimura");
+	if (mirai->bondshi == 6) {
+		mirai->skillheal += 10;
+		rewardshimura->Enable(false);
+	}
+	else
+		wxMessageBox(wxT("Your bond with Shimura has not full yet!"), wxT("Warning!"), wxICON_STOP);
 }
 
 void MenuBonds::OnClickHijikata(wxCommandEvent &event) {
 	wxMessageOutputDebug().Printf("Get Reward from Hijikata");
+	if (mirai->bondhij == 6) {
+		mirai->skillatt += 15;
+		rewardhijikata->Enable(false);
+	}
+	else 
+		wxMessageBox(wxT("Your bond with Hijikata has not full yet!"), wxT("Warning!"), wxICON_STOP);
 }
 
 void MenuBonds::OnClickSakata(wxCommandEvent &event) {
 	wxMessageOutputDebug().Printf("Get Reward from Sakata");
+	if (mirai->bondsak == 6) {
+		mirai->skilldef += 25;
+		rewardsakata->Enable(false);
+	}
+	else
+		wxMessageBox(wxT("Your bond with Sakata has not full yet!"), wxT("Warning!"), wxICON_STOP);
 }
 
 void MenuBonds::OnClickStatus(wxCommandEvent &event) {
