@@ -24,10 +24,9 @@ private:
 	wxString fileLocation;
 	wxBitmap *map, *buttonwindow, *bond, *chibi, *description;
 	wxBitmap *bitmapstatus, *bitmapbonds, *bitmapinvent, *bitmapskill, *bitmapexit;
-	wxBitmap *bitmapshimura, *bitmaphijikata, *bitmapsakata;
 	wxBitmap *shimura, *hijikata, *sakata;
 	wxBitmap *nameshimura, *namehijikata, *namesakata;
-	wxBitmap *heartnull, *hearthalf, *heartfull;
+	wxBitmap *heartnull, *hearthalf, *heartfull, *claim;
 	//wxBitmap *buttonexit;
 	wxBitmapButton *buttonstatus, *buttonbonds, *buttoninvent, *buttonskill, *buttonexit;
 	wxBitmapButton *rewardshimura, *rewardhijikata, *rewardsakata;
@@ -36,7 +35,6 @@ private:
 	void LoadMapBitmap();
 	void LoadMenuBitmap();
 	void LoadBondsBitmap();
-	void LoadRewardBitmap();
 
 	DECLARE_EVENT_TABLE()
 };

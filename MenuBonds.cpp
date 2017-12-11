@@ -32,9 +32,9 @@ MenuBonds::MenuBonds(ImageFrame *parent) : wxWindow(parent, wxID_ANY), parentFra
 	buttonskill = new wxBitmapButton(this, 1010, *bitmapskill, wxPoint(32, 620), wxDefaultSize, wxBORDER_MASK);
 	buttonexit = new wxBitmapButton(this, 1001, *bitmapexit, wxPoint(397, 8), wxDefaultSize, wxBORDER_NONE);
 
-	rewardshimura = new wxBitmapButton(this, 1011,*bitmapshimura, wxPoint(339, 100), wxDefaultSize, wxBORDER_NONE);
-	rewardhijikata = new wxBitmapButton(this, 1012, *bitmaphijikata, wxPoint(88, 233), wxDefaultSize, wxBORDER_NONE);
-	rewardsakata = new wxBitmapButton(this, 1013, *bitmapsakata, wxPoint(338, 352
+	rewardshimura = new wxBitmapButton(this, 1011, *claim, wxPoint(339, 100), wxDefaultSize, wxBORDER_NONE);
+	rewardhijikata = new wxBitmapButton(this, 1012, *claim, wxPoint(88, 233), wxDefaultSize, wxBORDER_NONE);
+	rewardsakata = new wxBitmapButton(this, 1013, *claim, wxPoint(338, 352
 	), wxDefaultSize, wxBORDER_NONE);
 
 }
@@ -189,7 +189,6 @@ void MenuBonds::LoadAllBitmap() {
 	this->LoadMapBitmap();
 	this->LoadMenuBitmap();
 	this->LoadBondsBitmap();
-	this->LoadRewardBitmap();
 }
 
 void MenuBonds::LoadMapBitmap() {
@@ -277,18 +276,8 @@ void MenuBonds::LoadBondsBitmap() {
 	wxString hfull = wxFileName(fileLocation).GetPath() + wxT("\\bond heart bar full.png");
 	wxImage image9(hfull, wxBITMAP_TYPE_PNG);
 	heartfull = new wxBitmap(image9);
-}
-
-void MenuBonds::LoadRewardBitmap() {
-	wxString locshimura = wxFileName(fileLocation).GetPath() + wxT("\\get shimura.png");
-	wxImage image1(locshimura, wxBITMAP_TYPE_PNG);
-	bitmapshimura = new wxBitmap(image1);
-
-	wxString lochijikata = wxFileName(fileLocation).GetPath() + wxT("\\get hijikata.png");
-	wxImage image2(lochijikata, wxBITMAP_TYPE_PNG);
-	bitmaphijikata = new wxBitmap(image2);
-
-	wxString locsakata = wxFileName(fileLocation).GetPath() + wxT("\\get sakata.png");
-	wxImage image3(locsakata, wxBITMAP_TYPE_PNG);
-	bitmapsakata = new wxBitmap(image3);
+	
+	wxString locclaim = wxFileName(fileLocation).GetPath() + wxT("\\bond claim.png");
+	wxImage image10(locclaim, wxBITMAP_TYPE_PNG);
+	claim = new wxBitmap(image10);
 }
