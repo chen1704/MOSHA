@@ -217,12 +217,14 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 		pdc.DrawRectangle(wxPoint(235, 531), wxSize((double)ratiohp*(double)mirai->HP, 18)); //mirai HP
 
 		pdc.DrawBitmap(*backwin, wxPoint(57, 17));
-		pdc.DrawBitmap(*balok, wxPoint(83, 236));
-		pdc.DrawBitmap(*bara, wxPoint(210, 239));
-		pdc.DrawText(wxT("2"), wxPoint(116, 354));
-		pdc.DrawText(wxT("2"), wxPoint(248, 353));
+		pdc.DrawBitmap(*balok, wxPoint(122, 248));
+		pdc.DrawBitmap(*bara, wxPoint(212, 247));
+		pdc.DrawBitmap(*gold, wxPoint(305, 247));
+		pdc.DrawText(wxT("2"), wxPoint(152, 323));
+		pdc.DrawText(wxT("2"), wxPoint(243, 323));
+		pdc.DrawText(wxT("50"), wxPoint(338, 323));
 
-		claimok = new wxBitmapButton(this, 1004, *claim, wxPoint(214, 377), wxDefaultSize, wxBORDER_RAISED);
+		claimok = new wxBitmapButton(this, 1004, *reward, wxPoint(182, 357), wxDefaultSize, wxBORDER_RAISED);
 
 
 	}
@@ -237,7 +239,7 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 		pdc.DrawRectangle(wxPoint(235, 531), wxSize(0, 18)); //mirai HP
 
 		pdc.DrawBitmap(*backlose, wxPoint(57, 17));
-		claimok = new wxBitmapButton(this, 1004, *claim, wxPoint(214, 377), wxDefaultSize, wxBORDER_RAISED);
+		claimok = new wxBitmapButton(this, 1004, *backmenu, wxPoint(182, 357), wxDefaultSize, wxBORDER_RAISED);
 	}
 
 
@@ -366,7 +368,7 @@ void Battle1::LoadMapBitmap()
 	wxImage image(loc, wxBITMAP_TYPE_PNG);
 	map = new wxBitmap(image);
 
-	loc = wxFileName(fileLocation).GetPath() + wxT("\\battle kotak.png");
+	loc = wxFileName(fileLocation).GetPath() + wxT("\\button window.png");
 	wxImage image2(loc, wxBITMAP_TYPE_PNG);
 	buttonWindow = new wxBitmap(image2);
 
@@ -452,9 +454,13 @@ void Battle1::LoadSpriteMiraiBitmap()
 
 void Battle1::LoadResultBitmap()
 {
-	wxString loclaim = wxFileName(fileLocation).GetPath() + wxT("\\bond claim.png");
+	wxString loclaim = wxFileName(fileLocation).GetPath() + wxT("\\button reward.png");
 	wxImage image1(loclaim, wxBITMAP_TYPE_PNG);
-	claim = new wxBitmap(image1);
+	reward = new wxBitmap(image1);
+
+	wxString loclaim2 = wxFileName(fileLocation).GetPath() + wxT("\\button back.png");
+	wxImage image10(loclaim2, wxBITMAP_TYPE_PNG);
+	backmenu = new wxBitmap(image10);
 
 	wxString locwin = wxFileName(fileLocation).GetPath() + wxT("\\window win.png");
 	wxImage image2(locwin, wxBITMAP_TYPE_PNG);
@@ -464,13 +470,17 @@ void Battle1::LoadResultBitmap()
 	wxImage image3(loclose, wxBITMAP_TYPE_PNG);
 	backlose = new wxBitmap(image3);
 
-	wxString locbalok = wxFileName(fileLocation).GetPath() + wxT("\\inventory log.png");
+	wxString locbalok = wxFileName(fileLocation).GetPath() + wxT("\\drop1.png");
 	wxImage image4(locbalok, wxBITMAP_TYPE_PNG);
 	balok = new wxBitmap(image4);
 
-	wxString locbara = wxFileName(fileLocation).GetPath() + wxT("\\inventory batu bara.png");
+	wxString locbara = wxFileName(fileLocation).GetPath() + wxT("\\drop2.png");
 	wxImage image5(locbara, wxBITMAP_TYPE_PNG);
 	bara = new wxBitmap(image5);
+
+	wxString locuang = wxFileName(fileLocation).GetPath() + wxT("\\drop7.png");
+	wxImage image6(locuang, wxBITMAP_TYPE_PNG);
+	gold = new wxBitmap(image6);
 }
 
 void Battle1::CalculateRatio()

@@ -25,7 +25,7 @@ private:
 	wxString fileLocation;
 
 	wxBitmap *map, *buttonWindow, *hp, *mp, *mpbar, *hpbar, *hpbarenemy, *battlechibi;
-	wxBitmap *claim, *backwin, *backlose;
+	wxBitmap *reward, *backmenu, *claim, *backwin, *backlose;
 	wxBitmap *balok, *bara, *gold;
 	wxBitmap *buttonatt, *buttondef, *buttonheal;
 	//mirai walking
