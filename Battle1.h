@@ -25,7 +25,7 @@ private:
 	wxString fileLocation;
 
 	wxBitmap *map, *buttonWindow, *hp, *mp, *mpbar, *hpbar, *hpbarenemy, *battlechibi;
-	wxBitmap *reward, *backmenu, *claim, *backwin, *backlose;
+	wxBitmap *reward, *backmenu, *backwin, *backlose;
 	wxBitmap *balok, *bara, *gold;
 	wxBitmap *buttonatt, *buttondef, *buttonheal;
 	//mirai walking
@@ -36,6 +36,7 @@ private:
 	wxBitmap *ma[20];
 	//mirai defense
 	wxBitmap *md[25];
+
 	//enemy
 	wxBitmap *mage[20], //enemy biasa
 		*t1, *t2, *t3; //enemy attack
@@ -47,6 +48,7 @@ private:
 	int enemystat, miraistat;
 	double ratioenemy, ratiohp, ratiomp;
 
+	void SetBar();
 	void LoadAllBitmap();
 	void LoadMapBitmap();
 	void LoadSpriteMiraiBitmap();

@@ -18,6 +18,7 @@ Battle1::Battle1(ImageFrame * parent) :
 	wxWindow(parent, wxID_ANY), parentFrame(parent)
 {
 	SetBackgroundColour(*wxWHITE);
+	SetDoubleBuffered(true);
 	Refresh();
 	wxImageHandler *pngLoader = new wxPNGHandler();
 	wxImage::AddHandler(pngLoader);
@@ -48,9 +49,11 @@ Battle1::~Battle1()
 	for (int i = 0; i <= 21; i++) delete mh[i];
 	for (int i = 9; i <= 16; i++) delete ma[i];
 	for (int i = 0; i <= 22; i++) delete md[i];
-	for (int i = 0; i <= 16; i++) delete mage[i];
 
+	for (int i = 0; i <= 16; i++) delete mage[i];
+	delete t1, t2, t3;
 	delete buttonatt, buttondef, buttonheal;
+	delete reward, backmenu, backwin, backlose, balok, bara, gold, attack, defense, heal, claimok;
 }
 
 
@@ -73,17 +76,19 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 	pdc.SetFont(font);
 	pdc.DrawText(mirai->name, wxPoint(185, 485));
 	pdc.SetFont(font1);
-	pdc.DrawText(icemage.name, wxPoint(313, 7));
-	/*
+	pdc.DrawText(icemage.name, wxPoint(315, 7));
+/*
+	wxPaintDC dc(this); //Paint tanpa buffer
+	mirai->renewframe = renew;
+	wxMessageOutputDebug().Printf("renewframe %d", mirai->renewframe);
+	mirai->DrawMiraiWalking(dc);
+
 	pdc.SetBrush(*wxBLUE_BRUSH);
 	pdc.DrawRectangle(wxPoint(319, 34), wxSize(ratioenemy*icemage.hp, 20)); //enemy HP
 	pdc.DrawRectangle(wxPoint(235, 568), wxSize(ratiomp*mirai->MP, 18)); //mirai MP
 	pdc.SetBrush(*wxRED_BRUSH);
 	pdc.DrawRectangle(wxPoint(235, 531), wxSize(ratiohp*mirai->HP, 18)); //mirai HP
-	*/
-
-	if (mirai->HP <= 0) turn = 6;
-
+*/
 	if (turn == 0) //masih belum diapa"in
 	{
 
@@ -93,9 +98,15 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 		pdc.SetBrush(*wxRED_BRUSH);
 		pdc.DrawRectangle(wxPoint(235, 531), wxSize(ratiohp*mirai->HP, 18)); //mirai HP
 
-		if (mirai->MP >= 3) attack->Enable(true);
-		if (mirai->MP >= 4) defense->Enable(true);
-		if (mirai->MP >= 7) heal->Enable(true);
+		if (mirai->MP>=3) attack->Enable(true);
+		if (mirai->MP>=4) defense->Enable(true);
+		if(mirai->MP>=7) heal->Enable(true);
+
+/*		wxPaintDC dc(this); //Paint tanpa buffer
+		mirai->renewframe = renew;
+		wxMessageOutputDebug().Printf("renewframe %d", mirai->renewframe);
+		mirai->DrawMiraiWalking(dc);
+*/
 		for (int i = 1; i <= 6; i++) { //walking
 			if (renew % 7 == 0) pdc.DrawBitmap(*mw[0], wxPoint(60, 175));
 			else if (renew % 7 == i) pdc.DrawBitmap(*mw[i], wxPoint(60, 175));
@@ -113,6 +124,7 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 		pdc.DrawRectangle(wxPoint(235, 568), wxSize(ratiomp*mirai->MP, 18)); //mirai MP
 		pdc.SetBrush(*wxRED_BRUSH);
 		pdc.DrawRectangle(wxPoint(235, 531), wxSize(ratiohp*mirai->HP, 18)); //mirai HP
+
 
 		for (int i = 1; i <= 14; i++) {
 			if (renew % 27 == 0) pdc.DrawBitmap(*mh[0], wxPoint(60, 175));
@@ -132,11 +144,11 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 		else if (renew % 27 == 24) pdc.DrawBitmap(*ma[14], wxPoint(60, 175));
 		else if (renew % 27 == 25) pdc.DrawBitmap(*ma[15], wxPoint(60, 175));
 		else if (renew % 27 == 26) {
-			pdc.DrawBitmap(*ma[16], wxPoint(60, 175));
-			renew = 0;
-			turn = 4;
-		}
-
+		pdc.DrawBitmap(*ma[16], wxPoint(60, 175));
+		renew = 0;
+		turn = 4;
+	}
+		
 		if (renew % 5 == 0 || renew % 5 == 4) pdc.DrawBitmap(*t1, wxPoint(125, 105));
 		else if (renew % 5 == 1 || renew % 5 == 3) pdc.DrawBitmap(*t2, wxPoint(125, 105));
 		else if (renew % 5 == 2) pdc.DrawBitmap(*t3, wxPoint(125, 105));
@@ -157,7 +169,7 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 			}
 			else if (renew % 23 == i) pdc.DrawBitmap(*md[i], wxPoint(60, 175));
 		}
-
+		
 		if (renew % 5 == 0 || renew % 5 == 4) pdc.DrawBitmap(*t1, wxPoint(125, 105));
 		else if (renew % 5 == 1 || renew % 5 == 3) pdc.DrawBitmap(*t2, wxPoint(125, 105));
 		else if (renew % 5 == 2) pdc.DrawBitmap(*t3, wxPoint(125, 105));
@@ -170,16 +182,17 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 		pdc.SetBrush(*wxRED_BRUSH);
 		pdc.DrawRectangle(wxPoint(235, 531), wxSize(ratiohp*mirai->HP, 18)); //mirai HP
 
+
 		pdc.DrawText("Mirai is healing", wxPoint(100, 100));
 		for (int i = 0; i <= 16; i++) {
-			if (renew % 18 == 17) {
+			if (renew % 18 == 17){
 				pdc.DrawBitmap(*mh[17], wxPoint(60, 175));
 				renew = 0;
 				turn = 4;
 			}
 			else if (renew % 18 == i) pdc.DrawBitmap(*mh[i], wxPoint(60, 175));
 		}
-
+	
 		if (renew % 5 == 0 || renew % 5 == 4) pdc.DrawBitmap(*t1, wxPoint(125, 105));
 		else if (renew % 5 == 1 || renew % 5 == 3) pdc.DrawBitmap(*t2, wxPoint(125, 105));
 		else if (renew % 5 == 2) pdc.DrawBitmap(*t3, wxPoint(125, 105));
@@ -212,28 +225,32 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 	else if (turn == 5) { //mirai win
 		timer->Stop();
 		pdc.DrawText(wxT("MIRAI WIN"), wxPoint(300, 100));
-		//		wxMessageOutputDebug().Printf("WIN = mirai %d mage %d", mirai->HP, icemage.hp);
-		mirai->level = 2;
+//		wxMessageOutputDebug().Printf("WIN = mirai %d mage %d", mirai->HP, icemage.hp);
+		mirai->win = 1;
 		pdc.SetBrush(*wxBLUE_BRUSH);
 		pdc.DrawRectangle(wxPoint(319, 34), wxSize(0, 20)); //enemy HP
 		pdc.DrawRectangle(wxPoint(235, 568), wxSize((double)ratiomp*(double)mirai->MP, 18)); //mirai MP
 		pdc.SetBrush(*wxRED_BRUSH);
 		pdc.DrawRectangle(wxPoint(235, 531), wxSize((double)ratiohp*(double)mirai->HP, 18)); //mirai HP
 
+		pdc.SetTextForeground(*wxWHITE);
 		pdc.DrawBitmap(*backwin, wxPoint(57, 17));
-		pdc.DrawBitmap(*balok, wxPoint(83, 236));
-		pdc.DrawBitmap(*bara, wxPoint(210, 239));
-		pdc.DrawText(wxT("2"), wxPoint(116, 354));
-		pdc.DrawText(wxT("2"), wxPoint(248, 353));
+		pdc.DrawBitmap(*balok, wxPoint(122, 248));
+		pdc.DrawBitmap(*bara, wxPoint(212, 247));
+		pdc.DrawBitmap(*gold, wxPoint(305, 247));
+		pdc.DrawText(wxT("2"), wxPoint(152, 323));
+		pdc.DrawText(wxT("2"), wxPoint(243, 323));
+		pdc.DrawText(wxT("50"), wxPoint(338, 323));
 
-		claimok = new wxBitmapButton(this, 1004, *claim, wxPoint(214, 377), wxDefaultSize, wxBORDER_RAISED);
+
+		claimok = new wxBitmapButton(this, 1004, *reward, wxPoint(182, 357), wxDefaultSize, wxBORDER_RAISED);
 
 
 	}
 	else if (turn == 6) { //mirai lose
 		timer->Stop();
 		pdc.DrawText(wxT("MIRAI LOSEEEEEE"), wxPoint(200, 100));
-		//		wxMessageOutputDebug().Printf("LOSE = mirai %d mage %d", mirai->HP, icemage.hp);
+//		wxMessageOutputDebug().Printf("LOSE = mirai %d mage %d", mirai->HP, icemage.hp);
 		pdc.SetBrush(*wxBLUE_BRUSH);
 		pdc.DrawRectangle(wxPoint(319, 34), wxSize(ratioenemy*(double)icemage.hp, 20)); //enemy HP
 		pdc.DrawRectangle(wxPoint(235, 568), wxSize((double)ratiomp*(double)mirai->MP, 18)); //mirai MP
@@ -241,19 +258,19 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 		pdc.DrawRectangle(wxPoint(235, 531), wxSize(0, 18)); //mirai HP
 
 		pdc.DrawBitmap(*backlose, wxPoint(57, 17));
-		claimok = new wxBitmapButton(this, 1004, *claim, wxPoint(214, 377), wxDefaultSize, wxBORDER_RAISED);
+		claimok = new wxBitmapButton(this, 1004, *backmenu, wxPoint(182, 357), wxDefaultSize, wxBORDER_RAISED);
 	}
 
-
+	
 
 	//draw HP
-	/*
+/*
 	pdc.SetBrush(*wxBLUE_BRUSH);
 	pdc.DrawRectangle(wxPoint(319, 34), wxSize(ratioenemy*(double)icemage.hp, 20)); //enemy HP
 	pdc.DrawRectangle(wxPoint(235, 568), wxSize((double)ratiomp*(double)mirai->MP, 18)); //mirai MP
 	pdc.SetBrush(*wxRED_BRUSH);
 	pdc.DrawRectangle(wxPoint(235, 531), wxSize((double)ratiohp*(double)mirai->HP, 18)); //mirai HP
-	*/
+*/
 
 }
 
@@ -264,23 +281,23 @@ void Battle1::OnClickAttack(wxCommandEvent & event)
 	renew = 0;
 
 	mirai->MP -= 3;
-
+	
 	int tempenemy, tempmirai, tempwin = 0;
-	tempenemy = icemage.hp - 15;
-	if (tempenemy>0) icemage.hp -= 15;
+	tempenemy = icemage.hp - mirai->skillatt;
+	if (tempenemy>0) icemage.hp -= mirai->skillatt;
 	else {
 		icemage.hp -= icemage.hp; tempwin = 1; turn = 5;
 	}
 	wxMessageOutputDebug().Printf("icemage %d\n", icemage.hp);
 	if (tempwin == 0) {
-		tempmirai = mirai->HP - 10;
-		if (tempmirai >= 0) mirai->HP -= 10;
+		tempmirai = mirai->HP - icemage.attack;
+		if (tempmirai >= 0) mirai->HP -= icemage.attack;
 		else {
 			turn = 6;
 		}
 	}
 	wxMessageOutputDebug().Printf("mirai %d\n", mirai->HP);
-
+	
 	attack->Enable(false);
 	defense->Enable(false);
 	heal->Enable(false);
@@ -294,7 +311,7 @@ void Battle1::OnClickDefense(wxCommandEvent & event)
 
 	mirai->MP -= 4;
 
-	int tempenemy, tempmirai, tempwin = 0;
+	int tempenemy, tempmirai,tempwin = 0;
 	tempenemy = icemage.hp - mirai->skillatt;
 	if (tempenemy>0) icemage.hp -= mirai->skillatt;
 	else {
@@ -303,7 +320,7 @@ void Battle1::OnClickDefense(wxCommandEvent & event)
 	wxMessageOutputDebug().Printf("d icemage %d", icemage.hp);
 	if (tempwin == 0) {
 		tempmirai = mirai->HP - ((1 - (mirai->skilldef / 100)) * 10);
-		if (tempmirai > 0) mirai->HP -= 10;
+		if (tempmirai > 0) mirai->HP -= ((1 - (mirai->skilldef / 100)) * 10);
 		else {
 			turn = 6;
 		}
@@ -322,9 +339,9 @@ void Battle1::OnClickHeal(wxCommandEvent & event)
 	mirai->MP -= 7;
 
 	int tempheal, tempmirai;
-	tempheal = mirai->HP + 20;
+	tempheal = mirai->HP + mirai->skillheal;
 	if (tempheal < mirai->hpmax) {
-		mirai->HP += 20;
+		mirai->HP += mirai->skillheal;
 		wxMessageOutputDebug().Printf("access if = tempheal %d mirai HP %d", tempheal, mirai->HP);
 	}
 	else {
@@ -333,13 +350,12 @@ void Battle1::OnClickHeal(wxCommandEvent & event)
 		mirai->HP += selisih;
 		wxMessageOutputDebug().Printf("ELSE tempheal %d mirai HP %d", tempheal, mirai->HP);
 	}
-	//	wxMessageOutputDebug().Printf("tempheal %d mirai HP %d", tempheal, mirai->HP);
-	tempmirai = mirai->HP - 10;
-	if (tempmirai>0) mirai->HP -= 10;
+//	wxMessageOutputDebug().Printf("tempheal %d mirai HP %d", tempheal, mirai->HP);
+	tempmirai = mirai->HP - icemage.attack;
+	if (tempmirai>0) mirai->HP -= icemage.attack;
 	else {
 		turn = 6;
 	}
-
 	attack->Enable(false);
 	defense->Enable(false);
 	heal->Enable(false);
@@ -351,9 +367,6 @@ void Battle1::OnClickClaim(wxCommandEvent & event)
 	mirai->itmlog += 2;
 	mirai->itmbrick += 2;
 	wxMessageOutputDebug().Printf("Mirai log %d brick %d", mirai->itmlog, mirai->itmbrick);
-	parentFrame->ShowMap();
-	timer->Start(100);
-	turn = 0;
 }
 
 void Battle1::OnTimer(wxTimerEvent & event)
@@ -361,8 +374,18 @@ void Battle1::OnTimer(wxTimerEvent & event)
 	static int counter = 0;
 	//	framerate = counter;
 	++renew;
-	//	wxMessageOutputDebug().Printf("wxTimer %d", counter++);
+//	wxMessageOutputDebug().Printf("wxTimer %d", counter++);
 	Refresh();
+}
+
+void Battle1::SetBar()
+{
+	mirai->HP = mirai->hpmax;
+	mirai->MP = mirai->mpmax;
+	icemage.name = "Mage";
+	icemage.hpmax = 50;
+	icemage.hp = 50;
+	icemage.attack = 10;
 }
 
 void Battle1::LoadAllBitmap()
@@ -422,7 +445,7 @@ void Battle1::LoadMapBitmap()
 	wxString lochibi = wxFileName(fileLocation).GetPath() + wxT("\\battle mirai ikon.png");
 	wxImage image11(lochibi, wxBITMAP_TYPE_PNG);
 	battlechibi = new wxBitmap(image11);
-
+	
 }
 
 void Battle1::LoadSpriteMiraiBitmap()
@@ -445,7 +468,7 @@ void Battle1::LoadSpriteMiraiBitmap()
 		wxImage mi1(locheal, wxBITMAP_TYPE_PNG);
 		mh[i] = new wxBitmap(mi1);
 	}
-
+	
 	// LOAD MIRAI + ATTACK
 	for (int i = 9; i <= 16; i++) {
 		wxString locatt;
@@ -455,7 +478,7 @@ void Battle1::LoadSpriteMiraiBitmap()
 		wxImage mi2(locatt, wxBITMAP_TYPE_PNG);
 		ma[i] = new wxBitmap(mi2);
 	}
-
+	
 	//LOAD MIRAI + DEFENSE SHIELD
 	for (int i = 0; i <= 22; i++) {
 		wxString locdef;
@@ -469,9 +492,13 @@ void Battle1::LoadSpriteMiraiBitmap()
 
 void Battle1::LoadResultBitmap()
 {
-	wxString loclaim = wxFileName(fileLocation).GetPath() + wxT("\\bond claim.png");
+	wxString loclaim = wxFileName(fileLocation).GetPath() + wxT("\\button reward.png");
 	wxImage image1(loclaim, wxBITMAP_TYPE_PNG);
-	claim = new wxBitmap(image1);
+	reward = new wxBitmap(image1);
+
+	wxString loclaim2 = wxFileName(fileLocation).GetPath() + wxT("\\button back.png");
+	wxImage image10(loclaim2, wxBITMAP_TYPE_PNG);
+	backmenu = new wxBitmap(image10);
 
 	wxString locwin = wxFileName(fileLocation).GetPath() + wxT("\\window win.png");
 	wxImage image2(locwin, wxBITMAP_TYPE_PNG);
@@ -481,32 +508,29 @@ void Battle1::LoadResultBitmap()
 	wxImage image3(loclose, wxBITMAP_TYPE_PNG);
 	backlose = new wxBitmap(image3);
 
-	wxString locbalok = wxFileName(fileLocation).GetPath() + wxT("\\inventory log.png");
+	wxString locbalok = wxFileName(fileLocation).GetPath() + wxT("\\drop1.png");
 	wxImage image4(locbalok, wxBITMAP_TYPE_PNG);
 	balok = new wxBitmap(image4);
 
-	wxString locbara = wxFileName(fileLocation).GetPath() + wxT("\\inventory batu bara.png");
+	wxString locbara = wxFileName(fileLocation).GetPath() + wxT("\\drop2.png");
 	wxImage image5(locbara, wxBITMAP_TYPE_PNG);
 	bara = new wxBitmap(image5);
+
+	wxString locuang = wxFileName(fileLocation).GetPath() + wxT("\\drop7.png");
+	wxImage image6(locuang, wxBITMAP_TYPE_PNG);
+	gold = new wxBitmap(image6);
 }
 
 void Battle1::CalculateRatio()
 {
-
+	
 	ratioenemy = 168.0 / (double)icemage.hpmax;
 	ratiohp = 212.0 / (double)mirai->hpmax;
 	ratiomp = 212.0 / (double)mirai->mpmax;
 	wxMessageOutputDebug().Printf("ratioenemy %lf", ratioenemy);
 	wxMessageOutputDebug().Printf("ratio mirai HP %lf MP %lf\n", ratiohp, ratiomp);
 	wxMessageOutputDebug().Printf("mirai hp max %d mp max %d\n", mirai->hpmax, mirai->mpmax);
-
-}
-
-void Battle1::SetBar()
-{
-	mirai->HP = mirai->hpmax;
-	mirai->MP = mirai->mpmax;
-	icemage.name = "Mage";
+	
 }
 
 void Battle1::LoadSpriteEnemyBitmap()

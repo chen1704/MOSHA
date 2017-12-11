@@ -8,6 +8,7 @@ class Battle2 : public wxWindow
 {
 public:
 	Battle2(ImageFrame *parent);
+	~Battle2();
 	void OnPaintMirai(wxPaintEvent &event);
 	void OnClickAttack(wxCommandEvent &event);
 	void OnClickDefense(wxCommandEvent &event);
@@ -16,8 +17,7 @@ public:
 	void OnTimer(wxTimerEvent &event);
 
 	Hero *mirai;
-	Enemy linksan;
-	~Battle2();
+	Enemy warrior;
 
 private:
 	ImageFrame *parentFrame;
@@ -25,9 +25,10 @@ private:
 	wxString fileLocation;
 
 	wxBitmap *map, *buttonWindow, *hp, *mp, *mpbar, *hpbar, *hpbarenemy, *battlechibi;
-	wxBitmap *reward, *backmenu, *claim, *backwin, *backlose;
+	wxBitmap *reward, *backmenu, *backwin, *backlose;
 	wxBitmap *balok, *bara, *gold;
 	wxBitmap *buttonatt, *buttondef, *buttonheal;
+
 	//mirai walking
 	wxBitmap *mw[10];
 	//mirai healing
@@ -37,20 +38,23 @@ private:
 	//mirai defense
 	wxBitmap *md[25];
 	//enemy
-	wxBitmap *link[20], //enemy biasa
-		*t1, *t2; //enemy attack
+	wxBitmap *ww[5], *wa[15]; //walking & attack
 
 	wxBitmapButton *attack, *defense, *heal, *claimok;
 	int framerate;
 	int renew;
 	int turn;
-	int enemystat, miraistat;
 	double ratioenemy, ratiohp, ratiomp;
 
+	void SetBar();
 	void LoadAllBitmap();
 	void LoadMapBitmap();
 	void LoadSpriteMiraiBitmap();
+	void LoadResultBitmap();
+	void CalculateRatio();
 
 	void LoadSpriteEnemyBitmap();
 	DECLARE_EVENT_TABLE();
+
 };
+
