@@ -12,6 +12,7 @@ public:
 	void OnClickAttack(wxCommandEvent &event);
 	void OnClickDefense(wxCommandEvent &event);
 	void OnClickHeal(wxCommandEvent &event);
+	void OnClickClaim(wxCommandEvent &event);
 	void OnTimer(wxTimerEvent &event);
 
 	Hero *mirai;
@@ -24,6 +25,8 @@ private:
 	wxString fileLocation;
 
 	wxBitmap *map, *buttonWindow, *hp, *mp, *mpbar, *hpbar, *hpbarenemy, *battlechibi;
+	wxBitmap *claim, *backwin, *backlose;
+	wxBitmap *balok, *bara, *gold;
 	wxBitmap *buttonatt, *buttondef, *buttonheal;
 	//mirai walking
 	wxBitmap *mw[10];
@@ -37,7 +40,7 @@ private:
 	wxBitmap *mage[20], //enemy biasa
 		*t1, *t2, *t3; //enemy attack
 
-	wxBitmapButton *attack, *defense, *heal;
+	wxBitmapButton *attack, *defense, *heal, *claimok;
 	int framerate;
 	int renew;
 	int turn;
@@ -47,6 +50,7 @@ private:
 	void LoadAllBitmap();
 	void LoadMapBitmap();
 	void LoadSpriteMiraiBitmap();
+	void LoadResultBitmap();
 	void CalculateRatio();
 
 	void LoadSpriteEnemyBitmap();

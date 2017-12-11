@@ -14,9 +14,13 @@
 
 Hero* Hero::instance = 0;
 
-ImageFrame::ImageFrame(const wxString &title) : wxFrame(NULL, wxID_ANY, title)
+ImageFrame::ImageFrame(const wxString &title) 
+	: wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxDefaultSize, wxMINIMIZE_BOX | wxSYSTEM_MENU | wxCAPTION | wxCLOSE_BOX | wxCLIP_CHILDREN)
 {
 	//	this->SetInitialSize(wxSize(515, 700));
+	wxIcon icon3(wxT("retrokyuu.ico"), wxBITMAP_TYPE_ICO);
+	SetIcon(icon3);
+
 	this->InitComponents();
 }
 
@@ -61,9 +65,10 @@ void ImageFrame::InitComponents()
 
 	SetSizer(boxSizer);
 
-	//ShowStart();
+	ShowStart();
 	//ShowBattle1();
-	ShowMenuBonds();
+	//ShowMenuBonds();
+	//ShowMenuUpgrade();
 	//ShowMenuInvent();
 }
 
