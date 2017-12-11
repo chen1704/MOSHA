@@ -70,7 +70,7 @@ void Battle2::OnPaintMirai(wxPaintEvent & event)
 	pdc.SetFont(font);
 	pdc.DrawText(mirai->name, wxPoint(185, 485));
 	pdc.SetFont(font1);
-	
+
 	if (turn == 0) //masih belum diapa"in
 	{
 		for (int i = 1; i <= 6; i++) { //walking
@@ -107,7 +107,7 @@ void Battle2::OnPaintMirai(wxPaintEvent & event)
 		}
 
 		if (renew % 2 == 0) pdc.DrawBitmap(*t1, wxPoint(225, 205));
-		else if (renew % 2 == 1 ) pdc.DrawBitmap(*t2, wxPoint(225, 205));
+		else if (renew % 2 == 1) pdc.DrawBitmap(*t2, wxPoint(225, 205));
 	}
 
 	else if (turn == 2) { //defense
@@ -147,14 +147,14 @@ void Battle2::OnPaintMirai(wxPaintEvent & event)
 			else if (renew % 7 == i) pdc.DrawBitmap(*mw[i], wxPoint(60, 175));
 		}
 
-		for (int i = 2; i <= 6; i++) {
+		for (int i = 1; i <= 10; i++) {
 			wxMessageOutputDebug().Printf("link renew : %d", renew);
-			if (renew % 5 == 1) {
+			if (renew % 11 == 10) {
 				pdc.DrawBitmap(*link[2], wxPoint(225, 205));
 				renew = 0;
 				turn = 0;
 			}
-			else if (renew % 5 == 0) pdc.DrawBitmap(*link[i], wxPoint(225, 205));
+			else if(renew % 11 == i)pdc.DrawBitmap(*link[i], wxPoint(225, 205));
 		}
 	}
 
@@ -309,16 +309,16 @@ void Battle2::LoadSpriteMiraiBitmap()
 void Battle2::LoadSpriteEnemyBitmap()
 {
 	wxString enemy;
-	enemy = wxFileName(fileLocation).GetPath() + wxT("\\linksmall0.png");
+	enemy = wxFileName(fileLocation).GetPath() + wxT("\\link0.png");
 	wxImage i1(enemy, wxBITMAP_TYPE_PNG);
 	t1 = new wxBitmap(i1);
-	enemy = wxFileName(fileLocation).GetPath() + wxT("\\linksmall1.png");
+	enemy = wxFileName(fileLocation).GetPath() + wxT("\\link2.png");
 	wxImage i2(enemy, wxBITMAP_TYPE_PNG);
 	t2 = new wxBitmap(i2);
 
-	for (int i = 2; i <= 6; i++) {
+	for (int i = 1; i <= 10; i++) {
 		wxString elocatt;
-		elocatt = wxFileName(fileLocation).GetPath() + wxT("\\linksmall");
+		elocatt = wxFileName(fileLocation).GetPath() + wxT("\\linkatt");
 		elocatt = elocatt + wxString::Format("%d", i);
 		elocatt = elocatt + wxT(".png");
 		wxImage emage(elocatt, wxBITMAP_TYPE_PNG);
