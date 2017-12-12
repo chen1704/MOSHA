@@ -29,7 +29,7 @@ private:
 	wxBitmap *balok, *bara, *gold;
 	wxBitmap *buttonatt, *buttondef, *buttonheal;
 	//mirai walking
-	wxBitmap *mw[10];
+	wxBitmap *mw[10], *huruf[60];
 	//mirai healing
 	wxBitmap *mh[25];
 	//mirai attack
@@ -53,6 +53,8 @@ private:
 	void LoadMapBitmap();
 	void LoadSpriteMiraiBitmap();
 	void LoadResultBitmap();
+	void LoadHurufkecilBitmap();
+	void LoadHurufbesarBitmap();
 	void CalculateRatio();
 
 	void LoadSpriteEnemyBitmap();

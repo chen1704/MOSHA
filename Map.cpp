@@ -101,11 +101,13 @@ void Map::ClickMap1(wxCommandEvent & event)
 void Map::ClickMap2(wxCommandEvent & event)
 {
 	wxMessageOutputDebug().Printf("click on map2");
+	parentFrame->ShowBattle2();
 }
 
 void Map::ClickMap3(wxCommandEvent & event)
 {
 	wxMessageOutputDebug().Printf("click on map3");
+	parentFrame->ShowBattle3();
 }
 
 void Map::ClickMap4(wxCommandEvent & event)

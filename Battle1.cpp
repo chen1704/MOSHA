@@ -3,6 +3,7 @@
 #include <wx/filename.h>
 #include <wx/dcbuffer.h>
 #include <wx/font.h>
+#include <vector>
 #define TIMER_ID 2000
 
 BEGIN_EVENT_TABLE(Battle1, wxWindow)
@@ -71,13 +72,17 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 	pdc.DrawBitmap(*mpbar, wxPoint(225, 558), true);
 	pdc.DrawBitmap(*hpbarenemy, wxPoint(311, 26), true);
 
-	wxFont font(20, wxFONTFAMILY_TELETYPE, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
-	wxFont font1(14, wxFONTFAMILY_TELETYPE, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-	pdc.SetFont(font);
-	pdc.DrawText(mirai->name, wxPoint(185, 485));
-	pdc.SetFont(font1);
-	pdc.DrawText(icemage.name, wxPoint(315, 7));
-/*
+	vector<char> mirainama(mirai->name.begin(), mirai->name.end());
+	int i, x, n, y, o;
+	x = 175; y = 480; o = mirainama.size();
+	for (i = 0; i < o; i++) {
+		if (mirainama[i] < 65 || mirainama[i]>122) continue;
+		n = mirainama[i] - '0';
+		n -= 16;
+		pdc.DrawBitmap(*huruf[n], wxPoint(x, y), true);
+		x += 16;
+	}
+	/*
 	wxPaintDC dc(this); //Paint tanpa buffer
 	mirai->renewframe = renew;
 	wxMessageOutputDebug().Printf("renewframe %d", mirai->renewframe);
@@ -88,7 +93,7 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 	pdc.DrawRectangle(wxPoint(235, 568), wxSize(ratiomp*mirai->MP, 18)); //mirai MP
 	pdc.SetBrush(*wxRED_BRUSH);
 	pdc.DrawRectangle(wxPoint(235, 531), wxSize(ratiohp*mirai->HP, 18)); //mirai HP
-*/
+	*/
 	if (turn == 0) //masih belum diapa"in
 	{
 
@@ -98,15 +103,15 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 		pdc.SetBrush(*wxRED_BRUSH);
 		pdc.DrawRectangle(wxPoint(235, 531), wxSize(ratiohp*mirai->HP, 18)); //mirai HP
 
-		if (mirai->MP>=3) attack->Enable(true);
-		if (mirai->MP>=4) defense->Enable(true);
-		if(mirai->MP>=7) heal->Enable(true);
+		if (mirai->MP >= 3) attack->Enable(true);
+		if (mirai->MP >= 4) defense->Enable(true);
+		if (mirai->MP >= 7) heal->Enable(true);
 
-/*		wxPaintDC dc(this); //Paint tanpa buffer
+		/*		wxPaintDC dc(this); //Paint tanpa buffer
 		mirai->renewframe = renew;
 		wxMessageOutputDebug().Printf("renewframe %d", mirai->renewframe);
 		mirai->DrawMiraiWalking(dc);
-*/
+		*/
 		for (int i = 1; i <= 6; i++) { //walking
 			if (renew % 7 == 0) pdc.DrawBitmap(*mw[0], wxPoint(60, 175));
 			else if (renew % 7 == i) pdc.DrawBitmap(*mw[i], wxPoint(60, 175));
@@ -144,11 +149,11 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 		else if (renew % 27 == 24) pdc.DrawBitmap(*ma[14], wxPoint(60, 175));
 		else if (renew % 27 == 25) pdc.DrawBitmap(*ma[15], wxPoint(60, 175));
 		else if (renew % 27 == 26) {
-		pdc.DrawBitmap(*ma[16], wxPoint(60, 175));
-		renew = 0;
-		turn = 4;
-	}
-		
+			pdc.DrawBitmap(*ma[16], wxPoint(60, 175));
+			renew = 0;
+			turn = 4;
+		}
+
 		if (renew % 5 == 0 || renew % 5 == 4) pdc.DrawBitmap(*t1, wxPoint(125, 105));
 		else if (renew % 5 == 1 || renew % 5 == 3) pdc.DrawBitmap(*t2, wxPoint(125, 105));
 		else if (renew % 5 == 2) pdc.DrawBitmap(*t3, wxPoint(125, 105));
@@ -169,7 +174,7 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 			}
 			else if (renew % 23 == i) pdc.DrawBitmap(*md[i], wxPoint(60, 175));
 		}
-		
+
 		if (renew % 5 == 0 || renew % 5 == 4) pdc.DrawBitmap(*t1, wxPoint(125, 105));
 		else if (renew % 5 == 1 || renew % 5 == 3) pdc.DrawBitmap(*t2, wxPoint(125, 105));
 		else if (renew % 5 == 2) pdc.DrawBitmap(*t3, wxPoint(125, 105));
@@ -185,14 +190,14 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 
 		pdc.DrawText("Mirai is healing", wxPoint(100, 100));
 		for (int i = 0; i <= 16; i++) {
-			if (renew % 18 == 17){
+			if (renew % 18 == 17) {
 				pdc.DrawBitmap(*mh[17], wxPoint(60, 175));
 				renew = 0;
 				turn = 4;
 			}
 			else if (renew % 18 == i) pdc.DrawBitmap(*mh[i], wxPoint(60, 175));
 		}
-	
+
 		if (renew % 5 == 0 || renew % 5 == 4) pdc.DrawBitmap(*t1, wxPoint(125, 105));
 		else if (renew % 5 == 1 || renew % 5 == 3) pdc.DrawBitmap(*t2, wxPoint(125, 105));
 		else if (renew % 5 == 2) pdc.DrawBitmap(*t3, wxPoint(125, 105));
@@ -225,7 +230,7 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 	else if (turn == 5) { //mirai win
 		timer->Stop();
 		pdc.DrawText(wxT("MIRAI WIN"), wxPoint(300, 100));
-//		wxMessageOutputDebug().Printf("WIN = mirai %d mage %d", mirai->HP, icemage.hp);
+		//		wxMessageOutputDebug().Printf("WIN = mirai %d mage %d", mirai->HP, icemage.hp);
 		mirai->win = 1;
 		pdc.SetBrush(*wxBLUE_BRUSH);
 		pdc.DrawRectangle(wxPoint(319, 34), wxSize(0, 20)); //enemy HP
@@ -243,14 +248,14 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 		pdc.DrawText(wxT("50"), wxPoint(338, 323));
 
 
-		claimok = new wxBitmapButton(this, 1004, *reward, wxPoint(182, 357), wxDefaultSize, wxBORDER_RAISED);
+		claimok = new wxBitmapButton(this, 1004, *reward, wxPoint(177, 353), wxDefaultSize, wxBORDER_NONE);
 
 
 	}
 	else if (turn == 6) { //mirai lose
 		timer->Stop();
 		pdc.DrawText(wxT("MIRAI LOSEEEEEE"), wxPoint(200, 100));
-//		wxMessageOutputDebug().Printf("LOSE = mirai %d mage %d", mirai->HP, icemage.hp);
+		//		wxMessageOutputDebug().Printf("LOSE = mirai %d mage %d", mirai->HP, icemage.hp);
 		pdc.SetBrush(*wxBLUE_BRUSH);
 		pdc.DrawRectangle(wxPoint(319, 34), wxSize(ratioenemy*(double)icemage.hp, 20)); //enemy HP
 		pdc.DrawRectangle(wxPoint(235, 568), wxSize((double)ratiomp*(double)mirai->MP, 18)); //mirai MP
@@ -258,19 +263,19 @@ void Battle1::OnPaintMirai(wxPaintEvent & event)
 		pdc.DrawRectangle(wxPoint(235, 531), wxSize(0, 18)); //mirai HP
 
 		pdc.DrawBitmap(*backlose, wxPoint(57, 17));
-		claimok = new wxBitmapButton(this, 1004, *backmenu, wxPoint(182, 357), wxDefaultSize, wxBORDER_RAISED);
+		claimok = new wxBitmapButton(this, 1004, *backmenu, wxPoint(173, 351), wxDefaultSize, wxBORDER_NONE);
 	}
 
-	
+
 
 	//draw HP
-/*
+	/*
 	pdc.SetBrush(*wxBLUE_BRUSH);
 	pdc.DrawRectangle(wxPoint(319, 34), wxSize(ratioenemy*(double)icemage.hp, 20)); //enemy HP
 	pdc.DrawRectangle(wxPoint(235, 568), wxSize((double)ratiomp*(double)mirai->MP, 18)); //mirai MP
 	pdc.SetBrush(*wxRED_BRUSH);
 	pdc.DrawRectangle(wxPoint(235, 531), wxSize((double)ratiohp*(double)mirai->HP, 18)); //mirai HP
-*/
+	*/
 
 }
 
@@ -281,7 +286,7 @@ void Battle1::OnClickAttack(wxCommandEvent & event)
 	renew = 0;
 
 	mirai->MP -= 3;
-	
+
 	int tempenemy, tempmirai, tempwin = 0;
 	tempenemy = icemage.hp - mirai->skillatt;
 	if (tempenemy>0) icemage.hp -= mirai->skillatt;
@@ -297,7 +302,7 @@ void Battle1::OnClickAttack(wxCommandEvent & event)
 		}
 	}
 	wxMessageOutputDebug().Printf("mirai %d\n", mirai->HP);
-	
+
 	attack->Enable(false);
 	defense->Enable(false);
 	heal->Enable(false);
@@ -311,7 +316,7 @@ void Battle1::OnClickDefense(wxCommandEvent & event)
 
 	mirai->MP -= 4;
 
-	int tempenemy, tempmirai,tempwin = 0;
+	int tempenemy, tempmirai, tempwin = 0;
 	tempenemy = icemage.hp - mirai->skillatt;
 	if (tempenemy>0) icemage.hp -= mirai->skillatt;
 	else {
@@ -350,7 +355,7 @@ void Battle1::OnClickHeal(wxCommandEvent & event)
 		mirai->HP += selisih;
 		wxMessageOutputDebug().Printf("ELSE tempheal %d mirai HP %d", tempheal, mirai->HP);
 	}
-//	wxMessageOutputDebug().Printf("tempheal %d mirai HP %d", tempheal, mirai->HP);
+	//	wxMessageOutputDebug().Printf("tempheal %d mirai HP %d", tempheal, mirai->HP);
 	tempmirai = mirai->HP - icemage.attack;
 	if (tempmirai>0) mirai->HP -= icemage.attack;
 	else {
@@ -367,6 +372,7 @@ void Battle1::OnClickClaim(wxCommandEvent & event)
 	mirai->itmlog += 2;
 	mirai->itmbrick += 2;
 	wxMessageOutputDebug().Printf("Mirai log %d brick %d", mirai->itmlog, mirai->itmbrick);
+	parentFrame->ShowMap();
 }
 
 void Battle1::OnTimer(wxTimerEvent & event)
@@ -374,7 +380,7 @@ void Battle1::OnTimer(wxTimerEvent & event)
 	static int counter = 0;
 	//	framerate = counter;
 	++renew;
-//	wxMessageOutputDebug().Printf("wxTimer %d", counter++);
+	//	wxMessageOutputDebug().Printf("wxTimer %d", counter++);
 	Refresh();
 }
 
@@ -394,6 +400,8 @@ void Battle1::LoadAllBitmap()
 	this->LoadSpriteMiraiBitmap();
 	this->LoadSpriteEnemyBitmap();
 	this->LoadResultBitmap();
+	this->LoadHurufbesarBitmap();
+	this->LoadHurufkecilBitmap();
 }
 
 void Battle1::LoadMapBitmap()
@@ -406,7 +414,7 @@ void Battle1::LoadMapBitmap()
 	wxImage image(loc, wxBITMAP_TYPE_PNG);
 	map = new wxBitmap(image);
 
-	loc = wxFileName(fileLocation).GetPath() + wxT("\\battle kotak.png");
+	loc = wxFileName(fileLocation).GetPath() + wxT("\\button window.png");
 	wxImage image2(loc, wxBITMAP_TYPE_PNG);
 	buttonWindow = new wxBitmap(image2);
 
@@ -445,7 +453,7 @@ void Battle1::LoadMapBitmap()
 	wxString lochibi = wxFileName(fileLocation).GetPath() + wxT("\\battle mirai ikon.png");
 	wxImage image11(lochibi, wxBITMAP_TYPE_PNG);
 	battlechibi = new wxBitmap(image11);
-	
+
 }
 
 void Battle1::LoadSpriteMiraiBitmap()
@@ -468,7 +476,7 @@ void Battle1::LoadSpriteMiraiBitmap()
 		wxImage mi1(locheal, wxBITMAP_TYPE_PNG);
 		mh[i] = new wxBitmap(mi1);
 	}
-	
+
 	// LOAD MIRAI + ATTACK
 	for (int i = 9; i <= 16; i++) {
 		wxString locatt;
@@ -478,7 +486,7 @@ void Battle1::LoadSpriteMiraiBitmap()
 		wxImage mi2(locatt, wxBITMAP_TYPE_PNG);
 		ma[i] = new wxBitmap(mi2);
 	}
-	
+
 	//LOAD MIRAI + DEFENSE SHIELD
 	for (int i = 0; i <= 22; i++) {
 		wxString locdef;
@@ -523,14 +531,14 @@ void Battle1::LoadResultBitmap()
 
 void Battle1::CalculateRatio()
 {
-	
+
 	ratioenemy = 168.0 / (double)icemage.hpmax;
 	ratiohp = 212.0 / (double)mirai->hpmax;
 	ratiomp = 212.0 / (double)mirai->mpmax;
 	wxMessageOutputDebug().Printf("ratioenemy %lf", ratioenemy);
 	wxMessageOutputDebug().Printf("ratio mirai HP %lf MP %lf\n", ratiohp, ratiomp);
 	wxMessageOutputDebug().Printf("mirai hp max %d mp max %d\n", mirai->hpmax, mirai->mpmax);
-	
+
 }
 
 void Battle1::LoadSpriteEnemyBitmap()
@@ -554,4 +562,216 @@ void Battle1::LoadSpriteEnemyBitmap()
 		wxImage emage(elocatt, wxBITMAP_TYPE_PNG);
 		mage[i] = new wxBitmap(emage);
 	}
+}
+
+void Battle1::LoadHurufkecilBitmap() {
+	wxString loca = wxFileName(fileLocation).GetPath() + wxT("\\akecil.png");
+	wxImage image1(loca, wxBITMAP_TYPE_PNG);
+	huruf[33] = new wxBitmap(image1);
+
+	wxString locb = wxFileName(fileLocation).GetPath() + wxT("\\bkecil.png");
+	wxImage image2(locb, wxBITMAP_TYPE_PNG);
+	huruf[34] = new wxBitmap(image2);
+
+	wxString locc = wxFileName(fileLocation).GetPath() + wxT("\\ckecil.png");
+	wxImage image3(locc, wxBITMAP_TYPE_PNG);
+	huruf[35] = new wxBitmap(image3);
+
+	wxString locd = wxFileName(fileLocation).GetPath() + wxT("\\dkecil.png");
+	wxImage image4(locd, wxBITMAP_TYPE_PNG);
+	huruf[36] = new wxBitmap(image4);
+
+	wxString loce = wxFileName(fileLocation).GetPath() + wxT("\\ekecil.png");
+	wxImage image5(loce, wxBITMAP_TYPE_PNG);
+	huruf[37] = new wxBitmap(image5);
+
+	wxString locf = wxFileName(fileLocation).GetPath() + wxT("\\fkecil.png");
+	wxImage image6(locf, wxBITMAP_TYPE_PNG);
+	huruf[38] = new wxBitmap(image6);
+
+	wxString locg = wxFileName(fileLocation).GetPath() + wxT("\\gkecil.png");
+	wxImage image7(locg, wxBITMAP_TYPE_PNG);
+	huruf[39] = new wxBitmap(image7);
+
+	wxString loch = wxFileName(fileLocation).GetPath() + wxT("\\hkecil.png");
+	wxImage image8(loch, wxBITMAP_TYPE_PNG);
+	huruf[40] = new wxBitmap(image8);
+
+	wxString loci = wxFileName(fileLocation).GetPath() + wxT("\\ikecil.png");
+	wxImage image26(loci, wxBITMAP_TYPE_PNG);
+	huruf[41] = new wxBitmap(image26);
+
+	wxString locj = wxFileName(fileLocation).GetPath() + wxT("\\jkecil.png");
+	wxImage image9(locj, wxBITMAP_TYPE_PNG);
+	huruf[42] = new wxBitmap(image9);
+
+	wxString lock = wxFileName(fileLocation).GetPath() + wxT("\\kkecil.png");
+	wxImage image10(lock, wxBITMAP_TYPE_PNG);
+	huruf[43] = new wxBitmap(image10);
+
+	wxString locl = wxFileName(fileLocation).GetPath() + wxT("\\lkecil.png");
+	wxImage image11(locl, wxBITMAP_TYPE_PNG);
+	huruf[44] = new wxBitmap(image11);
+
+	wxString locm = wxFileName(fileLocation).GetPath() + wxT("\\mkecil.png");
+	wxImage image12(locm, wxBITMAP_TYPE_PNG);
+	huruf[45] = new wxBitmap(image12);
+
+	wxString locn = wxFileName(fileLocation).GetPath() + wxT("\\nkecil.png");
+	wxImage image13(locn, wxBITMAP_TYPE_PNG);
+	huruf[46] = new wxBitmap(image13);
+
+	wxString loco = wxFileName(fileLocation).GetPath() + wxT("\\okecil.png");
+	wxImage image14(loco, wxBITMAP_TYPE_PNG);
+	huruf[47] = new wxBitmap(image14);
+
+	wxString locp = wxFileName(fileLocation).GetPath() + wxT("\\pkecil.png");
+	wxImage image15(locp, wxBITMAP_TYPE_PNG);
+	huruf[48] = new wxBitmap(image15);
+
+	wxString locq = wxFileName(fileLocation).GetPath() + wxT("\\qkecil.png");
+	wxImage image16(locq, wxBITMAP_TYPE_PNG);
+	huruf[49] = new wxBitmap(image16);
+
+	wxString locr = wxFileName(fileLocation).GetPath() + wxT("\\rkecil.png");
+	wxImage image17(locr, wxBITMAP_TYPE_PNG);
+	huruf[50] = new wxBitmap(image17);
+
+	wxString locs = wxFileName(fileLocation).GetPath() + wxT("\\skecil.png");
+	wxImage image18(locs, wxBITMAP_TYPE_PNG);
+	huruf[51] = new wxBitmap(image18);
+
+	wxString loct = wxFileName(fileLocation).GetPath() + wxT("\\tkecil.png");
+	wxImage image19(loct, wxBITMAP_TYPE_PNG);
+	huruf[52] = new wxBitmap(image19);
+
+	wxString locu = wxFileName(fileLocation).GetPath() + wxT("\\ukecil.png");
+	wxImage image20(locu, wxBITMAP_TYPE_PNG);
+	huruf[53] = new wxBitmap(image20);
+
+	wxString locv = wxFileName(fileLocation).GetPath() + wxT("\\vkecil.png");
+	wxImage image21(locv, wxBITMAP_TYPE_PNG);
+	huruf[54] = new wxBitmap(image21);
+
+	wxString locw = wxFileName(fileLocation).GetPath() + wxT("\\wkecil.png");
+	wxImage image22(locw, wxBITMAP_TYPE_PNG);
+	huruf[55] = new wxBitmap(image22);
+
+	wxString locx = wxFileName(fileLocation).GetPath() + wxT("\\xkecil.png");
+	wxImage image23(locx, wxBITMAP_TYPE_PNG);
+	huruf[56] = new wxBitmap(image23);
+
+	wxString locy = wxFileName(fileLocation).GetPath() + wxT("\\ykecil.png");
+	wxImage image24(locy, wxBITMAP_TYPE_PNG);
+	huruf[57] = new wxBitmap(image24);
+
+	wxString locz = wxFileName(fileLocation).GetPath() + wxT("\\zkecil.png");
+	wxImage image25(locz, wxBITMAP_TYPE_PNG);
+	huruf[58] = new wxBitmap(image25);
+}
+
+void Battle1::LoadHurufbesarBitmap() {
+	wxString loca = wxFileName(fileLocation).GetPath() + wxT("\\a.png");
+	wxImage image1(loca, wxBITMAP_TYPE_PNG);
+	huruf[1] = new wxBitmap(image1);
+
+	wxString locb = wxFileName(fileLocation).GetPath() + wxT("\\b.png");
+	wxImage image2(locb, wxBITMAP_TYPE_PNG);
+	huruf[2] = new wxBitmap(image2);
+
+	wxString locc = wxFileName(fileLocation).GetPath() + wxT("\\c.png");
+	wxImage image3(locc, wxBITMAP_TYPE_PNG);
+	huruf[3] = new wxBitmap(image3);
+
+	wxString locd = wxFileName(fileLocation).GetPath() + wxT("\\d.png");
+	wxImage image4(locd, wxBITMAP_TYPE_PNG);
+	huruf[4] = new wxBitmap(image4);
+
+	wxString loce = wxFileName(fileLocation).GetPath() + wxT("\\e.png");
+	wxImage image5(loce, wxBITMAP_TYPE_PNG);
+	huruf[5] = new wxBitmap(image5);
+
+	wxString locf = wxFileName(fileLocation).GetPath() + wxT("\\f.png");
+	wxImage image6(locf, wxBITMAP_TYPE_PNG);
+	huruf[6] = new wxBitmap(image6);
+
+	wxString locg = wxFileName(fileLocation).GetPath() + wxT("\\g.png");
+	wxImage image7(locg, wxBITMAP_TYPE_PNG);
+	huruf[7] = new wxBitmap(image7);
+
+	wxString loch = wxFileName(fileLocation).GetPath() + wxT("\\h.png");
+	wxImage image8(loch, wxBITMAP_TYPE_PNG);
+	huruf[8] = new wxBitmap(image8);
+
+	wxString loci = wxFileName(fileLocation).GetPath() + wxT("\\i.png");
+	wxImage image26(loci, wxBITMAP_TYPE_PNG);
+	huruf[9] = new wxBitmap(image26);
+
+	wxString locj = wxFileName(fileLocation).GetPath() + wxT("\\j.png");
+	wxImage image9(locj, wxBITMAP_TYPE_PNG);
+	huruf[10] = new wxBitmap(image9);
+
+	wxString lock = wxFileName(fileLocation).GetPath() + wxT("\\k.png");
+	wxImage image10(lock, wxBITMAP_TYPE_PNG);
+	huruf[11] = new wxBitmap(image10);
+
+	wxString locl = wxFileName(fileLocation).GetPath() + wxT("\\l.png");
+	wxImage image11(locl, wxBITMAP_TYPE_PNG);
+	huruf[12] = new wxBitmap(image11);
+
+	wxString locm = wxFileName(fileLocation).GetPath() + wxT("\\m.png");
+	wxImage image12(locm, wxBITMAP_TYPE_PNG);
+	huruf[13] = new wxBitmap(image12);
+
+	wxString locn = wxFileName(fileLocation).GetPath() + wxT("\\n.png");
+	wxImage image13(locn, wxBITMAP_TYPE_PNG);
+	huruf[14] = new wxBitmap(image13);
+
+	wxString loco = wxFileName(fileLocation).GetPath() + wxT("\\o.png");
+	wxImage image14(loco, wxBITMAP_TYPE_PNG);
+	huruf[15] = new wxBitmap(image14);
+
+	wxString locp = wxFileName(fileLocation).GetPath() + wxT("\\p.png");
+	wxImage image15(locp, wxBITMAP_TYPE_PNG);
+	huruf[16] = new wxBitmap(image15);
+
+	wxString locq = wxFileName(fileLocation).GetPath() + wxT("\\q.png");
+	wxImage image16(locq, wxBITMAP_TYPE_PNG);
+	huruf[17] = new wxBitmap(image16);
+
+	wxString locr = wxFileName(fileLocation).GetPath() + wxT("\\r.png");
+	wxImage image17(locr, wxBITMAP_TYPE_PNG);
+	huruf[18] = new wxBitmap(image17);
+
+	wxString locs = wxFileName(fileLocation).GetPath() + wxT("\\s.png");
+	wxImage image18(locs, wxBITMAP_TYPE_PNG);
+	huruf[19] = new wxBitmap(image18);
+
+	wxString loct = wxFileName(fileLocation).GetPath() + wxT("\\t.png");
+	wxImage image19(loct, wxBITMAP_TYPE_PNG);
+	huruf[20] = new wxBitmap(image19);
+
+	wxString locu = wxFileName(fileLocation).GetPath() + wxT("\\u.png");
+	wxImage image20(locu, wxBITMAP_TYPE_PNG);
+	huruf[21] = new wxBitmap(image20);
+
+	wxString locv = wxFileName(fileLocation).GetPath() + wxT("\\v.png");
+	wxImage image21(locv, wxBITMAP_TYPE_PNG);
+	huruf[22] = new wxBitmap(image21);
+
+	wxString locw = wxFileName(fileLocation).GetPath() + wxT("\\w.png");
+	wxImage image22(locw, wxBITMAP_TYPE_PNG);
+	huruf[23] = new wxBitmap(image22);
+
+	wxString locx = wxFileName(fileLocation).GetPath() + wxT("\\x.png");
+	wxImage image23(locx, wxBITMAP_TYPE_PNG);
+	huruf[24] = new wxBitmap(image23);
+
+	wxString locy = wxFileName(fileLocation).GetPath() + wxT("\\y.png");
+	wxImage image24(locy, wxBITMAP_TYPE_PNG);
+	huruf[25] = new wxBitmap(image24);
+
+	wxString locz = wxFileName(fileLocation).GetPath() + wxT("\\z.png");
+	wxImage image25(locz, wxBITMAP_TYPE_PNG);
+	huruf[26] = new wxBitmap(image25);
 }

@@ -36,7 +36,7 @@ private:
 	//mirai attack
 	wxBitmap *ma[20];
 	//mirai defense
-	wxBitmap *md[25];
+	wxBitmap *md[25], *huruf[60];
 	//enemy
 	wxBitmap *cw[10], *ca[28];//enemy biasa //enemy attack
 
@@ -52,6 +52,8 @@ private:
 	void LoadMapBitmap();
 	void LoadSpriteMiraiBitmap();
 	void LoadResultBitmap();
+	void LoadHurufbesarBitmap();
+	void LoadHurufkecilBitmap();
 	void CalculateRatio();
 	void LoadSpriteEnemyBitmap();
 	DECLARE_EVENT_TABLE();

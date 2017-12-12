@@ -38,7 +38,7 @@ private:
 	//mirai defense
 	wxBitmap *md[25];
 	//enemy
-	wxBitmap *ww[5], *wa[15]; //walking & attack
+	wxBitmap *ww[5], *wa[15], *huruf[60]; //walking & attack
 
 	wxBitmapButton *attack, *defense, *heal, *claimok;
 	int framerate;
@@ -52,7 +52,8 @@ private:
 	void LoadSpriteMiraiBitmap();
 	void LoadResultBitmap();
 	void CalculateRatio();
-
+	void LoadHurufkecilBitmap();
+	void LoadHurufbesarBitmap();
 	void LoadSpriteEnemyBitmap();
 	DECLARE_EVENT_TABLE();
 
