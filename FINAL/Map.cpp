@@ -30,6 +30,8 @@ Map::Map(ImageFrame * parent)
 
 	mirai = Hero::getInstance();
 	rs = Resource::getInstance();
+//	rs->LoadBattleBitmap();
+//	rs->LoadResultBitmap();
 
 	wxBitmapButton* map1 = new wxBitmapButton(this, 1001, *mapnum[1], wxPoint(320, 10), wxDefaultSize, wxBORDER_NONE);
 	wxBitmapButton* map2 = new wxBitmapButton(this, 1002, *mapnum[2], wxPoint(230, 105), wxDefaultSize, wxBORDER_NONE);
@@ -84,31 +86,64 @@ void Map::OnPaint(wxPaintEvent & event)
 void Map::ClickMap1(wxCommandEvent & event)
 {
 	wxMessageOutputDebug().Printf("click on map1");
+	if (mirai->level>=1) parentFrame->ShowBattle1();
 }
 
 void Map::ClickMap2(wxCommandEvent & event)
 {
 	wxMessageOutputDebug().Printf("click on map2");
+	if (mirai->level>=2) parentFrame->ShowBattle2();
+	else {
+		wxString anu = wxT("Hero ") + mirai->name;
+		anu = anu + wxT(" have not completed previous level!");
+		wxMessageBox(anu, wxT("Warning!"), wxICON_INFORMATION);
+	}
 }
 
 void Map::ClickMap3(wxCommandEvent & event)
 {
 	wxMessageOutputDebug().Printf("click on map3");
+	if (mirai->level >= 3) parentFrame->ShowBattle3();
+	else {
+		wxString anu = wxT("Hero ") + mirai->name;
+		anu = anu + wxT(" have not completed previous level!");
+		wxMessageBox(anu, wxT("Warning!"), wxICON_INFORMATION);
+	}
 }
 
 void Map::ClickMap4(wxCommandEvent & event)
 {
 	wxMessageOutputDebug().Printf("click on map4");
+	if (mirai->level >= 4) parentFrame->ShowBattle4();
+	else {
+		wxString anu = wxT("Hero ") + mirai->name;
+		anu = anu + wxT(" have not completed previous level!");
+		wxMessageBox(anu, wxT("Warning!"), wxICON_INFORMATION);
+	}
+
 }
 
 void Map::ClickMap5(wxCommandEvent & event)
 {
 	wxMessageOutputDebug().Printf("click on map5");
+	if (mirai->level >= 5) parentFrame->ShowBattle5();
+	else {
+		wxString anu = wxT("Hero ") + mirai->name;
+		anu = anu + wxT(" have not completed previous level!");
+		wxMessageBox(anu, wxT("Warning!"), wxICON_INFORMATION);
+	}
+	
 }
 
 void Map::ClickMap6(wxCommandEvent & event)
 {
 	wxMessageOutputDebug().Printf("click on map6");
+	if (mirai->level >= 6) parentFrame->ShowBattle6();
+	else {
+		wxString anu = wxT("Hero ") + mirai->name;
+		anu = anu + wxT(" have not completed previous level!");
+		wxMessageBox(anu, wxT("Warning!"), wxICON_INFORMATION);
+	}
 }
 
 void Map::ClickButtonStatus(wxCommandEvent & event)

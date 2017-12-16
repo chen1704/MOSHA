@@ -21,9 +21,7 @@ MenuUpgrade::MenuUpgrade(ImageFrame * parent)
 {
 	Refresh();
 	this->SetBackgroundColour(wxColour(*wxWHITE));
-	wxImageHandler *pngLoader = new wxPNGHandler();
-	wxImage::AddHandler(pngLoader);
-
+	
 	LoadAllBitmap();
 	LoadRequirement();
 	mirai = Hero::getInstance();
@@ -53,7 +51,7 @@ void MenuUpgrade::OnPaint(wxPaintEvent & event)
 {
 	wxPaintDC pdc(this);
 
-	pdc.DrawBitmap(*rs->map, wxPoint(0, 0), true);
+	pdc.DrawBitmap(*rs->mapblur, wxPoint(0, 0), true);
 	pdc.DrawBitmap(*rs->buttonWindow, wxPoint(0, 455), true);
 	pdc.DrawBitmap(*upgrade, wxPoint(55, -1), true);
 	pdc.DrawBitmap(*rs->chibi, wxPoint(30, 490), true);
@@ -123,6 +121,7 @@ void MenuUpgrade::OnClickUpgradeAttack(wxCommandEvent & event)
 	wxMessageOutputDebug().Printf("upgrade attack");
 	if (mirai->itmlog >= rbalok && mirai->itmstone >= rbatu && mirai->money >= moneyatt) {
 		mirai->skillatt += 5;
+		mirai->mpatt += 2;
 		mirai->itmlog -= rbalok; mirai->itmstone -= rbatu; mirai->money -= moneyatt;
 		rbalok++; rbatu++; moneyatt += 50;
 		Refresh();
@@ -137,6 +136,7 @@ void MenuUpgrade::OnClickUpgradeShield(wxCommandEvent & event)
 	wxMessageOutputDebug().Printf("upgrade shield");
 	if (mirai->itmbrick >= rbara && mirai->itmwood >= rkayu && mirai->money >= moneydef) {
 		mirai->skilldef += 2;
+		mirai->mpdef += 2;
 		mirai->itmbrick -= rbara; mirai->itmwood -= rkayu; mirai->money -= moneydef;
 		rbara++; rkayu++; moneydef += 50;
 		Refresh();
@@ -150,6 +150,7 @@ void MenuUpgrade::OnClickUpgradeHeal(wxCommandEvent & event)
 	wxMessageOutputDebug().Printf("upgrade heal");
 	if (mirai->itmearth >= rtanah && mirai->itmdia >= rdiamond&&mirai->money >= moneyheal) {
 		mirai->skillheal += 10;
+		mirai->mpheal += 3;
 		mirai->itmearth -= rtanah; mirai->itmdia -= rdiamond; mirai->money -= moneyheal;
 		rtanah++; rkayu++; moneyheal += 100;
 		Refresh();

@@ -2,7 +2,6 @@
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
 
-
 Resource::Resource()
 {
 }
@@ -13,10 +12,16 @@ Resource::~Resource()
 	delete bitmapstatus, bitmapbonds, bitmapinvent, bitmapskill;
 	for (int i = 0; i <= 58; i++) delete huruf[i];
 
-	for (int i = 1; i <= 5; i++) delete background[i];
+	for (int i = 1; i <= 5; i++) {
+		delete background[i];
+		delete retreat[i];
+	}
 
 	delete buttonKotak, hp, mp, hpbar, mpbar, battlechibi, hpbarenemy;
 	delete buttonatt, buttondef, buttonheal;
+
+	delete reward, backmenu, backwin, backlose;
+	for (int i = 1; i <= 7; i++) delete drop[i];
 }
 
 
@@ -295,6 +300,14 @@ void Resource::LoadBattleBitmap()
 		background[i] = new wxBitmap(mi);
 	}
 
+	for (int i = 1; i <= 5; i++) {
+		loc = wxFileName(fileLocation).GetPath() + wxT("\\retreat");
+		loc = loc + wxString::Format("%d", i);
+		loc = loc + wxT(".png");
+		wxImage mi(loc, wxBITMAP_TYPE_PNG);
+		retreat[i] = new wxBitmap(mi);
+	}
+
 	loc = wxFileName(fileLocation).GetPath() + wxT("\\battle kotak.png");
 	wxImage image2(loc, wxBITMAP_TYPE_PNG);
 	buttonKotak = new wxBitmap(image2);
@@ -334,4 +347,32 @@ void Resource::LoadBattleBitmap()
 	wxString lochibi = wxFileName(fileLocation).GetPath() + wxT("\\battle mirai ikon.png");
 	wxImage image11(lochibi, wxBITMAP_TYPE_PNG);
 	battlechibi = new wxBitmap(image11);
+}
+
+void Resource::LoadResultBitmap()
+{
+	wxString loclaim = wxFileName(fileLocation).GetPath() + wxT("\\button reward.png");
+	wxImage image1(loclaim, wxBITMAP_TYPE_PNG);
+	reward = new wxBitmap(image1);
+
+	wxString loclaim2 = wxFileName(fileLocation).GetPath() + wxT("\\button back.png");
+	wxImage image10(loclaim2, wxBITMAP_TYPE_PNG);
+	backmenu = new wxBitmap(image10);
+
+	wxString locwin = wxFileName(fileLocation).GetPath() + wxT("\\window win.png");
+	wxImage image2(locwin, wxBITMAP_TYPE_PNG);
+	backwin = new wxBitmap(image2);
+
+	wxString loclose = wxFileName(fileLocation).GetPath() + wxT("\\window lose.png");
+	wxImage image3(loclose, wxBITMAP_TYPE_PNG);
+	backlose = new wxBitmap(image3);
+
+	for (int i = 1; i <= 7; i++) {
+		wxString loc;
+		loc = wxFileName(fileLocation).GetPath() + wxT("\\drop");
+		loc = loc + wxString::Format("%d", i);
+		loc = loc + wxT(".png");
+		wxImage mi(loc, wxBITMAP_TYPE_PNG);
+		drop[i] = new wxBitmap(mi);
+	}
 }

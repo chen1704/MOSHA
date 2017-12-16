@@ -18,8 +18,6 @@ MenuInvent::MenuInvent(ImageFrame * parent)
 {
 	Refresh();
 	this->SetBackgroundColour(wxColour(*wxWHITE));
-	wxImageHandler *pngLoader = new wxPNGHandler();
-	wxImage::AddHandler(pngLoader);
 
 	LoadAllBitmap();
 	mirai = Hero::getInstance();
@@ -42,7 +40,7 @@ MenuInvent::~MenuInvent()
 void MenuInvent::OnPaint(wxPaintEvent & event)
 {
 	wxPaintDC pdc(this);
-	pdc.DrawBitmap(*rs->map, wxPoint(0, 0), true);
+	pdc.DrawBitmap(*rs->mapblur, wxPoint(0, 0), true);
 	pdc.DrawBitmap(*rs->buttonWindow, wxPoint(0, 455), true);
 	pdc.DrawBitmap(*inventory, wxPoint(55, -1), true);
 	pdc.DrawBitmap(*rs->chibi, wxPoint(30, 490), true);

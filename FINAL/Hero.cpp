@@ -6,12 +6,17 @@ Hero::Hero()
 {
 	hpmax = 40; mpmax = 30;
 	HP = 40; MP = 30;
+
+//	hpmax = 1000; mpmax = 1000;
+//	HP = 1000; MP = 1000;
+
 	level = 1;
 	bondshi = bondhij = bondsak = 0;
 	itmlog = itmstone = itmbrick = itmdia = itmearth = itmwood = 0;
 	money = 100;
 
-	skillatt = 5; skilldef = 10; skillheal = 5;
+	skillatt = 15; skilldef = 20; skillheal = 15;
+	mpatt = 3; mpdef = 4; mpheal = 7;
 }
 
 

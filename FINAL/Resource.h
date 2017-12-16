@@ -24,10 +24,15 @@ public:
 	void LoadHurufkecilBitmap();
 
 	//Battle
-	wxBitmap *background[6], *buttonKotak, *hp, *mp,
+	wxBitmap *background[6], *retreat[6], *buttonKotak, *hp, *mp,
 		*hpbar, *mpbar, *battlechibi, *hpbarenemy;
 	wxBitmap *buttonatt, *buttondef, *buttonheal;
 	void LoadBattleBitmap();
+
+	//Results Battle
+	wxBitmap *reward, *backmenu, *backwin, *backlose;
+	wxBitmap *drop[10];
+	void LoadResultBitmap();
 
 private:
 	Resource();

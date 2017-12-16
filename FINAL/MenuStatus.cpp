@@ -22,9 +22,7 @@ MenuStatus::MenuStatus(ImageFrame * parent)
 {
 	Refresh();
 	this->SetBackgroundColour(wxColour(*wxWHITE));
-	wxImageHandler *pngLoader = new wxPNGHandler();
-	wxImage::AddHandler(pngLoader);
-
+	
 	mirai = Hero::getInstance();
 	rs = Resource::getInstance();
 	LoadAllBitmap();

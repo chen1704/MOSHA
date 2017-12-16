@@ -5,11 +5,11 @@
 #include "Enemy.h"
 #include "Resource.h"
 
-class Battle1 : public wxWindow
+class Battle4 : public wxWindow
 {
 public:
-	Battle1(ImageFrame *parent);
-	~Battle1();
+	Battle4(ImageFrame *parent);
+	~Battle4();
 
 	void OnPaintMirai(wxPaintEvent &event);
 	void OnTimer(wxTimerEvent &event);
@@ -31,9 +31,9 @@ private:
 
 	wxBitmapButton *attack, *defense, *heal, *buttonwin, *buttonlose;
 	wxBitmapButton *retreat1;
-	
-	wxBitmap *mw[5], *ma[20]; //battle1, battle4 [mage]
-	
+
+	wxBitmap *mw[5], *ma[20]; //Battle4, battle4 [mage]
+
 	int renew, turn;
 	double ratioenemy, ratiohp, ratiomp;
 

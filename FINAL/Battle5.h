@@ -5,11 +5,11 @@
 #include "Enemy.h"
 #include "Resource.h"
 
-class Battle1 : public wxWindow
+class Battle5 : public wxWindow
 {
 public:
-	Battle1(ImageFrame *parent);
-	~Battle1();
+	Battle5(ImageFrame *parent);
+	~Battle5();
 
 	void OnPaintMirai(wxPaintEvent &event);
 	void OnTimer(wxTimerEvent &event);
@@ -22,18 +22,16 @@ public:
 
 	Hero *mirai;
 	Resource *rs;
-	Enemy icemage;
+	Enemy warrior;
 
 private:
 	ImageFrame *parentFrame;
 	wxTimer *timer;
 	wxString fileLocation;
 
-	wxBitmapButton *attack, *defense, *heal, *buttonwin, *buttonlose;
-	wxBitmapButton *retreat1;
-	
-	wxBitmap *mw[5], *ma[20]; //battle1, battle4 [mage]
-	
+	wxBitmapButton *attack, *defense, *heal, *retreat, *buttonwin, *buttonlose;
+	wxBitmap *ww[5], *wa[15]; //Battle5, battle5 [warrior]
+
 	int renew, turn;
 	double ratioenemy, ratiohp, ratiomp;
 
@@ -43,3 +41,4 @@ private:
 	void CalculateRatio();
 	DECLARE_EVENT_TABLE()
 };
+

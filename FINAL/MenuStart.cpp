@@ -22,7 +22,7 @@ MenuStart::MenuStart(ImageFrame * parent)
 	rs->LoadMenuBitmap();
 	rs->LoadHurufbesarBitmap();
 	rs->LoadHurufkecilBitmap();
-
+	
 	wxBitmapButton* startbutton = new wxBitmapButton(this, 1001, *start, wxPoint(100, 520), wxDefaultSize, wxBORDER_NONE);
 }
 

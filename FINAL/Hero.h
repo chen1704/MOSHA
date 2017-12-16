@@ -12,11 +12,12 @@ public:
 	static Hero *getInstance();
 
 	string name;
-	int HP, MP, level, money;
-	int hpmax, mpmax;
+	int level, money;
+	int hpmax, mpmax, HP, MP;
 	int skillatt, skilldef, skillheal;
+	int mpatt, mpdef, mpheal; //mp requirement
 	int itmlog, itmbrick, itmstone, itmearth, itmdia, itmwood;
-	int bondshi, bondhij, bondsak;
+	int bondshi, bondhij, bondsak; //bond with prince
 
 	//mirai walking
 	wxBitmap *mw[10];

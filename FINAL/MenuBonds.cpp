@@ -21,9 +21,7 @@ MenuBonds::MenuBonds(ImageFrame * parent)
 {
 	Refresh();
 	this->SetBackgroundColour(wxColour(*wxWHITE));
-	wxImageHandler *pngLoader = new wxPNGHandler();
-	wxImage::AddHandler(pngLoader);
-
+	
 	mirai = Hero::getInstance();
 	rs = Resource::getInstance();
 	LoadAllBitmap();
@@ -53,7 +51,7 @@ void MenuBonds::OnPaint(wxPaintEvent & event)
 {
 	wxPaintDC pdc(this);
 
-	pdc.DrawBitmap(*rs->map, wxPoint(0, 0), true);
+	pdc.DrawBitmap(*rs->mapblur, wxPoint(0, 0), true);
 	pdc.DrawBitmap(*rs->buttonWindow, wxPoint(0, 455), true);
 	pdc.DrawBitmap(*bond, wxPoint(55, -1), true);
 	pdc.DrawBitmap(*rs->chibi, wxPoint(30, 490), true);

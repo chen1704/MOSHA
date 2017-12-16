@@ -1,4 +1,4 @@
-#include "Battle3.h"
+#include "Battle6.h"
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
 #include <wx/dcbuffer.h>
@@ -6,21 +6,21 @@
 #include <vector>
 #define TIMER_ID 2003
 
-BEGIN_EVENT_TABLE(Battle3, wxWindow)
-EVT_PAINT(Battle3::OnPaintMirai)
-EVT_TIMER(TIMER_ID, Battle3::OnTimer)
-EVT_BUTTON(1001, Battle3::OnClickAttack)
-EVT_BUTTON(1002, Battle3::OnClickDefense)
-EVT_BUTTON(1003, Battle3::OnClickHeal)
-EVT_BUTTON(1004, Battle3::OnClickRetreat)
-EVT_BUTTON(1005, Battle3::OnClickClaim)
-EVT_BUTTON(1006, Battle3::OnClickBackMenu)
+BEGIN_EVENT_TABLE(Battle6, wxWindow)
+EVT_PAINT(Battle6::OnPaintMirai)
+EVT_TIMER(TIMER_ID, Battle6::OnTimer)
+EVT_BUTTON(1001, Battle6::OnClickAttack)
+EVT_BUTTON(1002, Battle6::OnClickDefense)
+EVT_BUTTON(1003, Battle6::OnClickHeal)
+EVT_BUTTON(1004, Battle6::OnClickRetreat)
+EVT_BUTTON(1005, Battle6::OnClickClaim)
+EVT_BUTTON(1006, Battle6::OnClickBackMenu)
 END_EVENT_TABLE()
 
 
 
 
-Battle3::Battle3(ImageFrame *parent)
+Battle6::Battle6(ImageFrame *parent)
 	:wxWindow(parent, wxID_ANY), parentFrame(parent)
 {
 	Refresh();
@@ -31,11 +31,11 @@ Battle3::Battle3(ImageFrame *parent)
 	rs = Resource::getInstance();
 
 	LoadAllBitmap();
-	
+
 	attack = new wxBitmapButton(this, 1001, *rs->buttonatt, wxPoint(102, 600), wxDefaultSize, wxBORDER_NONE);
 	defense = new wxBitmapButton(this, 1002, *rs->buttondef, wxPoint(209, 600), wxDefaultSize, wxBORDER_NONE);
 	heal = new wxBitmapButton(this, 1003, *rs->buttonheal, wxPoint(316, 600), wxDefaultSize, wxBORDER_NONE);
-	retreat = new wxBitmapButton(this, 1004, *rs->retreat[3], wxPoint(362, 404), wxDefaultSize, wxBORDER_NONE);
+	retreat = new wxBitmapButton(this, 1004, *rs->retreat[2], wxPoint(362, 404), wxDefaultSize, wxBORDER_NONE);
 
 	buttonwin = new wxBitmapButton(this, 1005, *rs->reward, wxPoint(177, 353), wxDefaultSize, wxBORDER_NONE);
 	buttonlose = new wxBitmapButton(this, 1006, *rs->backmenu, wxPoint(177, 353), wxDefaultSize, wxBORDER_NONE);
@@ -48,7 +48,7 @@ Battle3::Battle3(ImageFrame *parent)
 }
 
 
-Battle3::~Battle3()
+Battle6::~Battle6()
 {
 	timer->Stop();
 	delete timer;
@@ -58,13 +58,13 @@ Battle3::~Battle3()
 
 }
 
-void Battle3::OnPaintMirai(wxPaintEvent & event)
+void Battle6::OnPaintMirai(wxPaintEvent & event)
 {
 	wxBufferedPaintDC pdc(this);
 	PrepareDC(pdc);
 
 	pdc.SetBackground(*wxWHITE);
-	pdc.DrawBitmap(*rs->background[3], wxPoint(0, 0));
+	pdc.DrawBitmap(*rs->background[2], wxPoint(0, 0));
 	pdc.DrawBitmap(*rs->buttonKotak, wxPoint(0, 455));
 	pdc.DrawBitmap(*rs->battlechibi, wxPoint(33, 477));
 	pdc.DrawBitmap(*rs->hp, wxPoint(179, 523), true);
@@ -86,7 +86,6 @@ void Battle3::OnPaintMirai(wxPaintEvent & event)
 
 	wxFont font1(14, wxFONTFAMILY_TELETYPE, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
 	pdc.SetFont(font1);
-	pdc.SetTextForeground(*wxWHITE);
 	pdc.DrawText(chitose.name, wxPoint(315, 7));
 
 	//Set HP MP bar
@@ -104,7 +103,7 @@ void Battle3::OnPaintMirai(wxPaintEvent & event)
 		for (int i = 0; i <= 7; i++) //mirai walk
 			if (renew % 8 == i) {
 				pdc.DrawBitmap(*mirai->mw[i], wxPoint(60, 205));
-				pdc.DrawBitmap(*cw[i + 1], wxPoint(250,205)); //chitose walk
+				pdc.DrawBitmap(*cw[i + 1], wxPoint(250, 205)); //chitose walk
 			}
 	}
 
@@ -130,7 +129,7 @@ void Battle3::OnPaintMirai(wxPaintEvent & event)
 
 		for (int i = 0; i <= 7; i++)
 			if (renew % 8 == i)
-				pdc.DrawBitmap(*cw[i+1], wxPoint(250, 205));
+				pdc.DrawBitmap(*cw[i + 1], wxPoint(250, 205));
 	}
 
 	else if (turn == 2) {
@@ -173,7 +172,7 @@ void Battle3::OnPaintMirai(wxPaintEvent & event)
 		}
 
 		for (int i = 0; i <= 7; i++) //mirai walk
-			if (renew % 8 == i) 
+			if (renew % 8 == i)
 				pdc.DrawBitmap(*mirai->mw[i], wxPoint(60, 205));
 
 	}
@@ -182,7 +181,7 @@ void Battle3::OnPaintMirai(wxPaintEvent & event)
 		timer->Stop();
 		retreat->Show(false);
 		buttonwin->Show(true);
-		mirai->level = 4;
+		mirai->level = 7;
 		pdc.SetBrush(*wxBLUE_BRUSH);
 		pdc.DrawRectangle(wxPoint(319, 34), wxSize(0, 20)); //enemy HP
 		pdc.DrawRectangle(wxPoint(235, 568), wxSize((double)ratiomp*(double)mirai->MP, 18)); //mirai MP
@@ -192,7 +191,7 @@ void Battle3::OnPaintMirai(wxPaintEvent & event)
 		pdc.SetTextForeground(*wxWHITE);
 		pdc.DrawBitmap(*rs->backwin, wxPoint(57, 17));
 		pdc.DrawBitmap(*rs->drop[5], wxPoint(122, 248));
-		pdc.DrawBitmap(*rs->drop[6], wxPoint(212, 247));
+		pdc.DrawBitmap(*rs->drop[3], wxPoint(212, 247));
 		pdc.DrawBitmap(*rs->drop[7], wxPoint(305, 247));
 		pdc.DrawText(wxT("2"), wxPoint(152, 323));
 		pdc.DrawText(wxT("2"), wxPoint(243, 323));
@@ -221,7 +220,7 @@ void Battle3::OnPaintMirai(wxPaintEvent & event)
 
 }
 
-void Battle3::OnTimer(wxTimerEvent & event)
+void Battle6::OnTimer(wxTimerEvent & event)
 {
 	static int counter = 0;
 	++renew;
@@ -230,7 +229,7 @@ void Battle3::OnTimer(wxTimerEvent & event)
 	Refresh();
 }
 
-void Battle3::OnClickAttack(wxCommandEvent & event)
+void Battle6::OnClickAttack(wxCommandEvent & event)
 {
 	turn = 1;
 	renew = 0;
@@ -262,7 +261,7 @@ void Battle3::OnClickAttack(wxCommandEvent & event)
 	heal->Enable(false);
 }
 
-void Battle3::OnClickDefense(wxCommandEvent & event)
+void Battle6::OnClickDefense(wxCommandEvent & event)
 {
 	turn = 2;
 	renew = 0;
@@ -289,29 +288,29 @@ void Battle3::OnClickDefense(wxCommandEvent & event)
 	heal->Enable(false);
 }
 
-void Battle3::OnClickHeal(wxCommandEvent & event)
+void Battle6::OnClickHeal(wxCommandEvent & event)
 {
 	turn = 3;
 	renew = 0;
 	int tempheal;
-/*
+	/*
 	tempmirai = mirai->HP - chitose.attack;
 	if (tempmirai>0) mirai->HP -= chitose.attack;
 	else {
-		turn = 6;
-		mirai->HP = 0;
+	turn = 6;
+	mirai->HP = 0;
 	}
-*/
+	*/
 	tempheal = mirai->HP + (mirai->skillheal - chitose.attack);
 	if (tempheal >0 && tempheal < mirai->hpmax) {
 		mirai->HP += (mirai->skillheal - chitose.attack);
 		wxMessageOutputDebug().Printf("access if = tempheal %d mirai HP %d", tempheal, mirai->HP);
 	}
-	else if (tempheal > mirai->hpmax){
+	else if (tempheal > mirai->hpmax) {
 		mirai->HP = mirai->hpmax;
 		wxMessageOutputDebug().Printf("ELSE tempheal %d mirai HP %d", tempheal, mirai->HP);
 	}
-	else if (tempheal<=0){
+	else if (tempheal <= 0) {
 		turn = 6;
 		mirai->HP = 0;
 	}
@@ -322,7 +321,7 @@ void Battle3::OnClickHeal(wxCommandEvent & event)
 	heal->Enable(false);
 }
 
-void Battle3::OnClickRetreat(wxCommandEvent & event)
+void Battle6::OnClickRetreat(wxCommandEvent & event)
 {
 	wxMessageOutputDebug().Printf("button Retreat has been clicked");
 	parentFrame->ShowMap();
@@ -334,14 +333,14 @@ void Battle3::OnClickRetreat(wxCommandEvent & event)
 	buttonwin->Show(false);
 }
 
-void Battle3::OnClickClaim(wxCommandEvent & event)
+void Battle6::OnClickClaim(wxCommandEvent & event)
 {
 	wxMessageOutputDebug().Printf("claim");
-	if (mirai->level <= 4) {
+	if (mirai->level <= 7) {
 		wxMessageOutputDebug().Printf("Claim muncul saat menang");
 		mirai->itmdia += 2;
-		mirai->itmwood += 2;
-		wxMessageOutputDebug().Printf("Mirai diamond %d diamond %d", mirai->itmlog, mirai->itmbrick);
+		mirai->itmstone += 2;
+		wxMessageOutputDebug().Printf("Mirai diamond %d stone %d", mirai->itmdia, mirai->itmstone);
 	}
 	parentFrame->ShowMap();
 	SetBar();
@@ -352,7 +351,7 @@ void Battle3::OnClickClaim(wxCommandEvent & event)
 	buttonwin->Show(false);
 }
 
-void Battle3::OnClickBackMenu(wxCommandEvent & event)
+void Battle6::OnClickBackMenu(wxCommandEvent & event)
 {
 	wxMessageOutputDebug().Printf("lose back to menu");
 	parentFrame->ShowMap();
@@ -364,12 +363,12 @@ void Battle3::OnClickBackMenu(wxCommandEvent & event)
 	buttonwin->Show(false);
 }
 
-void Battle3::LoadAllBitmap()
+void Battle6::LoadAllBitmap()
 {
 	LoadSpriteEnemyBitmap();
 }
 
-void Battle3::LoadSpriteEnemyBitmap()
+void Battle6::LoadSpriteEnemyBitmap()
 {
 	wxStandardPaths &stdPaths = wxStandardPaths::Get();
 	fileLocation = stdPaths.GetExecutablePath();
@@ -393,18 +392,18 @@ void Battle3::LoadSpriteEnemyBitmap()
 	}
 }
 
-void Battle3::SetBar()
+void Battle6::SetBar()
 {
 	mirai->HP = mirai->hpmax;
 	mirai->MP = mirai->mpmax;
-	chitose.name = "Lynn Lilliana";
-	chitose.hpmax = 70;
-	chitose.hp = 70;
-	chitose.attack = 20;
+	chitose.name = "Guinevere";
+	chitose.hpmax = 100;
+	chitose.hp = 100;
+	chitose.attack = 50;
 	retreat->Show(true);
 }
 
-void Battle3::CalculateRatio()
+void Battle6::CalculateRatio()
 {
 	ratioenemy = 168.0 / (double)chitose.hpmax;
 	ratiohp = 212.0 / (double)mirai->hpmax;

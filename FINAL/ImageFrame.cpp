@@ -12,6 +12,9 @@
 #include "Battle1.h"
 #include "Battle2.h"
 #include "Battle3.h"
+#include "Battle4.h"
+#include "Battle5.h"
+#include "Battle6.h"
 #include "Hero.h"
 #include "Resource.h"
 
@@ -68,6 +71,30 @@ void ImageFrame::InitComponents()
 	this->menubonds->Show(false);
 	this->boxSizer->Add(menubonds, 1, wxEXPAND, 0);
 
+	this->battle1 = new Battle1(this);
+	this->battle1->Show(false);
+	this->boxSizer->Add(battle1, 1, wxEXPAND, 0);
+
+	this->battle2 = new Battle2(this);
+	this->battle2->Show(false);
+	this->boxSizer->Add(battle2, 1, wxEXPAND, 0);
+
+	this->battle3 = new Battle3(this);
+	this->battle3->Show(false);
+	this->boxSizer->Add(battle3, 1, wxEXPAND, 0);
+
+	this->battle4 = new Battle4(this);
+	this->battle4->Show(false);
+	this->boxSizer->Add(battle4, 1, wxEXPAND, 0);
+
+	this->battle5 = new Battle5(this);
+	this->battle5->Show(false);
+	this->boxSizer->Add(battle5, 1, wxEXPAND, 0);
+
+	this->battle6 = new Battle6(this);
+	this->battle6->Show(false);
+	this->boxSizer->Add(battle6, 1, wxEXPAND, 0);
+
 	SetSizer(boxSizer);
 	ShowStart();
 
@@ -82,6 +109,13 @@ void ImageFrame::ShowStart()
 	this->menuinvent->Show(false);
 	this->menustatus->Show(false);
 	this->menubonds->Show(false);
+
+	this->battle1->Show(false);
+	this->battle2->Show(false);
+	this->battle3->Show(false);
+	this->battle4->Show(false);
+	this->battle5->Show(false);
+	this->battle6->Show(false);
 	fitWindowSize();
 }
 
@@ -94,6 +128,14 @@ void ImageFrame::ShowName()
 	this->menuinvent->Show(false);
 	this->menustatus->Show(false);
 	this->menubonds->Show(false);
+
+	this->battle1->Show(false);
+	this->battle2->Show(false);
+	this->battle3->Show(false);
+	this->battle4->Show(false);
+	this->battle5->Show(false);
+	this->battle6->Show(false);
+
 	fitWindowSize();
 }
 
@@ -106,6 +148,13 @@ void ImageFrame::ShowMap()
 	this->menuinvent->Show(false);
 	this->menustatus->Show(false);
 	this->menubonds->Show(false);
+
+	this->battle1->Show(false);
+	this->battle2->Show(false);
+	this->battle3->Show(false);
+	this->battle4->Show(false);
+	this->battle5->Show(false);
+	this->battle6->Show(false);
 	fitWindowSize();
 }
 
@@ -118,6 +167,14 @@ void ImageFrame::ShowMenuUpgrade()
 	this->menuinvent->Show(false);
 	this->menustatus->Show(false);
 	this->menubonds->Show(false);
+
+
+	this->battle1->Show(false);
+	this->battle2->Show(false);
+	this->battle3->Show(false);
+	this->battle4->Show(false);
+	this->battle5->Show(false);
+	this->battle6->Show(false);
 	fitWindowSize();
 }
 
@@ -130,6 +187,13 @@ void ImageFrame::ShowMenuInvent()
 	this->menuinvent->Show(true);
 	this->menustatus->Show(false);
 	this->menubonds->Show(false);
+
+	this->battle1->Show(false);
+	this->battle2->Show(false);
+	this->battle3->Show(false);
+	this->battle4->Show(false);
+	this->battle5->Show(false);
+	this->battle6->Show(false);
 	fitWindowSize();
 }
 
@@ -142,6 +206,13 @@ void ImageFrame::ShowMenuStatus()
 	this->menuinvent->Show(false);
 	this->menustatus->Show(true);
 	this->menubonds->Show(false);
+
+	this->battle1->Show(false);
+	this->battle2->Show(false);
+	this->battle3->Show(false);
+	this->battle4->Show(false);
+	this->battle5->Show(false);
+	this->battle6->Show(false);
 	fitWindowSize();
 }
 
@@ -154,19 +225,128 @@ void ImageFrame::ShowMenuBonds()
 	this->menuinvent->Show(false);
 	this->menustatus->Show(false);
 	this->menubonds->Show(true);
+
+	this->battle1->Show(false);
+	this->battle2->Show(false);
+	this->battle3->Show(false);
+	this->battle4->Show(false);
+	this->battle5->Show(false);
+	this->battle6->Show(false);
 	fitWindowSize();
 }
 
 void ImageFrame::ShowBattle1()
 {
+	this->menustart->Show(false);
+	this->menuname->Show(false);
+	this->map->Show(false);
+	this->menuupgrade->Show(false);
+	this->menuinvent->Show(false);
+	this->menustatus->Show(false);
+	this->menubonds->Show(false);
+
+	this->battle1->Show(true);
+	this->battle2->Show(false);
+	this->battle3->Show(false);
+	this->battle4->Show(false);
+	this->battle5->Show(false);
+	this->battle6->Show(false);
+	fitWindowSize();
 }
 
 void ImageFrame::ShowBattle2()
 {
+	this->menustart->Show(false);
+	this->menuname->Show(false);
+	this->map->Show(false);
+	this->menuupgrade->Show(false);
+	this->menuinvent->Show(false);
+	this->menustatus->Show(false);
+	this->menubonds->Show(false);
+
+	this->battle1->Show(false);
+	this->battle2->Show(true);
+	this->battle3->Show(false);
+	this->battle4->Show(false);
+	this->battle5->Show(false);
+	this->battle6->Show(false);
+	fitWindowSize();
 }
 
 void ImageFrame::ShowBattle3()
 {
+	this->menustart->Show(false);
+	this->menuname->Show(false);
+	this->map->Show(false);
+	this->menuupgrade->Show(false);
+	this->menuinvent->Show(false);
+	this->menustatus->Show(false);
+	this->menubonds->Show(false);
+
+	this->battle1->Show(false);
+	this->battle2->Show(false);
+	this->battle3->Show(true);
+	this->battle4->Show(false);
+	this->battle5->Show(false);
+	this->battle6->Show(false);
+	fitWindowSize();
+}
+
+void ImageFrame::ShowBattle4()
+{
+	this->menustart->Show(false);
+	this->menuname->Show(false);
+	this->map->Show(false);
+	this->menuupgrade->Show(false);
+	this->menuinvent->Show(false);
+	this->menustatus->Show(false);
+	this->menubonds->Show(false);
+
+	this->battle1->Show(false);
+	this->battle2->Show(false);
+	this->battle3->Show(false);
+	this->battle4->Show(true);
+	this->battle5->Show(false);
+	this->battle6->Show(false);
+	fitWindowSize();
+}
+
+void ImageFrame::ShowBattle5()
+{
+	this->menustart->Show(false);
+	this->menuname->Show(false);
+	this->map->Show(false);
+	this->menuupgrade->Show(false);
+	this->menuinvent->Show(false);
+	this->menustatus->Show(false);
+	this->menubonds->Show(false);
+
+	this->battle1->Show(false);
+	this->battle2->Show(false);
+	this->battle3->Show(false);
+	this->battle4->Show(false);
+	this->battle5->Show(true);
+	this->battle6->Show(false);
+	fitWindowSize();
+}
+
+void ImageFrame::ShowBattle6()
+{
+	this->menustart->Show(false);
+	this->menuname->Show(false);
+	this->map->Show(false);
+	this->menuupgrade->Show(false);
+	this->menuinvent->Show(false);
+	this->menustatus->Show(false);
+	this->menubonds->Show(false);
+
+	this->battle1->Show(false);
+	this->battle2->Show(false);
+	this->battle3->Show(false);
+	this->battle4->Show(false);
+	this->battle5->Show(false);
+	this->battle6->Show(true);
+	fitWindowSize();
 }
 
 void ImageFrame::fitWindowSize()
