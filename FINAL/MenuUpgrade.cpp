@@ -120,7 +120,7 @@ void MenuUpgrade::OnClickUpgradeAttack(wxCommandEvent & event)
 {
 	wxMessageOutputDebug().Printf("upgrade attack");
 	if (mirai->itmlog >= rbalok && mirai->itmstone >= rbatu && mirai->money >= moneyatt) {
-		mirai->skillatt += 5;
+		mirai->skillatt += 10;
 		mirai->mpatt += 2;
 		mirai->itmlog -= rbalok; mirai->itmstone -= rbatu; mirai->money -= moneyatt;
 		rbalok++; rbatu++; moneyatt += 50;
@@ -135,7 +135,7 @@ void MenuUpgrade::OnClickUpgradeShield(wxCommandEvent & event)
 {
 	wxMessageOutputDebug().Printf("upgrade shield");
 	if (mirai->itmbrick >= rbara && mirai->itmwood >= rkayu && mirai->money >= moneydef) {
-		mirai->skilldef += 2;
+		mirai->skilldef += 5;
 		mirai->mpdef += 2;
 		mirai->itmbrick -= rbara; mirai->itmwood -= rkayu; mirai->money -= moneydef;
 		rbara++; rkayu++; moneydef += 50;
@@ -152,7 +152,7 @@ void MenuUpgrade::OnClickUpgradeHeal(wxCommandEvent & event)
 		mirai->skillheal += 10;
 		mirai->mpheal += 3;
 		mirai->itmearth -= rtanah; mirai->itmdia -= rdiamond; mirai->money -= moneyheal;
-		rtanah++; rkayu++; moneyheal += 100;
+		rtanah++; rdiamond++; moneyheal += 100;
 		Refresh();
 	}
 	else

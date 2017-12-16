@@ -181,13 +181,25 @@ void Battle6::OnPaintMirai(wxPaintEvent & event)
 		timer->Stop();
 		retreat->Show(false);
 		buttonwin->Show(true);
-		mirai->level = 7;
+		mirai->level = max(mirai->level,7);
 		pdc.SetBrush(*wxBLUE_BRUSH);
 		pdc.DrawRectangle(wxPoint(319, 34), wxSize(0, 20)); //enemy HP
 		pdc.DrawRectangle(wxPoint(235, 568), wxSize((double)ratiomp*(double)mirai->MP, 18)); //mirai MP
 		pdc.SetBrush(*wxRED_BRUSH);
 		pdc.DrawRectangle(wxPoint(235, 531), wxSize((double)ratiohp*(double)mirai->HP, 18)); //mirai HP
-
+/*
+		int bawah = 2, atas = 5, randdrop1, randdrop2;
+		randdrop1 = rand() % (atas - bawah + 1) + bawah;
+		randdrop2 = rand() % (atas - bawah + 1) + bawah;
+		int temp1, temp2;
+		temp1 = randdrop1;
+		temp2 = randdrop2;
+		mirai->itmdia += temp1;
+		mirai->itmstone += temp2;
+		wxString drop1, drop2;
+		drop1 = wxString::Format("%d", randdrop1);
+		drop2 = wxString::Format("%d", randdrop2);
+*/
 		pdc.SetTextForeground(*wxWHITE);
 		pdc.DrawBitmap(*rs->backwin, wxPoint(57, 17));
 		pdc.DrawBitmap(*rs->drop[5], wxPoint(122, 248));
@@ -340,6 +352,7 @@ void Battle6::OnClickClaim(wxCommandEvent & event)
 		wxMessageOutputDebug().Printf("Claim muncul saat menang");
 		mirai->itmdia += 2;
 		mirai->itmstone += 2;
+		mirai->bondsak += 2;
 		wxMessageOutputDebug().Printf("Mirai diamond %d stone %d", mirai->itmdia, mirai->itmstone);
 	}
 	parentFrame->ShowMap();
@@ -399,7 +412,7 @@ void Battle6::SetBar()
 	chitose.name = "Guinevere";
 	chitose.hpmax = 100;
 	chitose.hp = 100;
-	chitose.attack = 50;
+	chitose.attack = 25;
 	retreat->Show(true);
 }
 

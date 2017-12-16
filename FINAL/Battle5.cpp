@@ -180,17 +180,29 @@ void Battle5::OnPaintMirai(wxPaintEvent & event)
 		timer->Stop();
 		retreat->Show(false);
 		buttonwin->Show(true);
-		mirai->level = 6;
+		mirai->level = max(mirai->level,6);
 		pdc.SetBrush(*wxBLUE_BRUSH);
 		pdc.DrawRectangle(wxPoint(319, 34), wxSize(0, 20)); //enemy HP
 		pdc.DrawRectangle(wxPoint(235, 568), wxSize((double)ratiomp*(double)mirai->MP, 18)); //mirai MP
 		pdc.SetBrush(*wxRED_BRUSH);
 		pdc.DrawRectangle(wxPoint(235, 531), wxSize((double)ratiohp*(double)mirai->HP, 18)); //mirai HP
-
+/*
+		int bawah = 2, atas = 5, randdrop1, randdrop2;
+		randdrop1 = rand() % (atas - bawah + 1) + bawah;
+		randdrop2 = rand() % (atas - bawah + 1) + bawah;
+		int temp1, temp2;
+		temp1 = randdrop1;
+		temp2 = randdrop2;
+		mirai->itmlog += temp1;
+		mirai->itmwood += temp2;
+		wxString drop1, drop2;
+		drop1 = wxString::Format("%d", randdrop1);
+		drop2 = wxString::Format("%d", randdrop2);
+*/
 		pdc.SetTextForeground(*wxWHITE);
 		pdc.DrawBitmap(*rs->backwin, wxPoint(57, 17));
 		pdc.DrawBitmap(*rs->drop[1], wxPoint(122, 248));
-		pdc.DrawBitmap(*rs->drop[4], wxPoint(212, 247));
+		pdc.DrawBitmap(*rs->drop[6], wxPoint(212, 247));
 		pdc.DrawBitmap(*rs->drop[7], wxPoint(305, 247));
 		pdc.DrawText(wxT("2"), wxPoint(152, 323));
 		pdc.DrawText(wxT("2"), wxPoint(243, 323));
@@ -335,12 +347,12 @@ void Battle5::OnClickRetreat(wxCommandEvent & event)
 void Battle5::OnClickClaim(wxCommandEvent & event)
 {
 	wxMessageOutputDebug().Printf("claim");
-	if (mirai->level <= 6) {
 		wxMessageOutputDebug().Printf("Claim muncul saat menang");
 		mirai->itmlog += 2;
-		mirai->itmearth += 2;
+		mirai->itmwood += 2;
+		mirai->bondhij += 2;
 		wxMessageOutputDebug().Printf("Mirai log %d earth %d", mirai->itmlog, mirai->itmearth);
-	}
+
 	parentFrame->ShowMap();
 	SetBar();
 	CalculateRatio();
@@ -399,7 +411,7 @@ void Battle5::SetBar()
 	warrior.name = "Crysteffor the Nightfall";
 	warrior.hpmax = 80;
 	warrior.hp = 80;
-	warrior.attack = 30;
+	warrior.attack = 20;
 }
 
 void Battle5::CalculateRatio()

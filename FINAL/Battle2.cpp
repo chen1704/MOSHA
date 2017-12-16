@@ -179,7 +179,7 @@ void Battle2::OnPaintMirai(wxPaintEvent & event)
 		timer->Stop();
 		retreat->Show(false);
 		buttonwin->Show(true);
-		mirai->level = 3;
+		mirai->level = max(mirai->level,3);
 		pdc.SetBrush(*wxBLUE_BRUSH);
 		pdc.DrawRectangle(wxPoint(319, 34), wxSize(0, 20)); //enemy HP
 		pdc.DrawRectangle(wxPoint(235, 568), wxSize((double)ratiomp*(double)mirai->MP, 18)); //mirai MP
@@ -187,9 +187,22 @@ void Battle2::OnPaintMirai(wxPaintEvent & event)
 		pdc.DrawRectangle(wxPoint(235, 531), wxSize((double)ratiohp*(double)mirai->HP, 18)); //mirai HP
 
 		pdc.SetTextForeground(*wxWHITE);
+/*
+		int bawah = 2, atas = 5, randdrop1, randdrop2;
+		randdrop1 = rand() % (atas - bawah + 1) + bawah;
+		randdrop2 = rand() % (atas - bawah + 1) + bawah;
+		int temp1, temp2;
+		temp1 = randdrop1;
+		temp2 = randdrop2;
+		mirai->itmbrick += temp1;
+		mirai->itmwood += temp2;
+		wxString drop1, drop2;
+		drop1 = wxString::Format("%d", randdrop1);
+		drop2 = wxString::Format("%d", randdrop2);
+*/
 		pdc.DrawBitmap(*rs->backwin, wxPoint(57, 17));
 		pdc.DrawBitmap(*rs->drop[2], wxPoint(122, 248));
-		pdc.DrawBitmap(*rs->drop[4], wxPoint(212, 247));
+		pdc.DrawBitmap(*rs->drop[6], wxPoint(212, 247));
 		pdc.DrawBitmap(*rs->drop[7], wxPoint(305, 247));
 		pdc.DrawText(wxT("2"), wxPoint(152, 323));
 		pdc.DrawText(wxT("2"), wxPoint(243, 323));
@@ -334,12 +347,13 @@ void Battle2::OnClickRetreat(wxCommandEvent & event)
 void Battle2::OnClickClaim(wxCommandEvent & event)
 {
 	wxMessageOutputDebug().Printf("claim");
-	if (mirai->level <= 3) {
+	
 		wxMessageOutputDebug().Printf("Claim muncul saat menang");
 		mirai->itmbrick += 2;
-		mirai->itmearth += 2;
+		mirai->itmwood += 2;
+		mirai->bondhij += 1;
 		wxMessageOutputDebug().Printf("Mirai brick %d earth %d", mirai->itmlog, mirai->itmbrick);
-	}
+	
 	parentFrame->ShowMap();
 	SetBar();
 	CalculateRatio();

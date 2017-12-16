@@ -133,17 +133,17 @@ void MenuBonds::OnPaint(wxPaintEvent & event)
 	}
 
 	//bond +6
-	if (mirai->bondshi == 6) {
+	if (mirai->bondshi >= 6) {
 		pdc.DrawBitmap(*heartfull, wxPoint(212, 126));
 		pdc.DrawBitmap(*heartfull, wxPoint(252, 126));
 		pdc.DrawBitmap(*heartfull, wxPoint(292, 126));
 	}
-	if (mirai->bondhij == 6) {
+	if (mirai->bondhij >= 6) {
 		pdc.DrawBitmap(*heartfull, wxPoint(154, 249));
 		pdc.DrawBitmap(*heartfull, wxPoint(194, 249));
 		pdc.DrawBitmap(*heartfull, wxPoint(234, 249));
 	}
-	if (mirai->bondsak == 6) {
+	if (mirai->bondsak >= 6) {
 		pdc.DrawBitmap(*heartfull, wxPoint(212, 368));
 		pdc.DrawBitmap(*heartfull, wxPoint(252, 368));
 		pdc.DrawBitmap(*heartfull, wxPoint(292, 368));
