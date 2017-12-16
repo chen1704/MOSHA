@@ -20,8 +20,10 @@ MenuName::MenuName(ImageFrame * parent)
 	wxImage::AddHandler(pngLoader);
 	
 	mirai = Hero::getInstance();
+	mirai->LoadSpriteMiraiBitmap();
+
 	rs = Resource::getInstance();
-//	rs->LoadResourceBitmap(); //ttp harus load resource dulu
+//	rs->LoadResourceBitmap(); //tidak harus load resource dulu
 //	rs->LoadMenuBitmap();
 	LoadNameBitmap();
 
@@ -63,7 +65,7 @@ void MenuName::ClickOK(wxCommandEvent & event)
 		for (i = 0; i < o; i++) {
 			n = mirainama[i] - '0';
 			n -= 16;
-			if ((n <= 0) || (n > 42 && n < 49) || (n >= 75)) {
+			if (mirainama[i] < 65 || mirainama[i]>122) {
 				wxMessageBox(wxT("Number and Symbol will not be shown"), wxT("Warning!"), wxICON_ERROR);
 				break;
 			}

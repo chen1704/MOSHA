@@ -2,6 +2,7 @@
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
 
+
 Resource::Resource()
 {
 }
@@ -10,7 +11,12 @@ Resource::~Resource()
 {
 	delete buttonWindow, map, mapblur, chibi;
 	delete bitmapstatus, bitmapbonds, bitmapinvent, bitmapskill;
-	for (int i=0; i<=58;i++) delete huruf[i];
+	for (int i = 0; i <= 58; i++) delete huruf[i];
+
+	for (int i = 1; i <= 5; i++) delete background[i];
+
+	delete buttonKotak, hp, mp, hpbar, mpbar, battlechibi, hpbarenemy;
+	delete buttonatt, buttondef, buttonheal;
 }
 
 
@@ -276,4 +282,56 @@ void Resource::LoadHurufkecilBitmap()
 	wxString locz = wxFileName(fileLocation).GetPath() + wxT("\\zkecil.png");
 	wxImage image25(locz, wxBITMAP_TYPE_PNG);
 	huruf[58] = new wxBitmap(image25);
+}
+
+void Resource::LoadBattleBitmap()
+{
+	wxString loc;
+	for (int i = 1; i <= 5; i++) {
+		loc = wxFileName(fileLocation).GetPath() + wxT("\\bacground battle ");
+		loc = loc + wxString::Format("%d", i);
+		loc = loc + wxT(".png");
+		wxImage mi(loc, wxBITMAP_TYPE_PNG);
+		background[i] = new wxBitmap(mi);
+	}
+
+	loc = wxFileName(fileLocation).GetPath() + wxT("\\battle kotak.png");
+	wxImage image2(loc, wxBITMAP_TYPE_PNG);
+	buttonKotak = new wxBitmap(image2);
+
+	wxString locmap1 = wxFileName(fileLocation).GetPath() + wxT("\\battle attack.png");
+	wxImage image3(locmap1, wxBITMAP_TYPE_PNG);
+	buttonatt = new wxBitmap(image3);
+
+	wxString locmap2 = wxFileName(fileLocation).GetPath() + wxT("\\battle shield.png");
+	wxImage image4(locmap2, wxBITMAP_TYPE_PNG);
+	buttondef = new wxBitmap(image4);
+
+	wxString locmap3 = wxFileName(fileLocation).GetPath() + wxT("\\battle heal.png");
+	wxImage image5(locmap3, wxBITMAP_TYPE_PNG);
+	buttonheal = new wxBitmap(image5);
+
+	wxString lochp = wxFileName(fileLocation).GetPath() + wxT("\\window hp.png");
+	wxImage image6(lochp, wxBITMAP_TYPE_PNG);
+	hp = new wxBitmap(image6);
+
+	wxString locmp = wxFileName(fileLocation).GetPath() + wxT("\\window mp.png");
+	wxImage image7(locmp, wxBITMAP_TYPE_PNG);
+	mp = new wxBitmap(image7);
+
+	wxString lochpbar = wxFileName(fileLocation).GetPath() + wxT("\\bar hp.png");
+	wxImage image8(lochpbar, wxBITMAP_TYPE_PNG);
+	hpbar = new wxBitmap(image8);
+
+	wxString locmpbar = wxFileName(fileLocation).GetPath() + wxT("\\bar mp.png");
+	wxImage image9(locmpbar, wxBITMAP_TYPE_PNG);
+	mpbar = new wxBitmap(image9);
+
+	wxString lochpenemy = wxFileName(fileLocation).GetPath() + wxT("\\bar enemy.png");
+	wxImage image10(lochpenemy, wxBITMAP_TYPE_PNG);
+	hpbarenemy = new wxBitmap(image10);
+
+	wxString lochibi = wxFileName(fileLocation).GetPath() + wxT("\\battle mirai ikon.png");
+	wxImage image11(lochibi, wxBITMAP_TYPE_PNG);
+	battlechibi = new wxBitmap(image11);
 }
